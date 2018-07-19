@@ -8,6 +8,8 @@ import { EscapeHtmlPipe } from './pipes/keep-html.pipe';
 import { AppComponent } from './app.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { TicketsListComponent } from './main-page/tickets-list/tickets-list.component';
+import { AppRoutingModule } from './routing/app-routing.module';
+import { TicketEditComponent } from './ticket-edit/ticket-edit.component';
 
 @NgModule({
   declarations: [
@@ -15,10 +17,12 @@ import { TicketsListComponent } from './main-page/tickets-list/tickets-list.comp
     MainPageComponent,
     TicketsListComponent,
     EscapeHtmlPipe,
+    TicketEditComponent,
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule,
   ],
   providers: [
     TestService

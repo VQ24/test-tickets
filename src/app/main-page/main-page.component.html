@@ -1,12 +1,14 @@
-<h3>
-  Questions
-</h3>
+<div class="container">
 
-<a class="waves-effect waves-light btn blue-grey"
-  (click)="loadData()">
-  Load Data</a>
+  <h3>Questions</h3>
+  
+  <a class="waves-effect waves-light btn deep-purple"
+    (click)="loadData()">
+    Load Data</a>
+  
+  <app-tickets-list
+    [tickets]="tickets$ | async"
+    (deleteTicket)="deleteTicket($event)">
+  </app-tickets-list>
 
-<app-tickets-list
-  [tickets]="tickets$ | async"
-  (deleteTicket)="deleteTicket($event)">
-</app-tickets-list>
+</div>

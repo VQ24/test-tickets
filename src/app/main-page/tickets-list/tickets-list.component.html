@@ -4,6 +4,7 @@
       <tr>
         <th>Question</th>
         <th>Answer</th>
+        <th>Show answer</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -16,8 +17,22 @@
           [innerHTML]="ticket.answer | keepHtml"></span>
         </td>
         <td>
-          <a class="waves-effect waves-light btn-small blue-grey lighten-5 blue-grey-text"
-          (click)="showAnswer(ticket)">Show answer</a>
+          <a class="waves-effect waves-purple btn-flat white"
+            (click)="showAnswer(ticket)">
+            <span *ngIf="!ticket.showAnswer">
+              Show answer
+            </span>
+            <span *ngIf="ticket.showAnswer">
+              Hide answer
+            </span>
+          </a>
+        </td>
+        <td>
+          <a class="btn-floating btn-flat waves-effect waves-purple white tooltipped"
+            routerLink="edit"
+            (click)="editTicket(ticket)">
+            <i class="material-icons blue-grey-text">edit</i>
+          </a>
         </td>
       </tr>
     </tbody>

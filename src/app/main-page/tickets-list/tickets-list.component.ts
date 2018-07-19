@@ -21,6 +21,10 @@ export class TicketsListComponent implements OnInit {
   }
 
   showAnswer(ticket) {
-    ticket.showAnswer = true;
+    ticket.showAnswer = ticket.showAnswer ? false : true;
+  }
+
+  editTicket(ticket) {
+    console.log('editing');
   }
 }
