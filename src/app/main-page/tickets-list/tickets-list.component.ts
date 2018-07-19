@@ -19,4 +19,8 @@ export class TicketsListComponent implements OnInit {
   onDelete(event) {
     this.deleteTicket.emit(event);
   }
+
+  showAnswer(ticket) {
+    ticket.showAnswer = true;
+  }
 }

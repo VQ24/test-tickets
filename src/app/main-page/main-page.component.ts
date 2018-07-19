@@ -20,7 +20,7 @@ export class MainPageComponent implements OnInit {
   }
 
   deleteTicket(ticket) {
-    console.log(ticket);
+    this.service.deleteTicket(ticket._id).subscribe();
   }
 
 }

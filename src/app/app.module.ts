@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+
 import { TestService } from './service/test-service';
 import { EscapeHtmlPipe } from './pipes/keep-html.pipe';
 

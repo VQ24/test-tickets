@@ -7,16 +7,21 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class TestService {
 
-  private apiUrl = 'http://localhost:1980/tickets';
-
   constructor(private http: HttpClient) { }
 
   public getAllTickets() {
-    return this.http.get(this.apiUrl);
+    const apiUrl = 'http://localhost:1980/tickets';
+    return this.http.get(apiUrl);
   }
 
   public getFilteredTickets(filter: Object) {
+    const apiUrl = 'http://localhost:1980/tickets';
     const filterObject = {filter: JSON.stringify(filter)};
-    return this.http.get(this.apiUrl, {params: filterObject});
+    return this.http.get(apiUrl, {params: filterObject});
+  }
+
+  public deleteTicket(id: string) {
+    const apiUrl = 'http://localhost:1980/ticket';
+    return this.http.delete(apiUrl, {params: {_id: id}});
   }
 }

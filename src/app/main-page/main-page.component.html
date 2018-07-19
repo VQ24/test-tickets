@@ -2,7 +2,9 @@
   Questions
 </h3>
 
-<button (click)="loadData()">Load Data</button>
+<a class="waves-effect waves-light btn blue-grey"
+  (click)="loadData()">
+  Load Data</a>
 
 <app-tickets-list
   [tickets]="tickets$ | async"
