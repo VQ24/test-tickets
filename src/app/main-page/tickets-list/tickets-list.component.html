@@ -1,0 +1,11 @@
+<div *ngIf="tickets">
+  <ol>
+    <li *ngFor="let ticket of tickets">
+      <span [innerHTML]="ticket.question | keepHtml"></span>
+      <span> ... </span>
+      <span [innerHTML]="ticket.answer | keepHtml"></span>
+      <span> ... </span>
+      <button (click)="onDelete(ticket)">Delete</button>
+    </li>
+  </ol>
+</div>

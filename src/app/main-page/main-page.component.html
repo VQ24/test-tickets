@@ -1,0 +1,10 @@
+<h3>
+  Questions
+</h3>
+
+<button (click)="loadData()">Load Data</button>
+
+<app-tickets-list
+  [tickets]="tickets$ | async"
+  (deleteTicket)="deleteTicket($event)">
+</app-tickets-list>
