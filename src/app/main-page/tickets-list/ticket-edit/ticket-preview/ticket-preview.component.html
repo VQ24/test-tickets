@@ -1,0 +1,57 @@
+<div *ngIf="ticket">
+  <div class="row">
+    <form [formGroup]="ticketForm">
+    <!--                question part                  -->
+      <div class="input-field col s12">
+        <h5>question</h5>
+        <div *ngIf="!edit.question">
+          <div [innerHTML]="ticket.question | keepHtml"
+              (click)="edit.question = !edit.question">
+          </div>
+        </div>
+        <div *ngIf="edit.question">
+          <textarea autosize class="materialize-textarea"
+                    formControlName="question"
+                    [innerHTML]="ticket.question">
+          </textarea>
+        </div>
+      </div>
+
+      <div *ngIf="edit.question">
+        <a class="waves-effect waves-light btn deep-purple"
+          (click)="applyQuestionText()">OK</a>
+        <a class="waves-effect waves-light btn deep-purple"
+          (click)="cancelQuestionText()">Cancel</a>
+      </div>
+    <!--                answer part                  -->
+      <div class="input-field col s12">
+        <h5>answer</h5>
+        <div *ngIf="!edit.answer">
+          <div [innerHTML]="ticket.answer | keepHtml"
+              (click)="edit.answer = !edit.answer">
+          </div>
+        </div>
+        <div *ngIf="edit.answer">
+          <textarea autosize class="materialize-textarea"
+                    formControlName="answer"
+                    [innerHTML]="ticket.answer">
+          </textarea>
+        </div>
+      </div>
+
+      <div *ngIf="edit.answer">
+        <a class="waves-effect waves-light btn deep-purple"
+          (click)="applyAnswerText()">OK</a>
+        <a class="waves-effect waves-light btn deep-purple"
+          (click)="cancelAnswerText()">Cancel</a>
+      </div>
+
+    </form>
+  </div>
+
+  <div>
+    <a class="waves-effect waves-light btn deep-purple"
+      (click)="onSave()">Done</a>
+  </div>
+
+</div>

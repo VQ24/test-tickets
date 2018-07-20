@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { TicketEditComponent } from '../ticket-edit/ticket-edit.component';
+import { TicketEditComponent } from '../main-page/tickets-list/ticket-edit/ticket-edit.component';
 import { MainPageComponent } from '../main-page/main-page.component';
 
 export const ROUTES: Routes = [

@@ -13,14 +13,16 @@ export class MainPageComponent implements OnInit {
   constructor(private service: TestService) { }
 
   ngOnInit() {
+    this.tickets$ = this.service.tickets$;
   }
 
   loadData() {
-    this.tickets$ = this.service.getAllTickets();
+    this.service.loadAllTickets();
+    // this.tickets$ = this.service.tickets$;
   }
 
   deleteTicket(ticket) {
-    this.service.deleteTicket(ticket._id).subscribe();
+    // this.service.deleteTicket(ticket._id).subscribe();
   }
 
 }

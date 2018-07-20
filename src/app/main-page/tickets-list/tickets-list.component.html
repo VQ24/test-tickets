@@ -1,5 +1,5 @@
 <div *ngIf="tickets">
-  <table class="highlight">
+  <table *ngIf="tickets.length" class="highlight">
     <thead>
       <tr>
         <th>Question</th>
@@ -29,7 +29,6 @@
         </td>
         <td>
           <a class="btn-floating btn-flat waves-effect waves-purple white tooltipped"
-            routerLink="edit"
             (click)="editTicket(ticket)">
             <i class="material-icons blue-grey-text">edit</i>
           </a>
