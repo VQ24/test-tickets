@@ -60,6 +60,28 @@ export class TicketPreviewComponent implements OnInit, OnChanges {
   }
 
   public onSave() {
-    this.saveTicket.emit(this.ticketForm.value);
+    if (this.ticket._id) {
+      this.saveTicket.emit(Object.assign({_id: this.ticket._id}, this.ticketForm.value));
+    } else {
+      this.saveTicket.emit(this.ticketForm.value);
+    }
+  }
+
+  public makeBold(element, value: string) {
+    if (window.getSelection) {
+      const selection = window.getSelection();
+      const replaceText = '<b>' + selection.toString() + '</b>';
+      const newText = element.value.slice(0, element.selectionStart) + replaceText + element.value.slice(element.selectionEnd);
+      this.ticketForm.patchValue({[value]: newText});
+    }
+  }
+
+  public makeItalic(element, value: string) {
+    if (window.getSelection) {
+      const selection = window.getSelection();
+      const replaceText = '<i>' + selection.toString() + '</i>';
+      const newText = element.value.slice(0, element.selectionStart) + replaceText + element.value.slice(element.selectionEnd);
+      this.ticketForm.patchValue({[value]: newText});
+    }
   }
 }

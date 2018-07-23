@@ -2,13 +2,10 @@
   <table *ngIf="tickets.length" class="highlight">
     <thead>
       <tr>
-        <th>Question</th>
-        <th>Answer</th>
-        <th>Show answer</th>
-        <th>Actions</th>
+        <th>Questions</th>
       </tr>
     </thead>
-    <tbody>
+    <!-- <tbody>
       <tr *ngFor="let ticket of tickets">
         <td>
           <span [innerHTML]="ticket.question | keepHtml"></span>
@@ -30,10 +27,44 @@
         <td>
           <a class="btn-floating btn-flat waves-effect waves-purple white tooltipped"
             (click)="editTicket(ticket)">
-            <i class="material-icons blue-grey-text">edit</i>
+            <i class="material-icons purple-text">edit</i>
+          </a>
+          <a class="btn-floating btn-flat waves-effect waves-purple white tooltipped"
+            (click)="onDelete(ticket)">
+            <i class="material-icons red-text">close</i>
           </a>
         </td>
       </tr>
-    </tbody>
+    </tbody> -->
+      <tbody>
+        <tr *ngFor="let ticket of tickets">
+          <td (click)="showAnswer(ticket)" style="cursor: pointer">
+            <div class="row">
+
+              <div class="col">
+                <span [innerHTML]="ticket.question | keepHtml"></span>
+              </div>
+
+              <div class="col">
+                  <div *ngIf="ticket.showAnswer"
+                  [innerHTML]="ticket.answer | keepHtml"></div>
+              </div>
+
+              <div class="col s2 offset-s10">
+                <a class="btn-floating btn-flat waves-effect waves-purple white tooltipped"
+                  (click)="editTicket(ticket)">
+                  <i class="material-icons purple-text">edit</i>
+                </a>
+                <a class="btn-floating btn-flat waves-effect waves-purple white tooltipped"
+                  (click)="onDelete(ticket)">
+                  <i class="material-icons red-text">close</i>
+                </a>
+              </div>
+
+            </div>
+          </td>
+        </tr>
+      </tbody>
+
   </table>
 </div>

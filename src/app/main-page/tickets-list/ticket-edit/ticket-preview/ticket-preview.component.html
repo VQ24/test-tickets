@@ -3,7 +3,7 @@
     <form [formGroup]="ticketForm">
     <!--                question part                  -->
       <div class="input-field col s12">
-        <h5>question</h5>
+        <h5>Question</h5>
         <div *ngIf="!edit.question">
           <div [innerHTML]="ticket.question | keepHtml"
               (click)="edit.question = !edit.question">
@@ -25,14 +25,21 @@
       </div>
     <!--                answer part                  -->
       <div class="input-field col s12">
-        <h5>answer</h5>
+        <h5>Answer</h5>
         <div *ngIf="!edit.answer">
           <div [innerHTML]="ticket.answer | keepHtml"
               (click)="edit.answer = !edit.answer">
           </div>
         </div>
         <div *ngIf="edit.answer">
-          <textarea autosize class="materialize-textarea"
+          <div class="col s12">
+      <!--          tool buttons               -->
+            <a class="waves-effect waves-light btn green"
+              (click)="makeBold(answerarea, 'answer')">Make Bold</a>
+            <a class="waves-effect waves-light btn green"
+              (click)="makeItalic(answerarea, 'answer')">Make Italic</a>
+          </div>
+          <textarea autosize class="materialize-textarea" #answerarea
                     formControlName="answer"
                     [innerHTML]="ticket.answer">
           </textarea>

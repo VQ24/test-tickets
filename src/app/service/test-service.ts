@@ -35,9 +35,17 @@ export class TestService {
   }
 
   public deleteTicket(id: string) {
-
+    const subscription = this._deleteTicket(id).subscribe( data => {
+      subscription.unsubscribe();
+    });
   }
 
+  public updateTicket(ticket) {
+    const subscription = this._updateTicket(ticket).subscribe( data => {
+      subscription.unsubscribe();
+      });
+    return this.getTicket(ticket._id);
+  }
   // ----------- back end functions --------------------
 
   private _getAllTickets() {
@@ -54,6 +62,11 @@ export class TestService {
   private _deleteTicket(id: string) {
     const apiUrl = 'http://localhost:1980/ticket';
     return this.http.delete(apiUrl, {params: {_id: id}});
+  }
+
+  private _updateTicket(ticket) {
+    const apiUrl = 'http://localhost:1980/ticket';
+    return this.http.put(apiUrl, ticket);
   }
 
 }

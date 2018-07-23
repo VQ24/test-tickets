@@ -18,7 +18,7 @@ export class TicketEditComponent implements OnInit {
     });
   }
 
-  saveTicket(tick) {
-    console.log(tick);
+  updateTicket(tick) {
+    this.ticket$ = this.service.updateTicket(tick);
   }
 }

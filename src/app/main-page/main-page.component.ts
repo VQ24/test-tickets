@@ -22,7 +22,8 @@ export class MainPageComponent implements OnInit {
   }
 
   deleteTicket(ticket) {
-    // this.service.deleteTicket(ticket._id).subscribe();
+    this.service.deleteTicket(ticket._id);
+    this.loadData();
   }
 
 }
