@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+.highlighted {
+  background-color: #fdfdfd;
+  background-color: lavender;
+  border: 1px solid #e4e4e4;
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+.margin-sm {
+  margin: .1rem;
+}

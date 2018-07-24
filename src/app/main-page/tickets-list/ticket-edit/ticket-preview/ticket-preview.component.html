@@ -32,13 +32,30 @@
           </div>
         </div>
         <div *ngIf="edit.answer">
-          <div class="col s12">
-      <!--          tool buttons               -->
-            <a class="waves-effect waves-light btn green"
-              (click)="makeBold(answerarea, 'answer')">Make Bold</a>
-            <a class="waves-effect waves-light btn green"
-              (click)="makeItalic(answerarea, 'answer')">Make Italic</a>
+    <!--          tool buttons start              -->
+          <div>
+            <a class="waves-effect waves-light btn-small white black-text margin-sm"
+              (click)="makeBold(answerarea, 'answer')"><i class="tiny material-icons">format_bold</i></a>
+            <a class="waves-effect waves-light btn-small white black-text margin-sm"
+              (click)="makeItalic(answerarea, 'answer')"><i class="tiny material-icons">format_italic</i></a>
+            <a class="waves-effect waves-light btn-small white black-text margin-sm"
+              (click)="makeSup(answerarea, 'answer')"><sup>sup</sup></a>
+            <a class="waves-effect waves-light btn-small white black-text margin-sm"
+              (click)="makeSub(answerarea, 'answer')"><sub>sub</sub></a>
+            <a class="waves-effect waves-light btn-small white black-text margin-sm"
+                (click)="makePre(answerarea, 'answer')"><i class="tiny material-icons">code</i></a>
+            <a class="waves-effect waves-light btn-small white black-text margin-sm"
+              (click)="highlightBlock(answerarea, 'answer')"><i class="tiny material-icons">format_color_fill</i></a>
+            <a class="waves-effect waves-light btn-small white black-text margin-sm"
+              (click)="makeH3(answerarea, 'answer')"><b>H</b>3</a>
+            <a class="waves-effect waves-light btn-small white black-text margin-sm"
+              (click)="makeH4(answerarea, 'answer')"><b>H</b>4</a>
+            <a class="waves-effect waves-light btn-small white black-text margin-sm"
+              (click)="makeH5(answerarea, 'answer')"><b>H</b>5</a>
+            <a class="waves-effect waves-light btn-small white black-text margin-sm"
+              (click)="cleerTag(answerarea, 'answer')"><i class="tiny material-icons">format_clear</i></a>
           </div>
+    <!--          tool buttons end              -->
           <textarea autosize class="materialize-textarea" #answerarea
                     formControlName="answer"
                     [innerHTML]="ticket.answer">
@@ -47,9 +64,9 @@
       </div>
 
       <div *ngIf="edit.answer">
-        <a class="waves-effect waves-light btn deep-purple"
+        <a class="waves-effect waves-light btn deep-purple margin-sm"
           (click)="applyAnswerText()">OK</a>
-        <a class="waves-effect waves-light btn deep-purple"
+        <a class="waves-effect waves-light btn deep-purple margin-sm"
           (click)="cancelAnswerText()">Cancel</a>
       </div>
 

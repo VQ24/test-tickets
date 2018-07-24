@@ -84,4 +84,78 @@ export class TicketPreviewComponent implements OnInit, OnChanges {
       this.ticketForm.patchValue({[value]: newText});
     }
   }
+
+  public makeSup(element, value: string) {
+    if (window.getSelection) {
+      const selection = window.getSelection();
+      const replaceText = '<sup>' + selection.toString() + '</sup>';
+      const newText = element.value.slice(0, element.selectionStart) + replaceText + element.value.slice(element.selectionEnd);
+      this.ticketForm.patchValue({[value]: newText});
+    }
+  }
+
+  public makeSub(element, value: string) {
+    if (window.getSelection) {
+      const selection = window.getSelection();
+      const replaceText = '<sub>' + selection.toString() + '</sub>';
+      const newText = element.value.slice(0, element.selectionStart) + replaceText + element.value.slice(element.selectionEnd);
+      this.ticketForm.patchValue({[value]: newText});
+    }
+  }
+
+  public makeH3(element, value: string) {
+    if (window.getSelection) {
+      const selection = window.getSelection();
+      const replaceText = '<h3>' + selection.toString() + '</h3>';
+      const newText = element.value.slice(0, element.selectionStart) + replaceText + element.value.slice(element.selectionEnd);
+      this.ticketForm.patchValue({[value]: newText});
+    }
+  }
+
+  public makeH4(element, value: string) {
+    if (window.getSelection) {
+      const selection = window.getSelection();
+      const replaceText = '<h4>' + selection.toString() + '</h4>';
+      const newText = element.value.slice(0, element.selectionStart) + replaceText + element.value.slice(element.selectionEnd);
+      this.ticketForm.patchValue({[value]: newText});
+    }
+  }
+
+  public makeH5(element, value: string) {
+    if (window.getSelection) {
+      const selection = window.getSelection();
+      const replaceText = '<h5>' + selection.toString() + '</h5>';
+      const newText = element.value.slice(0, element.selectionStart) + replaceText + element.value.slice(element.selectionEnd);
+      this.ticketForm.patchValue({[value]: newText});
+    }
+  }
+
+  public makePre(element, value: string) {
+    if (window.getSelection) {
+      const selection = window.getSelection();
+      const replaceText = '<pre>' + String.fromCharCode(10) +
+                            selection.toString().split('<').join('&lt') +
+                          String.fromCharCode(10) + '</pre>';
+      const newText = element.value.slice(0, element.selectionStart) + replaceText + element.value.slice(element.selectionEnd);
+      this.ticketForm.patchValue({[value]: newText});
+    }
+  }
+
+  public highlightBlock(element, value: string) {
+    if (window.getSelection) {
+      const selection = window.getSelection();
+      const replaceText = '<div class="highlighted">' + selection.toString() + '</div>';
+      const newText = element.value.slice(0, element.selectionStart) + replaceText + element.value.slice(element.selectionEnd);
+      this.ticketForm.patchValue({[value]: newText});
+    }
+  }
+
+  public cleerTag(element, value: string) {
+    // if (window.getSelection) {
+    //   const selection = window.getSelection();
+    //   const replaceText = selection.toString();
+    //   const newText = element.value.slice(0, element.selectionStart) + replaceText + element.value.slice(element.selectionEnd);
+    //   this.ticketForm.patchValue({[value]: newText});
+    // }
+  }
 }
