@@ -34,35 +34,45 @@
         <div *ngIf="edit.answer">
     <!--          tool buttons start              -->
           <div>
-            <a class="waves-effect waves-light btn-small white black-text margin-sm"
+            <a class="btn-small white black-text margin-sm tooltip-container"
               (click)="makeBold(answerarea, 'answer')"><i class="tiny material-icons">format_bold</i>
+              <div class="tooltip">Make <b>bold</b></div>
             </a>
-            <a class="waves-effect waves-light btn-small white black-text margin-sm"
+            <a class="btn-small white black-text margin-sm tooltip-container"
               (click)="makeItalic(answerarea, 'answer')"><i class="tiny material-icons">format_italic</i>
+              <div class="tooltip">Make <i>italic</i></div>
             </a>
-            <a class="waves-effect waves-light btn-small white black-text margin-sm"
+            <a class="btn-small white black-text margin-sm tooltip-container"
               (click)="makeSup(answerarea, 'answer')"><sup>sup</sup>
+              <div class="tooltip">Lift <sup>up</sup> text</div>
             </a>
-            <a class="waves-effect waves-light btn-small white black-text margin-sm"
+            <a class="btn-small white black-text margin-sm tooltip-container"
               (click)="makeSub(answerarea, 'answer')"><sub>sub</sub>
+              <div class="tooltip">Pull <sub>down</sub> text</div>
             </a>
-            <a class="waves-effect waves-light btn-small white black-text margin-sm"
+            <a class="btn-small white black-text margin-sm tooltip-container"
                 (click)="makePre(answerarea, 'answer')"><i class="tiny material-icons">code</i>
+                <div class="tooltip">Preformat text <pre style="color: white">in code style</pre></div>
             </a>
-            <a class="waves-effect waves-light btn-small white black-text margin-sm"
+            <a class="btn-small white black-text margin-sm tooltip-container"
               (click)="highlightBlock(answerarea, 'answer')"><i class="tiny material-icons">format_color_fill</i>
+              <div class="tooltip">Highlight <div class="highlighted" style="color: black">a part of</div> the text</div>
             </a>
-            <a class="waves-effect waves-light btn-small white black-text margin-sm"
+            <a class="btn-small white black-text margin-sm tooltip-container"
               (click)="makeH3(answerarea, 'answer')"><b>H</b>3
+              <div class="tooltip">Tooltip</div>
             </a>
-            <a class="waves-effect waves-light btn-small white black-text margin-sm"
+            <a class="btn-small white black-text margin-sm tooltip-container"
               (click)="makeH4(answerarea, 'answer')"><b>H</b>4
+              <div class="tooltip">Tooltip</div>
             </a>
-            <a class="waves-effect waves-light btn-small white black-text margin-sm"
+            <a class="btn-small white black-text margin-sm tooltip-container"
               (click)="makeH5(answerarea, 'answer')"><b>H</b>5
+              <div class="tooltip">Tooltip</div>
             </a>
-            <a class="waves-effect waves-light btn-small white black-text margin-sm"
+            <a class="btn-small white black-text margin-sm tooltip-container"
               (click)="clearTag(answerarea, 'answer')"><i class="tiny material-icons">format_clear</i>
+              <div class="tooltip">Tooltip</div>
             </a>
           </div>
     <!--          tool buttons end              -->
@@ -85,23 +95,11 @@
 
   <div>
     <a class="waves-effect waves-light btn deep-purple"
-      (click)="onSave()">Done</a>
-  </div>
-
-
-  <a #but1 class="btn tooltip-container" (mouseenter)="but1.vis = true" (mouseleave)="but1.vis = false">
-    Hover me!
-    <div [ngClass]="{'tooltip-hidden': true, 'tooltip-show': but1.vis}">
-        Tooltip text very long and qkjcebe kwjeb wjeb hjwbck djhbw jhcbv kwhje 
-    </div>
-  </a>
-
-  <a #but1 class="btn tooltip-container" (mouseenter)="but1.vis = true" (mouseleave)="but1.vis = false">
-      Hover me!
-      <div [ngClass]="{'tooltip-hidden': true, 'tooltip-show': but1.vis}">
-          Tooltip
-      </div>
+      (click)="onSave()">Done
     </a>
-  
+  </div>
+  <div class="asd">
+    wefwfewef
+  </div>
 
 </div>
