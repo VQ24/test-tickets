@@ -35,25 +35,35 @@
     <!--          tool buttons start              -->
           <div>
             <a class="waves-effect waves-light btn-small white black-text margin-sm"
-              (click)="makeBold(answerarea, 'answer')"><i class="tiny material-icons">format_bold</i></a>
+              (click)="makeBold(answerarea, 'answer')"><i class="tiny material-icons">format_bold</i>
+            </a>
             <a class="waves-effect waves-light btn-small white black-text margin-sm"
-              (click)="makeItalic(answerarea, 'answer')"><i class="tiny material-icons">format_italic</i></a>
+              (click)="makeItalic(answerarea, 'answer')"><i class="tiny material-icons">format_italic</i>
+            </a>
             <a class="waves-effect waves-light btn-small white black-text margin-sm"
-              (click)="makeSup(answerarea, 'answer')"><sup>sup</sup></a>
+              (click)="makeSup(answerarea, 'answer')"><sup>sup</sup>
+            </a>
             <a class="waves-effect waves-light btn-small white black-text margin-sm"
-              (click)="makeSub(answerarea, 'answer')"><sub>sub</sub></a>
+              (click)="makeSub(answerarea, 'answer')"><sub>sub</sub>
+            </a>
             <a class="waves-effect waves-light btn-small white black-text margin-sm"
-                (click)="makePre(answerarea, 'answer')"><i class="tiny material-icons">code</i></a>
+                (click)="makePre(answerarea, 'answer')"><i class="tiny material-icons">code</i>
+            </a>
             <a class="waves-effect waves-light btn-small white black-text margin-sm"
-              (click)="highlightBlock(answerarea, 'answer')"><i class="tiny material-icons">format_color_fill</i></a>
+              (click)="highlightBlock(answerarea, 'answer')"><i class="tiny material-icons">format_color_fill</i>
+            </a>
             <a class="waves-effect waves-light btn-small white black-text margin-sm"
-              (click)="makeH3(answerarea, 'answer')"><b>H</b>3</a>
+              (click)="makeH3(answerarea, 'answer')"><b>H</b>3
+            </a>
             <a class="waves-effect waves-light btn-small white black-text margin-sm"
-              (click)="makeH4(answerarea, 'answer')"><b>H</b>4</a>
+              (click)="makeH4(answerarea, 'answer')"><b>H</b>4
+            </a>
             <a class="waves-effect waves-light btn-small white black-text margin-sm"
-              (click)="makeH5(answerarea, 'answer')"><b>H</b>5</a>
+              (click)="makeH5(answerarea, 'answer')"><b>H</b>5
+            </a>
             <a class="waves-effect waves-light btn-small white black-text margin-sm"
-              (click)="clearTag(answerarea, 'answer')"><i class="tiny material-icons">format_clear</i></a>
+              (click)="clearTag(answerarea, 'answer')"><i class="tiny material-icons">format_clear</i>
+            </a>
           </div>
     <!--          tool buttons end              -->
           <textarea autosize class="materialize-textarea" #answerarea
@@ -77,5 +87,21 @@
     <a class="waves-effect waves-light btn deep-purple"
       (click)="onSave()">Done</a>
   </div>
+
+
+  <a #but1 class="btn tooltip-container" (mouseenter)="but1.vis = true" (mouseleave)="but1.vis = false">
+    Hover me!
+    <div [ngClass]="{'tooltip-hidden': true, 'tooltip-show': but1.vis}">
+        Tooltip text very long and qkjcebe kwjeb wjeb hjwbck djhbw jhcbv kwhje 
+    </div>
+  </a>
+
+  <a #but1 class="btn tooltip-container" (mouseenter)="but1.vis = true" (mouseleave)="but1.vis = false">
+      Hover me!
+      <div [ngClass]="{'tooltip-hidden': true, 'tooltip-show': but1.vis}">
+          Tooltip
+      </div>
+    </a>
+  
 
 </div>

@@ -151,31 +151,16 @@ export class TicketPreviewComponent implements OnInit, OnChanges {
   }
 
   public clearTag(element, value: string) {
-
-    // function clearTags (str: string) {
-    //   var regexp = /<\/*(\w*)>/ig
-    //   while (result = regexp.exec(str)) {
-    //     console.log('Найдено: ' + result[0] + ' на позиции:' + result.index);
-    //   }
-    //   }
-
-
-
     if (window.getSelection) {
       const selection = window.getSelection();
-      const replaceText = selection.toString();
+      let replaceText = selection.toString();
+      const regexp = /<.*?>/;
+      let result;
+      while ((result = regexp.exec(replaceText))) {
+        replaceText = replaceText.replace(result[0], '');
+      }
       const newText = element.value.slice(0, element.selectionStart) + replaceText + element.value.slice(element.selectionEnd);
-
-      const regexp = /<\/*(\w*)>/ig;
-      const result = regexp.exec(replaceText);
-      // while (let result = regexp.exec(replaceText)) {
-        console.log('Найдено: ' + result[0] + ' на позиции:' + result.index);
-      // }
-
-      // console.log(result);
-      // console.log('Найдено: ' + result[0] + ' на позиции:' + result.index);
-
-      // this.ticketForm.patchValue({[value]: newText});
+      this.ticketForm.patchValue({[value]: newText});
     }
   }
 }

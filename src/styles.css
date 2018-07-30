@@ -10,3 +10,41 @@
 .margin-sm {
   margin: .1rem;
 }
+
+.tooltip-container {
+  position:relative;
+}
+
+.tooltip-hidden {
+  position: absolute;
+
+  bottom: 105%;
+  left: 50%;
+  /* margin-left: -50%; */
+  margin-left: -5rem;
+
+  visibility: visible; 
+  opacity: 0;
+  background-color: black;
+  text-transform: none;
+  padding: 10px 8px;
+  font-size: 1rem;
+  z-index: 2000;
+  border-radius: 2px;
+  color: white;
+  min-height: 36px;
+  width: 10rem;
+  /* min-width: 100%; */
+
+  pointer-events: none;
+  line-height: 120%;
+  text-align: center;
+  overflow: hidden;
+
+  -webkit-transition: opacity .5s;
+  transition: opacity .5s;
+}
+
+.tooltip-show {
+  opacity: .9;
+}
