@@ -11,6 +11,10 @@
   margin: .1rem;
 }
 
+.question {
+  color: #311b92;
+}
+
 .tooltip-container {
   position:relative;
 }
