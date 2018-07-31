@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TestService } from '../../../service/test-service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
@@ -13,7 +13,7 @@ export class TicketEditComponent implements OnInit {
   public ticket$: any;
   public edit: boolean;
 
-  constructor(private route: ActivatedRoute, private service: TestService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private service: TestService) { }
 
   ngOnInit() {
     this.route.params.subscribe(data => {
@@ -27,7 +27,13 @@ export class TicketEditComponent implements OnInit {
     });
   }
 
-  updateTicket(tick) {
+  public updateTicket(tick) {
     this.ticket$ = this.service.updateTicket(tick);
+    // this.router.navigate(['../'], { relativeTo: this.route });
+  }
+
+  public saveTicket(tick) {
+    this.service.createTicket(tick);
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 }

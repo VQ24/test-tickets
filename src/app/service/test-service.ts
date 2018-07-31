@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/filter';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/filter';
 
 @Injectable()
 export class TestService {
@@ -35,8 +34,8 @@ export class TestService {
   }
 
   public deleteTicket(id: string) {
-    const subscription = this._deleteTicket(id).subscribe( data => {
-      subscription.unsubscribe();
+    this._deleteTicket(id).subscribe(() => {
+      this.store.dispatch({type: 'DELETE_TICKET', payload: id});
     });
   }
 
@@ -45,6 +44,12 @@ export class TestService {
       subscription.unsubscribe();
       });
     return this.getTicket(ticket._id);
+  }
+
+  public createTicket(ticket) {
+    this._createTicket(ticket).subscribe((data: any) => {
+      this.store.dispatch({type: 'ADD_TICKET', payload: data.ticket});
+    });
   }
   // ----------- back end functions --------------------
 
@@ -67,6 +72,11 @@ export class TestService {
   private _updateTicket(ticket) {
     const apiUrl = 'http://localhost:1980/ticket';
     return this.http.put(apiUrl, ticket);
+  }
+
+  private _createTicket(ticket) {
+    const apiUrl = 'http://localhost:1980/ticket';
+    return this.http.post(apiUrl, ticket);
   }
 
 }

@@ -6,6 +6,7 @@
   <app-ticket-preview
     [ticket]="ticket$ | async"
     [editTicket]="edit"
+    (saveTicket)="saveTicket($event)"
     (updateTicket)="updateTicket($event)">
   </app-ticket-preview>
 

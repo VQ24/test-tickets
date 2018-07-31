@@ -12,6 +12,24 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.post('/ticket', function(request, result) {
+  let body = '';
+  request.on('data', chunk => {
+    body += chunk.toString();
+  });
+  request.on('end', () => {
+    let ticket = JSON.parse(body)
+    MongoClient.connect(url, {useNewUrlParser: true}, function(err, db) {
+      if (err) { throw err };
+      db.db("my-test").collection('tickets').insertOne(ticket, function(err, res) {
+        if (err){ throw err; }
+        result.jsonp({ticket: ticket, status: 'created'});
+      });
+      db.close()
+    });
+  });
+});
+
 app.put('/ticket', function(request, result) {
   let body = '';
   request.on('data', chunk => {
