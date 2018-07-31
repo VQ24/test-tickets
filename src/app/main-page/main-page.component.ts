@@ -18,12 +18,10 @@ export class MainPageComponent implements OnInit {
 
   public loadData() {
     this.service.loadAllTickets();
-    // this.tickets$ = this.service.tickets$;
   }
 
   public deleteTicket(ticket) {
     this.service.deleteTicket(ticket._id);
-    this.loadData();
   }
 
 }

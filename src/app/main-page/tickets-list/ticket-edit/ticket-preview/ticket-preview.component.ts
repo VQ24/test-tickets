@@ -63,7 +63,7 @@ export class TicketPreviewComponent implements OnInit, OnChanges {
 
   public onSave() {
     if (this.editTicket) {
-      this.updateTicket.emit(Object.assign({_id: this.ticket._id}, this.ticketForm.value));
+      this.updateTicket.emit(Object.assign(this.ticket, this.ticketForm.value));
     } else {
       this.saveTicket.emit(this.ticketForm.value);
     }

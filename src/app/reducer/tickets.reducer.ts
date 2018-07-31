@@ -11,6 +11,17 @@ export function ticketReducer(state = initialState, action ) {
         ...state,
         tickets: [...state.tickets, action.payload],
       };
+    case 'UPDATE_TICKET':
+      return {
+        ...state,
+        tickets: state.tickets.map(ticket => {
+          if (ticket._id === action.payload._id) {
+            return action.payload;
+          } else {
+            return ticket;
+          }
+        }),
+      };
     case 'DELETE_TICKET':
       return {
         ...state,

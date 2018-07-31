@@ -40,9 +40,9 @@ export class TestService {
   }
 
   public updateTicket(ticket) {
-    const subscription = this._updateTicket(ticket).subscribe( data => {
-      subscription.unsubscribe();
-      });
+    this._updateTicket(ticket).subscribe(() => {
+      this.store.dispatch({type: 'UPDATE_TICKET', payload: ticket});
+    });
     return this.getTicket(ticket._id);
   }
 

@@ -77,10 +77,10 @@ app.delete('/ticket', function(request, result) {
 app.listen(1980, function () {
    var twirlTimer = (function() {
     var P = [
-      "\x1b[33m Server is running \x1b[37m.  ",
-      "\x1b[33m Server is running \x1b[37m.. ",
-      "\x1b[33m Server is running \x1b[37m...",
-      "\x1b[33m Server is running \x1b[37m   "
+      "\x1b[36m Server is running \x1b[37m.  ",
+      "\x1b[36m Server is running \x1b[37m.. ",
+      "\x1b[36m Server is running \x1b[37m...",
+      "\x1b[36m Server is running \x1b[37m   "
     ];
     var x = 0;
     return setInterval(function() {
