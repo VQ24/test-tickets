@@ -75,5 +75,17 @@ app.delete('/ticket', function(request, result) {
 });
 
 app.listen(1980, function () {
-   console.log("Server is running...")
+   var twirlTimer = (function() {
+    var P = [
+      "\x1b[33m Server is running \x1b[37m.  ",
+      "\x1b[33m Server is running \x1b[37m.. ",
+      "\x1b[33m Server is running \x1b[37m...",
+      "\x1b[33m Server is running \x1b[37m   "
+    ];
+    var x = 0;
+    return setInterval(function() {
+      process.stdout.write("\r" + P[x++]);
+      x &= 3;
+    }, 250);
+  })();
 })
