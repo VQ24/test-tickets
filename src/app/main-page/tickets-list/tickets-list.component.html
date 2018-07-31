@@ -2,40 +2,11 @@
   <table *ngIf="tickets.length" class="highlight">
     <thead>
       <tr>
-        <th>Questions</th>
+        <th>Questions
+        </th>
       </tr>
     </thead>
-    <!-- <tbody>
-      <tr *ngFor="let ticket of tickets">
-        <td>
-          <span [innerHTML]="ticket.question | keepHtml"></span>
-        </td>
-        <td><span *ngIf="ticket.showAnswer"
-          [innerHTML]="ticket.answer | keepHtml"></span>
-        </td>
-        <td>
-          <a class="waves-effect waves-purple btn-flat white"
-            (click)="showAnswer(ticket)">
-            <span *ngIf="!ticket.showAnswer">
-              Show answer
-            </span>
-            <span *ngIf="ticket.showAnswer">
-              Hide answer
-            </span>
-          </a>
-        </td>
-        <td>
-          <a class="btn-floating btn-flat waves-effect waves-purple white tooltipped"
-            (click)="editTicket(ticket)">
-            <i class="material-icons purple-text">edit</i>
-          </a>
-          <a class="btn-floating btn-flat waves-effect waves-purple white tooltipped"
-            (click)="onDelete(ticket)">
-            <i class="material-icons red-text">close</i>
-          </a>
-        </td>
-      </tr>
-    </tbody> -->
+
       <tbody>
         <tr *ngFor="let ticket of tickets">
           <td (click)="showAnswer(ticket)" style="cursor: pointer">

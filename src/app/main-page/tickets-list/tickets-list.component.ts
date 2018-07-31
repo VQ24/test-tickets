@@ -18,15 +18,16 @@ export class TicketsListComponent implements OnInit {
   ngOnInit() {
   }
 
-  onDelete(event) {
+  public onDelete(event) {
     this.deleteTicket.emit(event);
   }
 
-  showAnswer(ticket) {
+  public showAnswer(ticket) {
     ticket.showAnswer = ticket.showAnswer ? false : true;
   }
 
-  editTicket(ticket) {
+  public editTicket(ticket) {
     this.router.navigate(['./edit', { ticketId: ticket._id }], { relativeTo: this.route });
   }
+
 }

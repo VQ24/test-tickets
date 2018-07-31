@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TestService } from '../../../service/test-service';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 @Component({
   selector: 'app-ticket-edit',
@@ -9,12 +11,19 @@ import { TestService } from '../../../service/test-service';
 export class TicketEditComponent implements OnInit {
 
   public ticket$: any;
+  public edit: boolean;
 
   constructor(private route: ActivatedRoute, private service: TestService) { }
 
   ngOnInit() {
     this.route.params.subscribe(data => {
-      this.ticket$ = this.service.getTicket(data.ticketId);
+      if (data.ticketId) {
+        this.edit = true;
+        this.ticket$ = this.service.getTicket(data.ticketId);
+      } else {
+        this.edit = false;
+        this.ticket$ = Observable.of({answer: '', question: ''});
+      }
     });
   }
 

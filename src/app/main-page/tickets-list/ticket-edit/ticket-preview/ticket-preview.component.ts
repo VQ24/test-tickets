@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, OnChanges, Output, EventEmitter, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-ticket-preview',
@@ -8,10 +8,10 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class TicketPreviewComponent implements OnInit, OnChanges {
 
   @Input() public ticket: any;
+  @Input() public editTicket: boolean;
 
+  @Output() public updateTicket: EventEmitter<any> = new EventEmitter();
   @Output() public saveTicket: EventEmitter<any> = new EventEmitter();
-
-  @ViewChild('answerarea') public textArea;
 
   public edit = {
     question: false,
@@ -19,8 +19,8 @@ export class TicketPreviewComponent implements OnInit, OnChanges {
   };
 
   ticketForm = new FormGroup({
-    question: new FormControl(),
-    answer: new FormControl(),
+    question: new FormControl('', Validators.required),
+    answer: new FormControl('', Validators.required),
   });
 
   constructor() { }
@@ -62,8 +62,8 @@ export class TicketPreviewComponent implements OnInit, OnChanges {
   }
 
   public onSave() {
-    if (this.ticket._id) {
-      this.saveTicket.emit(Object.assign({_id: this.ticket._id}, this.ticketForm.value));
+    if (this.editTicket) {
+      this.updateTicket.emit(Object.assign({_id: this.ticket._id}, this.ticketForm.value));
     } else {
       this.saveTicket.emit(this.ticketForm.value);
     }

@@ -1,13 +1,12 @@
 <div class="container">
 
-  <h3>Ticket edit</h3>
-  
-  <a class="waves-effect waves-light btn deep-purple"
-  routerLink="../">Go Back</a>
+  <h3 *ngIf="edit">Ticket edit</h3>
+  <h3 *ngIf="!edit">Add new ticket</h3>
 
   <app-ticket-preview
     [ticket]="ticket$ | async"
-    (saveTicket)="updateTicket($event)">
+    [editTicket]="edit"
+    (updateTicket)="updateTicket($event)">
   </app-ticket-preview>
 
 </div>

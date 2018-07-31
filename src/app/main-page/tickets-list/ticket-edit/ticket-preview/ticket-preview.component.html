@@ -4,13 +4,57 @@
     <!--                question part                  -->
       <div class="input-field col s12">
         <h5>Question</h5>
-        <div *ngIf="!edit.question">
-          <div [innerHTML]="ticket.question | keepHtml"
+        <div *ngIf="!edit.question" class="underlined-block">
+          <div [innerHTML]="ticket.question ? ticket.question : 'Enter question here' | keepHtml"
               (click)="edit.question = !edit.question">
           </div>
         </div>
         <div *ngIf="edit.question">
-          <textarea autosize class="materialize-textarea"
+    <!--          tool buttons start              -->
+          <div>
+            <a class="btn-small btn-flat orange lighten-4 black-text margin-sm tooltip-container noselect"
+              (mousedown)="makeBold(questionarea, 'question')"><i class="tiny material-icons">format_bold</i>
+              <div class="tooltip">Make text <b>bold</b></div>
+            </a>
+            <a class="btn-small btn-flat orange lighten-4 black-text margin-sm tooltip-container noselect"
+              (mousedown)="makeItalic(questionarea, 'question')"><i class="tiny material-icons">format_italic</i>
+              <div class="tooltip">Make text <i>italic</i></div>
+            </a>
+            <a class="btn-small btn-flat orange lighten-4 black-text margin-sm tooltip-container noselect"
+              (mousedown)="makeSup(questionarea, 'question')"><sup>sup</sup>
+              <div class="tooltip">Lift <sup>up</sup> text</div>
+            </a>
+            <a class="btn-small btn-flat orange lighten-4 black-text margin-sm tooltip-container noselect"
+              (mousedown)="makeSub(questionarea, 'question')"><sub>sub</sub>
+              <div class="tooltip">Pull <sub>down</sub> text</div>
+            </a>
+            <a class="btn-small btn-flat orange lighten-4 black-text margin-sm tooltip-container noselect"
+              (mousedown)="makePre(questionarea, 'question')"><i class="tiny material-icons">code</i>
+              <div class="tooltip">Preformat text <pre style="color: white">in code style</pre></div>
+            </a>
+            <a class="btn-small btn-flat orange lighten-4 black-text margin-sm tooltip-container noselect"
+              (mousedown)="highlightBlock(questionarea, 'question')"><i class="tiny material-icons">format_color_fill</i>
+              <div class="tooltip">Highlight <div class="highlighted" style="color: black">a part of</div> the text</div>
+            </a>
+            <a class="btn-small btn-flat orange lighten-4 black-text margin-sm tooltip-container noselect"
+              (mousedown)="makeH3(questionarea, 'question')"><b>H</b>3
+              <div class="tooltip">Make a <h3>big header</h3></div>
+            </a>
+            <a class="btn-small btn-flat orange lighten-4 black-text margin-sm tooltip-container noselect"
+              (mousedown)="makeH4(questionarea, 'question')"><b>H</b>4
+              <div class="tooltip">Make a <h4>medium header</h4></div>
+            </a>
+            <a class="btn-small btn-flat orange lighten-4 black-text margin-sm tooltip-container noselect"
+              (mousedown)="makeH5(questionarea, 'question')"><b>H</b>5
+              <div class="tooltip">Make a <h5>small header</h5></div>
+            </a>
+            <a class="btn-small btn-flat orange lighten-4 black-text margin-sm tooltip-container noselect"
+              (mousedown)="clearTag(questionarea, 'question')"><i class="tiny material-icons">format_clear</i>
+              <div class="tooltip">Clear all tags</div>
+            </a>
+          </div>
+      <!--          tool buttons end              -->
+          <textarea autosize class="materialize-textarea" #questionarea
                     formControlName="question"
                     [innerHTML]="ticket.question">
           </textarea>
@@ -18,59 +62,59 @@
       </div>
 
       <div *ngIf="edit.question">
-        <a class="waves-effect waves-light btn deep-purple"
+        <a class="waves-effect waves-light btn light-green darken-3 margin-sm"
           (click)="applyQuestionText()">OK</a>
-        <a class="waves-effect waves-light btn deep-purple"
+        <a class="waves-effect waves-light btn grey darken-3 margin-sm"
           (click)="cancelQuestionText()">Cancel</a>
       </div>
     <!--                answer part                  -->
       <div class="input-field col s12">
         <h5>Answer</h5>
-        <div *ngIf="!edit.answer">
-          <div [innerHTML]="ticket.answer | keepHtml"
+        <div *ngIf="!edit.answer" class="underlined-block">
+          <div [innerHTML]="ticket.answer ? ticket.answer : 'Enter answer here' | keepHtml"
               (click)="edit.answer = !edit.answer">
           </div>
         </div>
         <div *ngIf="edit.answer">
     <!--          tool buttons start              -->
           <div>
-            <a class="btn-small white black-text margin-sm tooltip-container"
+            <a class="btn-small btn-flat orange lighten-4 black-text margin-sm tooltip-container noselect"
               (mousedown)="makeBold(answerarea, 'answer')"><i class="tiny material-icons">format_bold</i>
               <div class="tooltip">Make text <b>bold</b></div>
             </a>
-            <a class="btn-small white black-text margin-sm tooltip-container"
+            <a class="btn-small btn-flat orange lighten-4 black-text margin-sm tooltip-container noselect"
               (mousedown)="makeItalic(answerarea, 'answer')"><i class="tiny material-icons">format_italic</i>
               <div class="tooltip">Make text <i>italic</i></div>
             </a>
-            <a class="btn-small white black-text margin-sm tooltip-container"
+            <a class="btn-small btn-flat orange lighten-4 black-text margin-sm tooltip-container noselect"
               (mousedown)="makeSup(answerarea, 'answer')"><sup>sup</sup>
               <div class="tooltip">Lift <sup>up</sup> text</div>
             </a>
-            <a class="btn-small white black-text margin-sm tooltip-container"
+            <a class="btn-small btn-flat orange lighten-4 black-text margin-sm tooltip-container noselect"
               (mousedown)="makeSub(answerarea, 'answer')"><sub>sub</sub>
               <div class="tooltip">Pull <sub>down</sub> text</div>
             </a>
-            <a class="btn-small white black-text margin-sm tooltip-container"
+            <a class="btn-small btn-flat orange lighten-4 black-text margin-sm tooltip-container noselect"
               (mousedown)="makePre(answerarea, 'answer')"><i class="tiny material-icons">code</i>
               <div class="tooltip">Preformat text <pre style="color: white">in code style</pre></div>
             </a>
-            <a class="btn-small white black-text margin-sm tooltip-container"
+            <a class="btn-small btn-flat orange lighten-4 black-text margin-sm tooltip-container noselect"
               (mousedown)="highlightBlock(answerarea, 'answer')"><i class="tiny material-icons">format_color_fill</i>
               <div class="tooltip">Highlight <div class="highlighted" style="color: black">a part of</div> the text</div>
             </a>
-            <a class="btn-small white black-text margin-sm tooltip-container"
+            <a class="btn-small btn-flat orange lighten-4 black-text margin-sm tooltip-container noselect"
               (mousedown)="makeH3(answerarea, 'answer')"><b>H</b>3
               <div class="tooltip">Make a <h3>big header</h3></div>
             </a>
-            <a class="btn-small white black-text margin-sm tooltip-container"
+            <a class="btn-small btn-flat orange lighten-4 black-text margin-sm tooltip-container noselect"
               (mousedown)="makeH4(answerarea, 'answer')"><b>H</b>4
               <div class="tooltip">Make a <h4>medium header</h4></div>
             </a>
-            <a class="btn-small white black-text margin-sm tooltip-container"
+            <a class="btn-small btn-flat orange lighten-4 black-text margin-sm tooltip-container noselect"
               (mousedown)="makeH5(answerarea, 'answer')"><b>H</b>5
               <div class="tooltip">Make a <h5>small header</h5></div>
             </a>
-            <a class="btn-small white black-text margin-sm tooltip-container"
+            <a class="btn-small btn-flat orange lighten-4 black-text margin-sm tooltip-container noselect"
               (mousedown)="clearTag(answerarea, 'answer')"><i class="tiny material-icons">format_clear</i>
               <div class="tooltip">Clear all tags</div>
             </a>
@@ -84,9 +128,9 @@
       </div>
 
       <div *ngIf="edit.answer">
-        <a class="waves-effect waves-light btn deep-purple margin-sm"
+        <a class="waves-effect waves-light btn light-green darken-3 margin-sm"
           (click)="applyAnswerText()">OK</a>
-        <a class="waves-effect waves-light btn deep-purple margin-sm"
+        <a class="waves-effect waves-light btn grey darken-3 margin-sm"
           (click)="cancelAnswerText()">Cancel</a>
       </div>
 
@@ -94,9 +138,13 @@
   </div>
 
   <div>
-    <a class="waves-effect waves-light btn deep-purple"
-      (click)="onSave()">Done
-    </a>
+    <button class="waves-effect waves-light btn light-green darken-3 margin-sm" [disabled]="!ticketForm.valid"
+      (click)="onSave()">
+      <i class="material-icons left">check</i>Done
+    </button>
+    <button class="waves-effect waves-light btn grey darken-3 margin-sm"
+      routerLink="../"><i class="material-icons left">chevron_left</i>Go Back
+    </button>
   </div>
 
 </div>

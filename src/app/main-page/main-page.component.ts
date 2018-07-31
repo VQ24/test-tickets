@@ -16,12 +16,12 @@ export class MainPageComponent implements OnInit {
     this.tickets$ = this.service.tickets$;
   }
 
-  loadData() {
+  public loadData() {
     this.service.loadAllTickets();
     // this.tickets$ = this.service.tickets$;
   }
 
-  deleteTicket(ticket) {
+  public deleteTicket(ticket) {
     this.service.deleteTicket(ticket._id);
     this.loadData();
   }
