@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -10,6 +10,8 @@ export class TicketPreviewComponent implements OnInit, OnChanges {
   @Input() public ticket: any;
 
   @Output() public saveTicket: EventEmitter<any> = new EventEmitter();
+
+  @ViewChild('answerarea') public textArea;
 
   public edit = {
     question: false,
