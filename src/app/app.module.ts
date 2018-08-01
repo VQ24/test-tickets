@@ -12,16 +12,20 @@ import { EscapeHtmlPipe } from './pipes/keep-html.pipe';
 import { TextareaAutosizeModule } from 'ngx-textarea-autosize';
 
 import { AppComponent } from './app.component';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { TicketsPageComponent } from './tickets-page/tickets-page.component';
 import { MainPageComponent } from './main-page/main-page.component';
-import { TicketsListComponent } from './main-page/tickets-list/tickets-list.component';
+import { TicketsListComponent } from './tickets-page/tickets-list/tickets-list.component';
 import { AppRoutingModule } from './routing/app-routing.module';
-import { TicketEditComponent } from './main-page/tickets-list/ticket-edit/ticket-edit.component';
-import { TicketPreviewComponent } from './main-page/tickets-list/ticket-edit/ticket-preview/ticket-preview.component';
+import { TicketEditComponent } from './tickets-page/tickets-list/ticket-edit/ticket-edit.component';
+import { TicketPreviewComponent } from './tickets-page/tickets-list/ticket-edit/ticket-preview/ticket-preview.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    BreadcrumbComponent,
     MainPageComponent,
+    TicketsPageComponent,
     TicketsListComponent,
     EscapeHtmlPipe,
     TicketEditComponent,

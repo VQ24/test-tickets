@@ -1,25 +1,5 @@
-<div class="container">
-  <h3>Questions</h3>
+<h1>Main-page</h1>
 
-  <div class="row">
-    <div class="col">
-      <a class="btn-floating btn-large waves-effect waves-light deep-purple tooltipped large"
-        (click)="loadData()">
-        <i class="material-icons">autorenew</i>
-      </a>
-    </div>
-  
-    <div class="col">
-      <a class="btn-floating btn-large waves-effect waves-light light-green tooltipped large"
-        routerLink="edit">
-        <i class="material-icons">add_circle</i>
-      </a>
-    </div>
-  </div>
-
-  <app-tickets-list
-    [tickets]="tickets$ | async"
-    (deleteTicket)="deleteTicket($event)">
-  </app-tickets-list>
-
-</div>
+<button class="waves-effect waves-light btn deep-purple margin-sm"
+  routerLink="tickets">Tickets
+</button>
