@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import { Router, ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -10,7 +10,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 })
 
 
-export class BreadcrumbComponent {
+export class BreadcrumbComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
@@ -20,9 +20,8 @@ export class BreadcrumbComponent {
     .map(event =>  this.buildBreadCrumb(this.route.root))
     .map(breadcrumbs => breadcrumbs.filter(data => data.label));
 
-
-  public showUrl() {
-    this.breadcrumbs$.subscribe(data => console.log(data));
+  ngOnInit() {
+    this.breadcrumbs$.subscribe(data => console.table(data));
   }
 
   public buildBreadCrumb(route: ActivatedRoute, breadcrumbs = []) {
@@ -32,7 +31,7 @@ export class BreadcrumbComponent {
     };
     const newBreadcrumbs = [ ...breadcrumbs, breadcrumb ];
     if (route.firstChild) {
-        return this.buildBreadCrumb(route.firstChild, newBreadcrumbs);
+      return this.buildBreadCrumb(route.firstChild, newBreadcrumbs);
     }
     return newBreadcrumbs;
   }
