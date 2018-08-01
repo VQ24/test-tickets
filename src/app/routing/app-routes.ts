@@ -6,26 +6,82 @@ import { MainPageComponent } from '../main-page/main-page.component';
 export const ROUTES: Routes = [
   {
     path: '',
+    data: {
+      breadcrumb: ''
+    },
     children: [
       {
         path: 'tickets',
+        data: {
+          breadcrumb: 'Tickets'
+        },
         children: [
           {
             path: 'edit',
+            data: {
+              breadcrumb: 'Edit'
+            },
             component: TicketEditComponent,
           },
           {
             path: '',
+            data: {
+              breadcrumb: ''
+            },
             component: TicketsPageComponent
           }
         ]
       },
       {
         path: '',
+        data: {
+          breadcrumb: ''
+        },
         component: MainPageComponent
       }
     ]
   }
 
 ];
+
+// export const ROUTES: Routes = [
+//   {
+//     path: '',
+//     data: {
+//       breadcrumb: 'Home'
+//     },
+//     children: [
+//       {
+//         path: 'tickets',
+//         data: {
+//           breadcrumb: 'Tickets'
+//         },
+//         children: [
+//           {
+//             path: 'edit',
+//             data: {
+//               breadcrumb: 'Edit'
+//             },
+//             component: TicketEditComponent,
+//           },
+//           {
+//             path: '',
+//             data: {
+//               breadcrumb: ''
+//             },
+//             component: TicketsPageComponent
+//           }
+//         ]
+//       },
+//       {
+//         path: '',
+//         data: {
+//           breadcrumb: ''
+//         },
+//         component: MainPageComponent
+//       }
+//     ]
+//   }
+
+// ];
 

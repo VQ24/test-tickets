@@ -13,6 +13,6 @@ import { ROUTES } from './app-routes';
   exports: [
     RouterModule
   ],
-  declarations: []
+  declarations: [],
 })
 export class AppRoutingModule { }
