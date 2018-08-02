@@ -1,9 +1,6 @@
 <nav>
-  <div class="nav-wrapper deep-purple">
-    <div>
-      <a class="breadcrumb">First</a>
-      <a class="breadcrumb">Second</a>
-      <a class="breadcrumb">Third</a>
-    </div>
+  <div class="nav-wrapper deep-purple padding-left-lg">
+    <a *ngFor="let breadcrumb of breadcrumbs$ | async" class="breadcrumb"
+        [routerLink] = "breadcrumb.url">{{breadcrumb.label}}</a>
   </div>
 </nav>

@@ -11,6 +11,10 @@
   margin: .1rem;
 }
 
+.padding-left-lg {
+  padding-left: 2rem;
+}
+
 .question {
   color: #311b92;
 }

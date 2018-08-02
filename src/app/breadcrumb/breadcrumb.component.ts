@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
-import { Router, ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Component } from '@angular/core';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import 'rxjs/add/operator/distinctUntilChanged';
 
 @Component({
@@ -9,29 +7,27 @@ import 'rxjs/add/operator/distinctUntilChanged';
   templateUrl: './breadcrumb.component.html'
 })
 
-
-export class BreadcrumbComponent implements OnInit {
+export class BreadcrumbComponent {
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   public breadcrumbs$ = this.router.events
     .filter(event => event instanceof NavigationEnd)
     .distinctUntilChanged()
-    .map(event =>  this.buildBreadCrumb(this.route.root))
+    .map(() =>  this.buildBreadCrumb(this.route.root))
     .map(breadcrumbs => breadcrumbs.filter(data => data.label));
 
-  ngOnInit() {
-    this.breadcrumbs$.subscribe(data => console.table(data));
-  }
-
-  public buildBreadCrumb(route: ActivatedRoute, breadcrumbs = []) {
-    const label = route.routeConfig ? route.routeConfig.data['breadcrumb'] : 'Home';
+  private buildBreadCrumb(route: ActivatedRoute, url: string = '', breadcrumbs = []) {
+    const label = route.routeConfig ? route.routeConfig.data[ 'breadcrumb' ] : 'Home';
+    const path = route.routeConfig ? route.routeConfig.path : '';
+    const nextUrl = `${url}${path}/`;
     const breadcrumb = {
-        label: label,
+      label: label,
+      url: nextUrl.split('/').filter(item => item).join('/')
     };
     const newBreadcrumbs = [ ...breadcrumbs, breadcrumb ];
     if (route.firstChild) {
-      return this.buildBreadCrumb(route.firstChild, newBreadcrumbs);
+      return this.buildBreadCrumb(route.firstChild, nextUrl, newBreadcrumbs);
     }
     return newBreadcrumbs;
   }
