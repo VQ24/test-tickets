@@ -32,6 +32,11 @@ export function ticketReducer(state = initialState, action ) {
         ...state,
         tickets: action.payload,
       };
+    case 'GET_CATEGORIES':
+      return {
+        ...state,
+        categories: action.payload,
+      };
     default:
       return state;
   }

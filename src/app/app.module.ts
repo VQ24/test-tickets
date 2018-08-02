@@ -19,6 +19,8 @@ import { TicketsListComponent } from './tickets-page/tickets-list/tickets-list.c
 import { AppRoutingModule } from './routing/app-routing.module';
 import { TicketEditComponent } from './tickets-page/tickets-list/ticket-edit/ticket-edit.component';
 import { TicketPreviewComponent } from './tickets-page/tickets-list/ticket-edit/ticket-preview/ticket-preview.component';
+import { CategoryService } from './service/category-service';
+import { CategoriesPageComponent } from './categories-page/categories-page.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { TicketPreviewComponent } from './tickets-page/tickets-list/ticket-edit/
     EscapeHtmlPipe,
     TicketEditComponent,
     TicketPreviewComponent,
+    CategoriesPageComponent,
   ],
   imports: [
     FormsModule,
@@ -42,7 +45,8 @@ import { TicketPreviewComponent } from './tickets-page/tickets-list/ticket-edit/
     StoreDevtoolsModule.instrument(),
   ],
   providers: [
-    TestService
+    TestService,
+    CategoryService,
   ],
   bootstrap: [AppComponent]
 })

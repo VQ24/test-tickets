@@ -62,6 +62,19 @@ app.get('/tickets', function(request, result) {
   });
 });
 
+app.get('/categories', function(request, result) {
+  MongoClient.connect(url, {useNewUrlParser: true}, function(err, db) {
+    if (err) { throw err };
+    var filter = request.query.filter ? JSON.parse(request.query.filter) : {};
+    db.db("my-test").collection('categories').find(filter)
+      .toArray(function (err, res) {
+        if (err) { throw err };
+        result.jsonp(res);
+      });
+    db.close();
+  });
+});
+
 app.delete('/ticket', function(request, result) {
   MongoClient.connect(url, {useNewUrlParser: true}, function(err, db) {
     if (err) { throw err };
