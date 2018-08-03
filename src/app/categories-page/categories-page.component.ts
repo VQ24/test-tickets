@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../service/category-service';
-import { Observable } from 'rxjs/Observable';
 import { CategoryListItem } from '../models/category-list';
 
 @Component({
@@ -9,17 +8,17 @@ import { CategoryListItem } from '../models/category-list';
 })
 export class CategoriesPageComponent implements OnInit {
 
-  public categories$: Observable<CategoryListItem[]>;
+  public categories: CategoryListItem[];
 
   constructor(private service: CategoryService) { }
 
   ngOnInit() {
-    this.categories$ = this.service.categories$;
-    this.categories$.subscribe(data => {
+    this.service.categories$.subscribe(data => {
       if (!data || !data.length) {
         this.loadData();
       } else {
-        console.log(this.mapCategories(data));
+        this.categories = this.mapCategories(data);
+        // console.log(this.categories);
       }
     });
   }
@@ -29,12 +28,15 @@ export class CategoriesPageComponent implements OnInit {
   }
 
   private mapCategories (categories: any[]): CategoryListItem[] {
-    return categories.map(category => {
-      return {
-        name: category.name,
-        _id: category._id,
-        subCategory: this.mapCategories(categories.filter(cat => cat.parentCategory === category._id))
-      };
-    });
+    const rearrange = (arrCategories: any[]) => {
+      return arrCategories.map(arrCategory => {
+        return {
+          name: arrCategory.name,
+          _id: arrCategory._id,
+          subCategory: rearrange(categories.filter(cat => cat.parentCategory === arrCategory._id))
+        };
+      });
+    };
+    return rearrange(categories.filter(item => !item.parentCategory));
   }
 }
