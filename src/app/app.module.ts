@@ -21,6 +21,7 @@ import { TicketEditComponent } from './tickets-page/tickets-list/ticket-edit/tic
 import { TicketPreviewComponent } from './tickets-page/tickets-list/ticket-edit/ticket-preview/ticket-preview.component';
 import { CategoryService } from './service/category-service';
 import { CategoriesPageComponent } from './categories-page/categories-page.component';
+import { CategoriesListItemComponent } from './categories-page/categories-list-item/categories-list-item.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { CategoriesPageComponent } from './categories-page/categories-page.compo
     TicketEditComponent,
     TicketPreviewComponent,
     CategoriesPageComponent,
+    CategoriesListItemComponent,
   ],
   imports: [
     FormsModule,

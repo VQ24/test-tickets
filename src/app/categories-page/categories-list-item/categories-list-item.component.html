@@ -1,0 +1,18 @@
+<p (click)="hideChildren = !hideChildren"
+  [ngClass]="{'category-list-item': true, 'category-list-item-hide': hidden}">
+  <i *ngIf="listItem.subCategory.length && hideChildren"
+    class="material-icons left deep-purple-text text-lighten-1">keyboard_arrow_right</i>
+  <i *ngIf="listItem.subCategory.length && !hideChildren"
+    class="material-icons left deep-purple-text text-lighten-1">keyboard_arrow_down</i>
+  <i *ngIf="!listItem.subCategory.length"
+    class="material-icons left white-text">remove</i>
+  {{listItem.name}}
+</p>
+<ul *ngIf="listItem.subCategory.length">
+  <li class="category-list-template"  *ngFor="let category of listItem.subCategory">
+    <app-categories-list-item
+      [hidden]="hideChildren"
+      [listItem]="category">
+    </app-categories-list-item>
+  </li>
+</ul>

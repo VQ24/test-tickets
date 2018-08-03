@@ -75,3 +75,31 @@
         -ms-user-select: none;
             user-select: none;
 }
+
+.category-list-item {
+  display: block;
+  border-color: #311b92;
+  transform: translateY(0);
+  background-color: #fff;
+  line-height: 1.5rem;
+  padding: 10px 20px;
+  margin: 0;
+  border-radius: 3px;
+  cursor: pointer;
+  -webkit-transition: .25s;
+  transition: .25s;
+}
+
+.category-list-item:hover {
+  background-color: #ede7f6;
+  -webkit-transition: .25s;
+  transition: .25s;
+}
+
+.category-list-item-hide {
+  display: none;
+}
+
+.category-list-template {
+  margin-left: 1rem;
+}

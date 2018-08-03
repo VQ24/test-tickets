@@ -1,12 +1,7 @@
-<h1>Categories page</h1>
-<ol *ngIf="categories">
-  <li>
-    <span>Lorem ipsum dolor sit amet.</span>
-  </li>
-  <li>
-    <span>Lorem ipsum dolor sit amet.</span>
-  </li>
-  <li>
-    <span>Lorem ipsum dolor sit amet.</span>
-  </li>
-</ol>
+<div class="row">
+  <ul *ngIf="categories" class="col s12">
+    <li class="category-list-template" *ngFor="let cat of categories">
+      <app-categories-list-item [listItem]="cat"></app-categories-list-item>
+    </li>
+  </ul>
+</div>
