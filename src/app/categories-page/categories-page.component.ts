@@ -27,6 +27,22 @@ export class CategoriesPageComponent implements OnInit {
     this.service.loadAllCategories();
   }
 
+  public onDeleteCategory(item: CategoryListItem) {
+    console.log('Delete: ', item);
+  }
+
+  public onAddCategory(item: CategoryListItem) {
+    console.log('Add: ', item);
+  }
+
+  public onEditCategory(item: CategoryListItem) {
+    console.log('Edit: ', item);
+  }
+
+  public onChooseCategory(item: CategoryListItem) {
+    console.log('Checked: ', item);
+  }
+
   private mapCategories (categories: any[]): CategoryListItem[] {
     const rearrange = (arrCategories: any[]) => {
       return arrCategories.map(arrCategory => {

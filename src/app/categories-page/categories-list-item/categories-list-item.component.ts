@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CategoryListItem } from '../../models/category-list';
 
 @Component({
@@ -11,5 +11,33 @@ export class CategoriesListItemComponent {
   @Input() public listItem: CategoryListItem;
   @Input() public hidden = false;
   @Input() public hideChildren = false;
+  @Input() public editMode = false;
+  @Input() public checkItemMode = false;
 
+  @Output() public deleteCategory: EventEmitter<any> = new EventEmitter();
+  @Output() public addCategory: EventEmitter<any> = new EventEmitter();
+  @Output() public editCategory: EventEmitter<any> = new EventEmitter();
+  @Output() public chooseCategory: EventEmitter<any> = new EventEmitter();
+
+  public onCheckBoxInput(isChecked: boolean, item: CategoryListItem) {
+    if (isChecked) {
+      this.onChoose(item);
+    }
+  }
+
+  public onDelete(item: CategoryListItem) {
+    this.deleteCategory.emit(item);
+  }
+
+  public onAdd(item: CategoryListItem) {
+    this.addCategory.emit(item);
+  }
+
+  public onEdit(item: CategoryListItem) {
+    this.editCategory.emit(item);
+  }
+
+  public onChoose(item: CategoryListItem) {
+    this.chooseCategory.emit(item);
+  }
 }

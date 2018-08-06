@@ -96,10 +96,36 @@
   transition: .25s;
 }
 
+.category-list-item .show-on-hover{
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: .25s;
+  transition: .25s;
+}
+
+.category-list-item:hover .show-on-hover{
+  visibility: visible;
+  opacity: 1;
+  -webkit-transition: .25s;
+  transition: .25s;
+  transition-delay: .5s;
+}
+
 .category-list-item-hide {
   display: none;
 }
 
 .category-list-template {
   margin-left: 1rem;
+}
+
+[type="checkbox"]+.custom-checkbox::before {
+  border: 2px solid #b0bec5 !important;
+}
+
+[type="checkbox"]:checked+.custom-checkbox:before {
+  border-top: 2px solid transparent !important;
+  border-left: 2px solid transparent !important;
+  border-right: 2px solid #33691e !important;
+  border-bottom: 2px solid #33691e !important;
 }
