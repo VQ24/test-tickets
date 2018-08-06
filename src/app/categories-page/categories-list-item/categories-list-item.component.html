@@ -10,6 +10,7 @@
   <span *ngIf="checkItemMode">
     <label class="black-text">
       <input type="checkbox"
+        [checked]="itemIsChecked()"
         (input)="onCheckBoxInput($event.target.checked, listItem)"/>
       <span class="custom-checkbox">{{listItem.name}}</span>
     </label>
@@ -32,6 +33,7 @@
       [editMode]="editMode"
       [hidden]="hideChildren"
       [listItem]="category"
+      [checkedItemId]="checkedItemId"
       (deleteCategory)="onDelete($event)"
       (addCategory)="onAdd($event)"
       (editCategory)="onEdit($event)"

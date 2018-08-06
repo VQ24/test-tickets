@@ -9,15 +9,23 @@ import { CategoryListItem } from '../../models/category-list';
 export class CategoriesListItemComponent {
 
   @Input() public listItem: CategoryListItem;
+
   @Input() public hidden = false;
   @Input() public hideChildren = false;
+
   @Input() public editMode = false;
+
   @Input() public checkItemMode = false;
+  @Input() public checkedItemId: string;
 
   @Output() public deleteCategory: EventEmitter<any> = new EventEmitter();
   @Output() public addCategory: EventEmitter<any> = new EventEmitter();
   @Output() public editCategory: EventEmitter<any> = new EventEmitter();
   @Output() public chooseCategory: EventEmitter<any> = new EventEmitter();
+
+  public itemIsChecked(): boolean {
+    return this.listItem._id === this.checkedItemId;
+  }
 
   public onCheckBoxInput(isChecked: boolean, item: CategoryListItem) {
     if (isChecked) {

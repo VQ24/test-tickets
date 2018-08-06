@@ -9,6 +9,7 @@ import { CategoryListItem } from '../models/category-list';
 export class CategoriesPageComponent implements OnInit {
 
   public categories: CategoryListItem[];
+  public checkedItemId: string;
 
   constructor(private service: CategoryService) { }
 
@@ -40,6 +41,7 @@ export class CategoriesPageComponent implements OnInit {
   }
 
   public onChooseCategory(item: CategoryListItem) {
+    this.checkedItemId = item._id;
     console.log('Checked: ', item);
   }
 
