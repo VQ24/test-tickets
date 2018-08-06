@@ -13,7 +13,9 @@ export class TicketEditComponent implements OnInit {
   public ticket$: any;
   public edit: boolean;
 
-  constructor(private router: Router, private route: ActivatedRoute, private service: TestService) { }
+  constructor(private router: Router,
+              private route: ActivatedRoute,
+              private service: TestService) { }
 
   ngOnInit() {
     this.route.params.subscribe(data => {

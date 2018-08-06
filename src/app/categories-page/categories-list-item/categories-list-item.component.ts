@@ -27,6 +27,10 @@ export class CategoriesListItemComponent {
     return this.listItem._id === this.checkedItemId;
   }
 
+  public subItemIsChecked(item: CategoryListItem) {
+    return true;
+  }
+
   public onCheckBoxInput(isChecked: boolean, item: CategoryListItem) {
     if (isChecked) {
       this.onChoose(item);

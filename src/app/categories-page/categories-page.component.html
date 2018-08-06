@@ -2,10 +2,11 @@
   <ul *ngIf="categories" class="col s12">
     <li class="category-list-template" *ngFor="let cat of categories">
       <app-categories-list-item 
-        [checkItemMode]="true"
-        [editMode]="true"
+        [checkItemMode]="checkItemMode"
+        [editMode]="editMode"
         [listItem]="cat"
         [checkedItemId]="checkedItemId"
+        [hideChildren]="hideChildren"
         (deleteCategory)="onDeleteCategory($event)"
         (addCategory)="onAddCategory($event)"
         (editCategory)="onEditCategory($event)"

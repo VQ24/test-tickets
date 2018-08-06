@@ -124,6 +124,15 @@
   border-radius: 4px !important;
 }
 
+[type="checkbox"][subchecked]+.custom-checkbox::before {
+  content: 'a';
+  color: black;
+  border: 2px solid #b0bec5 !important;
+  padding: 2px;
+  background: #b0bec5;
+  border-radius: 4px !important;
+}
+
 [type="checkbox"]:checked+.custom-checkbox:before {
   border-top: 4px solid transparent !important;
   border-left: 4px solid transparent !important;

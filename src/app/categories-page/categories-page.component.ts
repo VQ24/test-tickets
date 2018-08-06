@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CategoryService } from '../service/category-service';
 import { CategoryListItem } from '../models/category-list';
 
@@ -8,8 +8,17 @@ import { CategoryListItem } from '../models/category-list';
 })
 export class CategoriesPageComponent implements OnInit {
 
+  @Input() public hidden = false;
+  @Input() public hideChildren = false;
+
+  @Input() public editMode = false;
+
+  @Input() public checkItemMode = false;
+  @Input() public checkedItemId: string;
+
+  @Output() public chooseCategory: EventEmitter<any> = new EventEmitter();
+
   public categories: CategoryListItem[];
-  public checkedItemId: string;
 
   constructor(private service: CategoryService) { }
 
@@ -42,6 +51,7 @@ export class CategoriesPageComponent implements OnInit {
 
   public onChooseCategory(item: CategoryListItem) {
     this.checkedItemId = item._id;
+    this.chooseCategory.emit(item._id);
     console.log('Checked: ', item);
   }
 

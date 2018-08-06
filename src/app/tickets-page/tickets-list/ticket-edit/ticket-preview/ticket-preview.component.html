@@ -1,6 +1,16 @@
 <div *ngIf="ticket">
   <div class="row">
     <form [formGroup]="ticketForm">
+    <!--                categories part                  -->
+    <div class="input-field col s12">
+      <h5>Category</h5>
+      <div class="underlined-block">
+        <app-categories-page
+          [checkItemMode]="true"
+          [hideChildren]="true">
+        </app-categories-page>
+      </div>
+    </div>
     <!--                question part                  -->
       <div class="input-field col s12">
         <h5>Question</h5>
