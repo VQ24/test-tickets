@@ -52,7 +52,6 @@ export class CategoriesPageComponent implements OnInit {
   public onChooseCategory(item: CategoryListItem) {
     this.checkedItemId = item._id;
     this.chooseCategory.emit(item._id);
-    console.log('Checked: ', item);
   }
 
   private mapCategories (categories: any[]): CategoryListItem[] {

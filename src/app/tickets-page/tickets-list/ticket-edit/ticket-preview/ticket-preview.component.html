@@ -4,20 +4,31 @@
     <!--                categories part                  -->
     <div class="input-field col s12">
       <h5>Category</h5>
-      <div class="underlined-block">
+      <div *ngIf="!edit.category" class="underlined-block">
+        <app-categories-flat-page
+          (click)="edit.category = !edit.category"
+          [currentTicketCategory]="ticket.category">
+        </app-categories-flat-page>
+      </div>
+      <div *ngIf="edit.category" class="underlined-block">
         <app-categories-page
-          [checkedItemId]="ticket.category"
+          [checkedItemId]="ticketCategory"
           [checkItemMode]="true"
           [hideChildren]="true"
           (chooseCategory)="onChooseCategory($event)">
         </app-categories-page>
+        <a class="waves-effect waves-light btn light-green darken-3 margin-sm"
+          (click)="applyCategoryChoose()">OK</a>
+        <a class="waves-effect waves-light btn grey darken-3 margin-sm"
+          (click)="cancelCategoryChoose()">Cancel</a>
       </div>
     </div>
     <!--                question part                  -->
       <div class="input-field col s12">
         <h5>Question</h5>
         <div *ngIf="!edit.question" class="underlined-block">
-          <div [innerHTML]="ticket.question ? ticket.question : 'Enter question here' | keepHtml"
+          <div class="clickable"
+              [innerHTML]="ticket.question ? ticket.question : 'Enter question here' | keepHtml"
               (click)="edit.question = !edit.question">
           </div>
         </div>
@@ -83,7 +94,8 @@
       <div class="input-field col s12">
         <h5>Answer</h5>
         <div *ngIf="!edit.answer" class="underlined-block">
-          <div [innerHTML]="ticket.answer ? ticket.answer : 'Enter answer here' | keepHtml"
+          <div class="clickable"
+              [innerHTML]="ticket.answer ? ticket.answer : 'Enter answer here' | keepHtml"
               (click)="edit.answer = !edit.answer">
           </div>
         </div>

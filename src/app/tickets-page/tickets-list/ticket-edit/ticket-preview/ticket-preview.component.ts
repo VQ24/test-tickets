@@ -15,8 +15,11 @@ export class TicketPreviewComponent implements OnInit, OnChanges {
 
   public edit = {
     question: false,
-    answer: false
+    answer: false,
+    category: false
   };
+
+  public ticketCategory;
 
   ticketForm = new FormGroup({
     question: new FormControl('', Validators.required),
@@ -34,6 +37,7 @@ export class TicketPreviewComponent implements OnInit, OnChanges {
         question: this.ticket.question,
         answer: this.ticket.answer
       });
+      this.ticketCategory = this.ticket.category;
     }
   }
 
@@ -62,7 +66,17 @@ export class TicketPreviewComponent implements OnInit, OnChanges {
   }
 
   public onChooseCategory(categoryId: string) {
-    this.ticket.category = categoryId;
+    this.ticketCategory = categoryId;
+  }
+
+  public applyCategoryChoose() {
+    this.ticket.category = this.ticketCategory;
+    this.edit.category = false;
+  }
+
+  public cancelCategoryChoose() {
+    this.ticketCategory = this.ticket.category;
+    this.edit.category = false;
   }
 
   public onSave() {
