@@ -61,6 +61,10 @@ export class TicketPreviewComponent implements OnInit, OnChanges {
     this.edit.question = !this.edit.question;
   }
 
+  public onChooseCategory(categoryId: string) {
+    this.ticket.category = categoryId;
+  }
+
   public onSave() {
     if (this.editTicket) {
       this.updateTicket.emit(Object.assign(this.ticket, this.ticketForm.value));

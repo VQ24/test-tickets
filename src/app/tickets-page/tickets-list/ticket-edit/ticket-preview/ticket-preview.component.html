@@ -6,8 +6,10 @@
       <h5>Category</h5>
       <div class="underlined-block">
         <app-categories-page
+          [checkedItemId]="ticket.category"
           [checkItemMode]="true"
-          [hideChildren]="true">
+          [hideChildren]="true"
+          (chooseCategory)="onChooseCategory($event)">
         </app-categories-page>
       </div>
     </div>

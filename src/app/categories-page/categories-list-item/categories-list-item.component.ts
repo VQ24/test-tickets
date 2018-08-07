@@ -23,34 +23,26 @@ export class CategoriesListItemComponent {
   @Output() public editCategory: EventEmitter<any> = new EventEmitter();
   @Output() public chooseCategory: EventEmitter<any> = new EventEmitter();
 
-  public itemIsChecked(item?: CategoryListItem): boolean {
-    return item ? item._id === this.checkedItemId : this.listItem._id === this.checkedItemId;
+  public itemIsChecked(): boolean {
+    return this.listItem._id === this.checkedItemId;
+  }
+
+  private itemChecked(item: CategoryListItem): boolean {
+    return item._id === this.checkedItemId;
   }
 
   public subItemIsChecked(item: CategoryListItem) {
-    function isChecked(subitem: CategoryListItem) {
-      // return subitem.subCategory.length
-      //   ? subitem.subCategory.filter(subCat => this.itemIsChecked(subCat)).length > 0
-      //     ? true : subitem.subCategory.filter(subCat => isChecked(subCat)).length > 0
-      //   : false;
-
-      if (subitem.subCategory.length > 0) {
-        // if (subitem.subCategory.filter(subCat => this.itemIsChecked(subCat))) {
-        //   return true;
-        // } else {
-        //   // return subitem.subCategory.forEach(subCat => isChecked(subCat));
-        //   return false;
-        // }
-      } else {
-        return false;
-      }
-    }
-    return isChecked(item);
+    const subChecked = subitem => subitem.subCategory.filter(sc =>
+      this.itemChecked(sc) ? true : subChecked(sc)
+    ).length > 0;
+    return item.subCategory.length ? subChecked(item) : false;
   }
 
   public onCheckBoxInput(isChecked: boolean, item: CategoryListItem) {
     if (isChecked) {
       this.onChoose(item);
+    } else {
+      this.onChoose({_id: null} as any);
     }
   }
 
