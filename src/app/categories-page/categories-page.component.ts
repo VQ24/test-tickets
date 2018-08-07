@@ -15,6 +15,8 @@ export class CategoriesPageComponent implements OnInit {
 
   @Input() public checkItemMode = false;
   @Input() public checkedItemId: string;
+  @Input() public multiCheck = false;
+  @Input() public checkedItems: string[] = [];
 
   @Output() public chooseCategory: EventEmitter<any> = new EventEmitter();
 
@@ -28,7 +30,6 @@ export class CategoriesPageComponent implements OnInit {
         this.loadData();
       } else {
         this.categories = this.mapCategories(data);
-        // console.log(this.categories);
       }
     });
   }
@@ -49,9 +50,23 @@ export class CategoriesPageComponent implements OnInit {
     console.log('Edit: ', item);
   }
 
-  public onChooseCategory(item: CategoryListItem) {
-    this.checkedItemId = item._id;
-    this.chooseCategory.emit(item._id);
+  public onChooseCategory(item: CategoryListItem | string) {
+    if (this.multiCheck) {
+      const input = item as string;
+      this.checkedItems.push(input);
+      this.chooseCategory.emit(this.checkedItems);
+    } else {
+      const input = item as CategoryListItem;
+      this.checkedItemId = input._id;
+      this.chooseCategory.emit(input._id);
+    }
+  }
+
+  public onUnChooseCategory(item: string) {
+    if (this.multiCheck) {
+      this.checkedItems = this.checkedItems.filter(it => it !== item);
+      this.chooseCategory.emit(this.checkedItems);
+    }
   }
 
   private mapCategories (categories: any[]): CategoryListItem[] {

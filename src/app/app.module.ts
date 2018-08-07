@@ -23,6 +23,7 @@ import { CategoryService } from './service/category-service';
 import { CategoriesPageComponent } from './categories-page/categories-page.component';
 import { CategoriesListItemComponent } from './categories-page/categories-list-item/categories-list-item.component';
 import { CategoriesFlatPageComponent } from './categories-page/categories-flat-page.component';
+import { CategoriesSetupPageComponent } from './categories-setup-page/categories-setup-page.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { CategoriesFlatPageComponent } from './categories-page/categories-flat-p
     CategoriesPageComponent,
     CategoriesListItemComponent,
     CategoriesFlatPageComponent,
+    CategoriesSetupPageComponent,
   ],
   imports: [
     FormsModule,

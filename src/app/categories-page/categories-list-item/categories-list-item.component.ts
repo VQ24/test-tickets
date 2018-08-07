@@ -17,14 +17,19 @@ export class CategoriesListItemComponent {
 
   @Input() public checkItemMode = false;
   @Input() public checkedItemId: string;
+  @Input() public multiCheck = false;
+  @Input() public checkedItems: string[] = [];
 
   @Output() public deleteCategory: EventEmitter<any> = new EventEmitter();
   @Output() public addCategory: EventEmitter<any> = new EventEmitter();
   @Output() public editCategory: EventEmitter<any> = new EventEmitter();
   @Output() public chooseCategory: EventEmitter<any> = new EventEmitter();
+  @Output() public unChooseCategory: EventEmitter<any> = new EventEmitter();
 
   public itemIsChecked(): boolean {
-    return this.listItem._id === this.checkedItemId;
+    return this.multiCheck ?
+      this.checkedItems.filter(item => item === this.listItem._id).length > 0 :
+      this.listItem._id === this.checkedItemId;
   }
 
   private itemChecked(item: CategoryListItem): boolean {
@@ -38,11 +43,21 @@ export class CategoriesListItemComponent {
     return item.subCategory.length ? subChecked(item) : false;
   }
 
-  public onCheckBoxInput(isChecked: boolean, item: CategoryListItem) {
+  public onCheckBoxInput(isChecked: boolean, item: CategoryListItem | string) {
     if (isChecked) {
-      this.onChoose(item);
+      if (this.multiCheck) {
+        const input = item as CategoryListItem;
+        this.onChoose(input._id);
+      } else {
+        this.onChoose(item);
+      }
     } else {
-      this.onChoose({_id: null} as any);
+      if (this.multiCheck) {
+        const input = item as CategoryListItem;
+        this.onUnChoose(input._id);
+      } else {
+        this.onChoose({_id: null} as any);
+      }
     }
   }
 
@@ -58,7 +73,11 @@ export class CategoriesListItemComponent {
     this.editCategory.emit(item);
   }
 
-  public onChoose(item: CategoryListItem) {
+  public onChoose(item: CategoryListItem | string) {
     this.chooseCategory.emit(item);
+  }
+
+  public onUnChoose(item: CategoryListItem | string) {
+    this.unChooseCategory.emit(item);
   }
 }

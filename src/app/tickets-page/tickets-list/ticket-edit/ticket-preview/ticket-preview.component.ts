@@ -24,6 +24,7 @@ export class TicketPreviewComponent implements OnInit, OnChanges {
   ticketForm = new FormGroup({
     question: new FormControl('', Validators.required),
     answer: new FormControl('', Validators.required),
+    category: new FormControl('', Validators.required),
   });
 
   constructor() { }
@@ -35,7 +36,8 @@ export class TicketPreviewComponent implements OnInit, OnChanges {
     if (changes.hasOwnProperty('ticket') && changes.ticket.currentValue) {
       this.ticketForm.patchValue({
         question: this.ticket.question,
-        answer: this.ticket.answer
+        answer: this.ticket.answer,
+        category: this.ticket.category,
       });
       this.ticketCategory = this.ticket.category;
     }
@@ -70,6 +72,9 @@ export class TicketPreviewComponent implements OnInit, OnChanges {
   }
 
   public applyCategoryChoose() {
+    this.ticketForm.patchValue({
+      category: this.ticketCategory,
+    });
     this.ticket.category = this.ticketCategory;
     this.edit.category = false;
   }

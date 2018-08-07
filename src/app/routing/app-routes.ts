@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { TicketEditComponent } from '../tickets-page/tickets-list/ticket-edit/ticket-edit.component';
 import { TicketsPageComponent } from '../tickets-page/tickets-page.component';
 import { MainPageComponent } from '../main-page/main-page.component';
-import { CategoriesPageComponent } from '../categories-page/categories-page.component';
+import { CategoriesSetupPageComponent } from '../categories-setup-page/categories-setup-page.component';
 
 export const ROUTES: Routes = [
   {
@@ -44,7 +44,7 @@ export const ROUTES: Routes = [
             data: {
               breadcrumb: ''
             },
-            component: CategoriesPageComponent
+            component: CategoriesSetupPageComponent
           }
         ]
       },

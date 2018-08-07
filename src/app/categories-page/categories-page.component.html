@@ -6,10 +6,13 @@
         [editMode]="editMode"
         [listItem]="cat"
         [checkedItemId]="checkedItemId"
+        [checkedItems]="checkedItems"
         [hideChildren]="hideChildren"
+        [multiCheck]="multiCheck"
         (deleteCategory)="onDeleteCategory($event)"
         (addCategory)="onAddCategory($event)"
         (editCategory)="onEditCategory($event)"
+        (unChooseCategory)="onUnChooseCategory($event)"
         (chooseCategory)="onChooseCategory($event)">
       </app-categories-list-item>
     </li>

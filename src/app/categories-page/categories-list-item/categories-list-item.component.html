@@ -10,7 +10,7 @@
   <span *ngIf="checkItemMode">
     <label class="black-text">
       <input type="checkbox"
-        [class.subchecked]="subItemIsChecked(listItem)"
+        [class.subchecked]="multiCheck ? false : subItemIsChecked(listItem)"
         [checked]="itemIsChecked()"
         (input)="onCheckBoxInput($event.target.checked, listItem)"/>
       <span class="custom-checkbox">{{listItem.name}}</span>
@@ -36,9 +36,12 @@
       [hideChildren]="hideChildren"
       [listItem]="category"
       [checkedItemId]="checkedItemId"
+      [checkedItems]="checkedItems"
+      [multiCheck]="multiCheck"
       (deleteCategory)="onDelete($event)"
       (addCategory)="onAdd($event)"
       (editCategory)="onEdit($event)"
+      (unChooseCategory)="onUnChoose($event)"
       (chooseCategory)="onChoose($event)">
     </app-categories-list-item>
   </li>

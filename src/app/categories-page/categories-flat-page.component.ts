@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CategoryService } from '../service/category-service';
-import { CategoryListItem } from '../models/category-list';
 
 @Component({
   selector: 'app-categories-flat-page',
