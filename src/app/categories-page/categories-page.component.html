@@ -18,3 +18,8 @@
     </li>
   </ul>
 </div>
+
+<app-modal-window #modalEditCategory
+  [header]="'Edit category name'"
+  (saveAction)="onUpdateCategory($event)">
+</app-modal-window>

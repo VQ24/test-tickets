@@ -20,11 +20,31 @@ export class CategoryService {
     });
   }
 
+  public getCategory(catNum: string) {
+    this.categories$.subscribe(data => {
+      if (!data.length) {
+        this.loadAllCategories();
+      }
+    });
+    return this.categories$.map(categories => categories.filter(cat => cat._id === catNum)[0]);
+  }
+
+  public updateCategory(category) {
+    this._updateCategory(category).subscribe(() => {
+      this.store.dispatch({type: 'UPDATE_CATEGORY', payload: category});
+    });
+  }
+
   // ----------- back end functions --------------------
 
   private _getAllCategories() {
     const apiUrl = 'http://localhost:1980/categories';
     return this.http.get(apiUrl);
+  }
+
+  private _updateCategory(category) {
+    const apiUrl = 'http://localhost:1980/category';
+    return this.http.put(apiUrl, category);
   }
 
 }

@@ -8,7 +8,4 @@ export class CategoriesSetupPageComponent {
 
   constructor() { }
 
-  public onChoose(input) {
-    console.log(input);
-  }
 }

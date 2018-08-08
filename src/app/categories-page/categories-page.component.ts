@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { CategoryService } from '../service/category-service';
 import { CategoryListItem } from '../models/category-list';
 
@@ -19,6 +19,8 @@ export class CategoriesPageComponent implements OnInit {
   @Input() public checkedItems: string[] = [];
 
   @Output() public chooseCategory: EventEmitter<any> = new EventEmitter();
+
+  @ViewChild('modalEditCategory') public editCategoryWindow;
 
   public categories: CategoryListItem[];
 
@@ -47,7 +49,14 @@ export class CategoriesPageComponent implements OnInit {
   }
 
   public onEditCategory(item: CategoryListItem) {
-    console.log('Edit: ', item);
+    this.editCategoryWindow.open(item, 'category name edit');
+  }
+
+  public onUpdateCategory(item: CategoryListItem) {
+    let matchingCategory;
+    this.service.getCategory(item._id).subscribe(data => matchingCategory = data);
+    const resultItem = Object.assign(matchingCategory, {name: item.name});
+    this.service.updateCategory(resultItem);
   }
 
   public onChooseCategory(item: CategoryListItem | string) {

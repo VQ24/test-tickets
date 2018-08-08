@@ -24,6 +24,7 @@ import { CategoriesPageComponent } from './categories-page/categories-page.compo
 import { CategoriesListItemComponent } from './categories-page/categories-list-item/categories-list-item.component';
 import { CategoriesFlatPageComponent } from './categories-page/categories-flat-page.component';
 import { CategoriesSetupPageComponent } from './categories-setup-page/categories-setup-page.component';
+import { ModalWindowComponent } from './modal-window/modal-window.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { CategoriesSetupPageComponent } from './categories-setup-page/categories
     CategoriesListItemComponent,
     CategoriesFlatPageComponent,
     CategoriesSetupPageComponent,
+    ModalWindowComponent,
   ],
   imports: [
     FormsModule,

@@ -30,6 +30,24 @@ app.post('/ticket', function(request, result) {
   });
 });
 
+app.post('/category', function(request, result) {
+  let body = '';
+  request.on('data', chunk => {
+    body += chunk.toString();
+  });
+  request.on('end', () => {
+    let category = JSON.parse(body)
+    MongoClient.connect(url, {useNewUrlParser: true}, function(err, db) {
+      if (err) { throw err };
+      db.db("my-test").collection('categories').insertOne(category, function(err, res) {
+        if (err){ throw err; }
+        result.jsonp({category: category, status: 'created'});
+      });
+      db.close()
+    });
+  });
+});
+
 app.put('/ticket', function(request, result) {
   let body = '';
   request.on('data', chunk => {
@@ -43,6 +61,25 @@ app.put('/ticket', function(request, result) {
       db.db("my-test").collection('tickets').updateOne({"_id": ObjectID(ticket._id)}, {$set: newTick}, function(err, res) {
         if (err){ throw err; }
         result.jsonp({status: 'ticket updated'});
+      });
+      db.close()
+    });
+  });
+});
+
+app.put('/category', function(request, result) {
+  let body = '';
+  request.on('data', chunk => {
+    body += chunk.toString();
+  });
+  request.on('end', () => {
+    let category = JSON.parse(body)
+    MongoClient.connect(url, {useNewUrlParser: true}, function(err, db) {
+      if (err) { throw err };
+      let {_id, ...newCat} = category;
+      db.db("my-test").collection('categories').updateOne({"_id": ObjectID(category._id)}, {$set: newCat}, function(err, res) {
+        if (err){ throw err; }
+        result.jsonp({status: 'category updated'});
       });
       db.close()
     });
@@ -87,8 +124,20 @@ app.delete('/ticket', function(request, result) {
   });
 });
 
+app.delete('/category', function(request, result) {
+  MongoClient.connect(url, {useNewUrlParser: true}, function(err, db) {
+    if (err) { throw err };
+    var category = request.query ? request.query : {};
+    db.db("my-test").collection('categories').deleteOne({"_id": ObjectID(category._id)}, function(err, res) {
+      if (err){ throw err; }
+      result.jsonp({status: 'category# ' + category._id + ' deleted'});
+    });
+    db.close();
+  });
+});
+
 app.listen(1980, function () {
-   var twirlTimer = (function() {
+  (function() {
     var P = [
       "\x1b[36m Server is running \x1b[37m.  ",
       "\x1b[36m Server is running \x1b[37m.. ",

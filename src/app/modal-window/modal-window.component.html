@@ -1,0 +1,20 @@
+<div [ngClass]="{'modal-wrapper': true, 'open': !hidden}">
+  <div class="modal">
+    <div class="modal-content">
+      <h4>{{header}}</h4>
+      <div class="row">
+        <div class="input-field col s12">
+          <input [(ngModel)]="item" type="text">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="waves-effect waves-light btn light-green darken-3 margin-sm"
+        [disabled]="!item"
+        (click)="saveAndClose()">OK</button>
+      <button class="waves-effect waves-light btn grey darken-3 margin-sm"
+        (click)="close()">Cancel</button>
+    </div>
+  </div>
+  <div class="modal-overlay"></div>
+</div>

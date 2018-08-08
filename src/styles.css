@@ -8,7 +8,7 @@
 }
 
 .margin-sm {
-  margin: .1rem;
+  margin: .1rem !important;
 }
 
 .padding-left-lg {
@@ -79,7 +79,6 @@
 .category-list-item {
   display: block;
   border-color: #311b92;
-  transform: translateY(0);
   background-color: #fff;
   line-height: 1.5rem;
   padding: 10px 20px;
@@ -108,7 +107,7 @@
   opacity: 1;
   -webkit-transition: .25s;
   transition: .25s;
-  transition-delay: .5s;
+  transition-delay: .25s;
 }
 
 .category-list-item-hide {
@@ -160,4 +159,25 @@ nav.nav-flat {
 
 .clickable {
   cursor: pointer;
+}
+
+.modal-wrapper .modal{
+  z-index: 1003;
+  display: none;
+}
+
+.modal-wrapper .modal-overlay{
+  z-index: 1002;
+  display: none;
+  opacity: 0.5;
+}
+
+.modal-wrapper.open .modal{
+  z-index: 1003;
+  display: block;
+  top: 20%;
+}
+
+.modal-wrapper.open .modal-overlay{
+  display: block;
 }

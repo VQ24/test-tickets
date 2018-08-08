@@ -1,7 +1,8 @@
 import { Action } from '@ngrx/store';
 
 const initialState = {
-  tickets: []
+  tickets: [],
+  categories: [],
 };
 
 export function ticketReducer(state = initialState, action ) {
@@ -36,6 +37,17 @@ export function ticketReducer(state = initialState, action ) {
       return {
         ...state,
         categories: action.payload,
+      };
+    case 'UPDATE_CATEGORY':
+      return {
+        ...state,
+        categories: state.categories.map(category => {
+          if (category._id === action.payload._id) {
+            return action.payload;
+          } else {
+            return category;
+          }
+        }),
       };
     default:
       return state;
