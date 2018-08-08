@@ -18,8 +18,18 @@
     </li>
   </ul>
 </div>
-
+<!--                 modal windows                   -->
 <app-modal-window #modalEditCategory
-  [header]="'Edit category name'"
-  (saveAction)="onUpdateCategory($event)">
+  [header]="'Edit category name:'"
+  (okAction)="onUpdateCategory($event)">
+</app-modal-window>
+
+<app-modal-window #modalAddCategory
+  [header]="'New category name:'"
+  (okAction)="onAddNewCategory($event)">
+</app-modal-window>
+
+<app-modal-window #modalDeleteCategory
+  [header]="'Delete category'"
+  (okAction)="onDeleteCategoryWithSubcategories($event)">
 </app-modal-window>

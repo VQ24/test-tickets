@@ -21,6 +21,8 @@ export class CategoriesPageComponent implements OnInit {
   @Output() public chooseCategory: EventEmitter<any> = new EventEmitter();
 
   @ViewChild('modalEditCategory') public editCategoryWindow;
+  @ViewChild('modalAddCategory') public addCategoryWindow;
+  @ViewChild('modalDeleteCategory') public deleteCategoryWindow;
 
   public categories: CategoryListItem[];
 
@@ -41,15 +43,15 @@ export class CategoriesPageComponent implements OnInit {
   }
 
   public onDeleteCategory(item: CategoryListItem) {
-    console.log('Delete: ', item);
+    this.deleteCategoryWindow.open(item, 'delete');
   }
 
   public onAddCategory(item: CategoryListItem) {
-    console.log('Add: ', item);
+    this.addCategoryWindow.open(item, 'create');
   }
 
   public onEditCategory(item: CategoryListItem) {
-    this.editCategoryWindow.open(item, 'category name edit');
+    this.editCategoryWindow.open(item, 'name edit');
   }
 
   public onUpdateCategory(item: CategoryListItem) {
@@ -57,6 +59,24 @@ export class CategoriesPageComponent implements OnInit {
     this.service.getCategory(item._id).subscribe(data => matchingCategory = data);
     const resultItem = Object.assign(matchingCategory, {name: item.name});
     this.service.updateCategory(resultItem);
+  }
+
+  public onAddNewCategory(item) {
+    this.service.createCategory(item);
+  }
+
+  public onDeleteCategoryWithSubcategories(item: CategoryListItem) {
+    let parentCategory;
+    this.service.categories$.subscribe(data => {
+      if (!data || !data.length) {
+        this.loadData();
+      } else {
+        const filteredData = data.filter(origCat => origCat.subCategory === item._id);
+        parentCategory = filteredData.length ? filteredData[0] : null;
+      }
+    });
+    const resultCategories = this.unMapCategories(item, parentCategory).map(cat => cat._id);
+    this.service.deleteCategories(resultCategories);
   }
 
   public onChooseCategory(item: CategoryListItem | string) {
@@ -89,5 +109,18 @@ export class CategoriesPageComponent implements OnInit {
       });
     };
     return rearrange(categories.filter(item => !item.parentCategory));
+  }
+
+  private unMapCategories (category: CategoryListItem, parentId: string): any[] {
+    const resultArr = [];
+    resultArr.push({_id: category._id, name: category.name, parentCategory: parentId});
+    const goInsideArray = (arrCategories: CategoryListItem[], parentItem: CategoryListItem) => {
+      arrCategories.forEach(subcat => {
+        resultArr.push({_id: subcat._id, name: subcat.name, parentCategory: parentItem});
+        goInsideArray(subcat.subCategory, subcat);
+      });
+    };
+    goInsideArray(category.subCategory, category);
+    return resultArr;
   }
 }

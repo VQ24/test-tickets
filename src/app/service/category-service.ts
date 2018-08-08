@@ -35,6 +35,18 @@ export class CategoryService {
     });
   }
 
+  public createCategory(category) {
+    this._createCategory(category).subscribe((data: any) => {
+      this.store.dispatch({type: 'ADD_CATEGORY', payload: data.category});
+    });
+  }
+
+  public deleteCategories(ids: any[]) {
+    this._deleteCategories(ids).subscribe(() => {
+      this.store.dispatch({type: 'DELETE_CATEGORIES', payload: ids});
+    });
+  }
+
   // ----------- back end functions --------------------
 
   private _getAllCategories() {
@@ -47,4 +59,20 @@ export class CategoryService {
     return this.http.put(apiUrl, category);
   }
 
+  private _createCategory(category) {
+    const apiUrl = 'http://localhost:1980/category';
+    return this.http.post(apiUrl, category);
+  }
+
+  private _deleteCategories(ids: string[]) {
+    const apiUrl = 'http://localhost:1980/categories';
+    const catToDelete = {filter: JSON.stringify(ids)};
+    return this.http.delete(apiUrl, {params: catToDelete});
+  }
+
+  private _getFilteredCategories(filter: Object) {
+    const apiUrl = 'http://localhost:1980/categories';
+    const filterObject = {filter: JSON.stringify(filter)};
+    return this.http.get(apiUrl, {params: filterObject});
+  }
 }

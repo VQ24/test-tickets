@@ -31,7 +31,7 @@ export class TicketEditComponent implements OnInit {
 
   public updateTicket(tick) {
     this.ticket$ = this.service.updateTicket(tick);
-    // this.router.navigate(['../'], { relativeTo: this.route });
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
   public saveTicket(tick) {

@@ -1,9 +1,15 @@
-import { Action } from '@ngrx/store';
-
 const initialState = {
   tickets: [],
   categories: [],
 };
+
+function remove(array: any[], elements: any[]) {
+  let resultArray = array;
+  elements.forEach(el => {
+    resultArray = resultArray.filter(arritem => el !== arritem._id);
+  });
+  return resultArray;
+}
 
 export function ticketReducer(state = initialState, action ) {
   switch (action.type) {
@@ -33,10 +39,20 @@ export function ticketReducer(state = initialState, action ) {
         ...state,
         tickets: action.payload,
       };
+    case 'ADD_CATEGORY':
+      return {
+        ...state,
+        categories: [...state.categories, action.payload],
+      };
     case 'GET_CATEGORIES':
       return {
         ...state,
         categories: action.payload,
+      };
+    case 'DELETE_CATEGORIES':
+      return {
+        ...state,
+        categories: remove(state.categories, action.payload),
       };
     case 'UPDATE_CATEGORY':
       return {

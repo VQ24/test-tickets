@@ -11,6 +11,10 @@
   margin: .1rem !important;
 }
 
+.margin-md {
+  margin: 1rem !important;
+}
+
 .padding-left-lg {
   padding-left: 2rem;
 }

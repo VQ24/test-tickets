@@ -124,13 +124,14 @@ app.delete('/ticket', function(request, result) {
   });
 });
 
-app.delete('/category', function(request, result) {
+app.delete('/categories', function(request, result) {
   MongoClient.connect(url, {useNewUrlParser: true}, function(err, db) {
     if (err) { throw err };
-    var category = request.query ? request.query : {};
-    db.db("my-test").collection('categories').deleteOne({"_id": ObjectID(category._id)}, function(err, res) {
+    var categories = request.query.filter ? JSON.parse(request.query.filter) : {};
+    var removeQuery = { _id: { $in: categories.map(cat => ObjectID(cat))} };
+    db.db("my-test").collection('categories').remove(removeQuery, function(err, res) {
       if (err){ throw err; }
-      result.jsonp({status: 'category# ' + category._id + ' deleted'});
+      result.jsonp({status: 'categories deleted'});
     });
     db.close();
   });
