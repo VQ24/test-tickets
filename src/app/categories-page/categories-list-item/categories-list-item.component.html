@@ -1,37 +1,36 @@
-<div class="category-list-container">
-  <p [ngClass]="{'category-list-item': true, 'category-list-item-hide': hidden}">
-    <i *ngIf="listItem.subCategory.length && hideChildren"
-      (click)="hideChildren = !hideChildren"
-      class="material-icons left deep-purple-text text-lighten-1">keyboard_arrow_right</i>
-    <i *ngIf="listItem.subCategory.length && !hideChildren"
-      (click)="hideChildren = !hideChildren"
-      class="material-icons left deep-purple-text text-lighten-1">keyboard_arrow_down</i>
-    <i *ngIf="!listItem.subCategory.length"
-      class="material-icons left white-text">keyboard_arrow_right</i>
-    <span *ngIf="checkItemMode">
-      <label class="black-text">
-        <input type="checkbox"
-          [class.subchecked]="multiCheck ? false : subItemIsChecked(listItem)"
-          [checked]="itemIsChecked()"
-          (input)="onCheckBoxInput($event.target.checked, listItem)"/>
-        <span class="custom-checkbox">{{listItem.name}}</span>
-      </label>
-    </span>
-    <span *ngIf="!checkItemMode">{{listItem.name}}</span>
-    <i *ngIf="editMode"
-      (click)="onDelete(listItem)"
-      class="material-icons show-on-hover right red-text">clear</i>
-    <i *ngIf="editMode"
-      (click)="onAdd(listItem)"
-      class="material-icons show-on-hover right green-text">add</i>
-    <i *ngIf="editMode"
-      (click)="onEdit(listItem)"
-      class="material-icons show-on-hover right deep-purple-text">create</i>
-    <span class="tree-icon-item"></span>
-  </p>
-  <ul *ngIf="listItem.subCategory.length" 
-    class="category-list-container">
-    <li class="category-list-template"  *ngFor="let category of listItem.subCategory">
+<p [ngClass]="{'category-list-item': true, 'category-list-item-hide': hidden}">
+  <i *ngIf="listItem.subCategory.length && hideChildren"
+    (click)="hideChildren = !hideChildren"
+    class="material-icons left deep-purple-text text-lighten-1">keyboard_arrow_right</i>
+  <i *ngIf="listItem.subCategory.length && !hideChildren"
+    (click)="hideChildren = !hideChildren"
+    class="material-icons left deep-purple-text text-lighten-1">keyboard_arrow_down</i>
+  <i *ngIf="!listItem.subCategory.length"
+    class="material-icons left white-text">keyboard_arrow_right</i>
+  <span *ngIf="checkItemMode">
+    <label class="black-text">
+      <input type="checkbox"
+        [class.subchecked]="multiCheck ? false : subItemIsChecked(listItem)"
+        [checked]="itemIsChecked()"
+        (input)="onCheckBoxInput($event.target.checked, listItem)"/>
+      <span class="custom-checkbox">{{listItem.name}}</span>
+    </label>
+  </span>
+  <span *ngIf="!checkItemMode">{{listItem.name}}</span>
+  <i *ngIf="editMode"
+    (click)="onDelete(listItem)"
+    class="material-icons show-on-hover right red-text">clear</i>
+  <i *ngIf="editMode"
+    (click)="onAdd(listItem)"
+    class="material-icons show-on-hover right green-text">add</i>
+  <i *ngIf="editMode"
+    (click)="onEdit(listItem)"
+    class="material-icons show-on-hover right deep-purple-text">create</i>
+  <span class="tree-icon-item"></span>
+</p>
+<ul *ngIf="listItem.subCategory.length">
+  <li *ngFor="let category of listItem.subCategory; index as i"
+      class="category-list-template category-list-container">
       <app-categories-list-item
         [checkItemMode]="checkItemMode"
         [editMode]="editMode"
@@ -47,8 +46,7 @@
         (unChooseCategory)="onUnChoose($event)"
         (chooseCategory)="onChoose($event)">
       </app-categories-list-item>
-      <span class="tree-trunc-icon-item"></span>
-    </li>
-  </ul>
-  <span class="tree-trunc-icon-item"></span>
-</div>
+    <span *ngIf="i < listItem.subCategory.length-1" class="tree-trunc-icon-item"></span>
+  </li>
+</ul>
+

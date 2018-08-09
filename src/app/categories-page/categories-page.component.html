@@ -10,21 +10,23 @@
     </button>
   </div>
   <ul *ngIf="categories" class="col s12">
-    <li class="category-list-template" *ngFor="let cat of categories">
-      <app-categories-list-item 
-        [checkItemMode]="checkItemMode"
-        [editMode]="editMode"
-        [listItem]="cat"
-        [checkedItemId]="checkedItemId"
-        [checkedItems]="checkedItems"
-        [hideChildren]="hideChildren"
-        [multiCheck]="multiCheck"
-        (deleteCategory)="onDeleteCategory($event)"
-        (addCategory)="onAddCategory($event)"
-        (editCategory)="onEditCategory($event)"
-        (unChooseCategory)="onUnChooseCategory($event)"
-        (chooseCategory)="onChooseCategory($event)">
-      </app-categories-list-item>
+    <li *ngFor="let cat of categories; index as i"
+        class="category-list-template category-list-container">
+        <app-categories-list-item 
+          [checkItemMode]="checkItemMode"
+          [editMode]="editMode"
+          [listItem]="cat"
+          [checkedItemId]="checkedItemId"
+          [checkedItems]="checkedItems"
+          [hideChildren]="hideChildren"
+          [multiCheck]="multiCheck"
+          (deleteCategory)="onDeleteCategory($event)"
+          (addCategory)="onAddCategory($event)"
+          (editCategory)="onEditCategory($event)"
+          (unChooseCategory)="onUnChooseCategory($event)"
+          (chooseCategory)="onChooseCategory($event)">
+        </app-categories-list-item>
+      <span *ngIf="i < categories.length-1" class="tree-trunc-icon-item"></span>
     </li>
   </ul>
 </div>
