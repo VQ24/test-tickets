@@ -1,13 +1,9 @@
-<div class="container">
+<h3 *ngIf="edit">Ticket edit</h3>
+<h3 *ngIf="!edit">Add new ticket</h3>
 
-  <h3 *ngIf="edit">Ticket edit</h3>
-  <h3 *ngIf="!edit">Add new ticket</h3>
-
-  <app-ticket-preview
-    [ticket]="ticket$ | async"
-    [editTicket]="edit"
-    (saveTicket)="saveTicket($event)"
-    (updateTicket)="updateTicket($event)">
-  </app-ticket-preview>
-
-</div>
+<app-ticket-preview
+  [ticket]="ticket$ | async"
+  [editTicket]="edit"
+  (saveTicket)="saveTicket($event)"
+  (updateTicket)="updateTicket($event)">
+</app-ticket-preview>

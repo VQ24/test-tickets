@@ -1,4 +1,14 @@
 <div class="row">
+  <div *ngIf="editMode"
+     class="col">
+    <button class="waves-effect waves-light btn grey darken-3 margin-sm"
+      routerLink="../"><i class="material-icons left">chevron_left</i>Go Back
+    </button>
+    <button class="waves-effect waves-light btn light-green darken-3 margin-sm"
+      (click)="onAddCategory(null)">
+      <i class="material-icons left">add</i>Add root
+    </button>
+  </div>
   <ul *ngIf="categories" class="col s12">
     <li class="category-list-template" *ngFor="let cat of categories">
       <app-categories-list-item 

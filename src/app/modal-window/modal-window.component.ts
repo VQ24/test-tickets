@@ -54,7 +54,7 @@ export class ModalWindowComponent {
         break;
       }
       case 'create': {
-        const resultItem = {name: this.item, parentCategory: this.itemObject._id};
+        const resultItem = {name: this.item, parentCategory: this.itemObject ? this.itemObject._id : null};
         this.okAction.emit(resultItem);
         break;
       }
