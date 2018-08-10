@@ -32,8 +32,14 @@ export class ModalWindowComponent {
         this.hidden = false;
         break;
       }
-      case 'delete': {
+      case 'delete category': {
         this.item = item.name;
+        this.confirmMode = true;
+        this.hidden = false;
+        break;
+      }
+      case 'delete ticket': {
+        this.item = '';
         this.confirmMode = true;
         this.hidden = false;
         break;
@@ -58,7 +64,11 @@ export class ModalWindowComponent {
         this.okAction.emit(resultItem);
         break;
       }
-      case 'delete': {
+      case 'delete category': {
+        this.okAction.emit(this.itemObject);
+        break;
+      }
+      case 'delete ticket': {
         this.okAction.emit(this.itemObject);
         break;
       }

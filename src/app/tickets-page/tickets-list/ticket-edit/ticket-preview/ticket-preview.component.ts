@@ -81,11 +81,15 @@ export class TicketPreviewComponent implements OnChanges {
     this.edit.category = false;
   }
 
+  public onUpdateTags(tags: string[]) {
+    this.ticket.tags = tags;
+  }
+
   public onSave() {
     if (this.editTicket) {
-      this.updateTicket.emit(Object.assign({_id: this.ticket._id}, this.ticketForm.value));
+      this.updateTicket.emit(Object.assign({_id: this.ticket._id, tags: this.ticket.tags}, this.ticketForm.value));
     } else {
-      this.saveTicket.emit(this.ticketForm.value);
+      this.saveTicket.emit(Object.assign({tags: this.ticket.tags}, this.ticketForm.value));
     }
   }
 

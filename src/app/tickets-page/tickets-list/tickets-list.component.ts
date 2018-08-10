@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -12,10 +12,16 @@ export class TicketsListComponent implements OnInit {
 
   @Output() public deleteTicket: EventEmitter<any> = new EventEmitter();
 
+  @ViewChild('modalDeleteTicket') public deleteModalWindow;
+
   constructor(private router: Router,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
+  }
+
+  public onDeleteButtonClick(ticket) {
+    this.deleteModalWindow.open(ticket, 'delete ticket');
   }
 
   public onDelete(event) {

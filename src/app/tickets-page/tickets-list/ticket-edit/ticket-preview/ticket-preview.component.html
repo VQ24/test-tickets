@@ -2,7 +2,7 @@
   <div class="row">
     <form [formGroup]="ticketForm">
     <!--                categories part start                  -->
-    <div class="input-field col m6 s12">
+    <div class="input-field col s12">
       <h5>Category</h5>
       <div *ngIf="!edit.category" class="underlined-block">
         <app-categories-flat-page
@@ -25,19 +25,14 @@
     </div>
     <!--                categories part end                  -->
     <!--                tags part start                  -->
-    <div class="input-field col m6 s12">
+    <div class="input-field col s12">
       <h5>Tags</h5>
       <div>
-        <!-- Default with no input (automatically generated)  -->
-        <div class="chip">
-          Tag
-          <i class="close material-icons">close</i>
-        </div>
-
-        <input class="custom-class">
-
+        <app-ticket-tags
+          [tags]="ticket.tags"
+          (updateTags)="onUpdateTags($event)">
+        </app-ticket-tags>
       </div>
-
     </div>
     <!--                tags part end                  -->
     <!--                question part start                 -->

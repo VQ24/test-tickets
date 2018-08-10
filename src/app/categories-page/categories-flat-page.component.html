@@ -1,8 +1,8 @@
 <div class="row">
   <div *ngIf="categories" class="col s12">
     <nav class="nav-flat">
-      <div class="nav-wrapper white">
-        <a *ngFor="let breadcrumb of categories" class="breadcrumb breadcrumb-inversed">
+      <div class="nav-wrapper white row">
+        <a *ngFor="let breadcrumb of categories" class="col breadcrumb breadcrumb-inversed">
           {{breadcrumb.name}}</a>
       </div>
     </nav>

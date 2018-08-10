@@ -1,0 +1,9 @@
+<div *ngFor = "let tag of tags" class="chip">
+  {{tag}}
+  <i class="close material-icons"
+    (click)="deteteTag(tag)">close</i>
+</div>
+
+<form (ngSubmit)="addTag(inputField.value)">
+  <input #inputField type="text">
+</form>

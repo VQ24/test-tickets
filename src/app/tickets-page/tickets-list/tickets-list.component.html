@@ -24,7 +24,7 @@
                 <i class="material-icons purple-text">edit</i>
               </a>
               <a class="btn-floating btn-flat waves-effect waves-red white"
-                (click)="onDelete(ticket)">
+                (click)="onDeleteButtonClick(ticket)">
                 <i class="material-icons red-text">close</i>
               </a>
             </div>
@@ -34,3 +34,8 @@
     </tbody>
   </table>
 </div>
+
+<app-modal-window #modalDeleteTicket
+  [header]="'Delete ticket'"
+  (okAction)="onDelete($event)">
+</app-modal-window>

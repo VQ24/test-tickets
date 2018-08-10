@@ -13,6 +13,11 @@ export class TicketsPageComponent implements OnInit {
   constructor(private service: TestService) { }
 
   ngOnInit() {
+    this.service.tickets$.subscribe(data => {
+      if (!data || !data.length) {
+        this.loadData();
+      }
+    });
     this.tickets$ = this.service.tickets$;
   }
 

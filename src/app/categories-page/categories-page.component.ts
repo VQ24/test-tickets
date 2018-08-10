@@ -43,7 +43,7 @@ export class CategoriesPageComponent implements OnInit {
   }
 
   public onDeleteCategory(item: CategoryListItem) {
-    this.deleteCategoryWindow.open(item, 'delete');
+    this.deleteCategoryWindow.open(item, 'delete category');
   }
 
   public onAddCategory(item: CategoryListItem) {

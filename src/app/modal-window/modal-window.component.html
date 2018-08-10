@@ -3,7 +3,7 @@
     <div class="margin-md">
       <div class="modal-content">
         <h4 class="blue-grey-text text-darken-4">{{header}}
-          <span *ngIf="confirmMode"
+          <span *ngIf="confirmMode && item"
             class="black-text"> "{{item}}"</span>
           <span *ngIf="confirmMode"
             class="blue-grey-text text-darken-4">?</span>
@@ -17,7 +17,7 @@
       </div>
       <div class="modal-footer">
         <button class="waves-effect waves-light btn light-green darken-3 margin-sm"
-          [disabled]="!item"
+          [disabled]="!item && !confirmMode"
           (click)="saveAndClose()">OK</button>
         <button class="waves-effect waves-light btn grey darken-3 margin-sm"
           (click)="close()">Cancel</button>
