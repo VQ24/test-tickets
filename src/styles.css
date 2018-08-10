@@ -97,19 +97,19 @@
 }
 
 .category-list-item:hover {
-  background-color: #ede7f6;
+  background-color: #e5d4ff;
   -webkit-transition: .25s;
   transition: .25s;
 }
 
-.category-list-item .show-on-hover{
+.table-list-item .show-on-hover, .category-list-item .show-on-hover{
   visibility: hidden;
   opacity: 0;
   -webkit-transition: .25s;
   transition: .25s;
 }
 
-.category-list-item:hover .show-on-hover{
+.table-list-item:hover .show-on-hover, .category-list-item:hover .show-on-hover{
   visibility: visible;
   opacity: 1;
   -webkit-transition: .25s;
@@ -136,9 +136,9 @@
   pointer-events: none;
 
   border-top: 0px solid transparent;
-  border-left: 1px dotted #d1c4e9;
+  border-left: 1px solid #efe4ff;
   border-right: 0px solid transparent;
-  border-bottom: 1px dotted #d1c4e9;
+  border-bottom: 1px solid #efe4ff;
 }
 
 .category-list-container {
@@ -156,20 +156,20 @@
   pointer-events: none;
 
   border-top: 0px solid transparent;
-  border-left: 1px dotted #d1c4e9;
+  border-left: 1px solid #efe4ff;
   border-right: 0px solid transparent;
   border-bottom: 0px solid transparent;
 }
 
 [type="checkbox"]+.custom-checkbox::before {
-  border: 2px solid #b0bec5 !important;
+  border: 2px solid #90a4ae !important;
   border-radius: 4px !important;
 }
 
 [type="checkbox"].subchecked+.custom-checkbox::before {
   outline: 2px solid white;
   outline-offset: -4px;
-  border: 2px solid #78909c !important;
+  border: 2px solid #607d8b !important;
   padding: 2px;
   background: #c8e6c9;
   border-radius: 2px !important;

@@ -38,4 +38,8 @@ export class TicketEditComponent implements OnInit {
     this.service.createTicket(tick);
     this.router.navigate(['../'], { relativeTo: this.route });
   }
+
+  public cancelEditTicket(tick) {
+    this.router.navigate(['../'], { relativeTo: this.route });
+  }
 }

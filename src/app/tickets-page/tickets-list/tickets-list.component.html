@@ -6,36 +6,31 @@
         </th>
       </tr>
     </thead>
-
-      <tbody>
-        <tr *ngFor="let ticket of tickets">
-          <td (click)="showAnswer(ticket)" style="cursor: pointer">
-            <div class="row">
-
-              <div class="col question">
-                <span [innerHTML]="ticket.question | keepHtml"></span>
-              </div>
-
-              <div class="col">
-                  <div *ngIf="ticket.showAnswer"
-                  [innerHTML]="ticket.answer | keepHtml"></div>
-              </div>
-
-              <div class="col s2 offset-s10">
-                <a class="btn-floating btn-flat waves-effect waves-purple white"
-                  (click)="editTicket(ticket)">
-                  <i class="material-icons purple-text">edit</i>
-                </a>
-                <a class="btn-floating btn-flat waves-effect waves-red white"
-                  (click)="onDelete(ticket)">
-                  <i class="material-icons red-text">close</i>
-                </a>
-              </div>
-
+    <tbody>
+      <tr *ngFor="let ticket of tickets"
+        class="table-list-item">
+        <td (click)="showAnswer(ticket)" style="cursor: pointer">
+          <div class="row">
+            <div class="col question">
+              <span [innerHTML]="ticket.question | keepHtml"></span>
             </div>
-          </td>
-        </tr>
-      </tbody>
-
+            <div class="col">
+                <div *ngIf="ticket.showAnswer"
+                [innerHTML]="ticket.answer | keepHtml"></div>
+            </div>
+            <div class="col s2 offset-s10 show-on-hover">
+              <a class="btn-floating btn-flat waves-effect waves-purple white"
+                (click)="editTicket(ticket)">
+                <i class="material-icons purple-text">edit</i>
+              </a>
+              <a class="btn-floating btn-flat waves-effect waves-red white"
+                (click)="onDelete(ticket)">
+                <i class="material-icons red-text">close</i>
+              </a>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
   </table>
 </div>

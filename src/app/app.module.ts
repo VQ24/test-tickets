@@ -25,6 +25,7 @@ import { CategoriesListItemComponent } from './categories-page/categories-list-i
 import { CategoriesFlatPageComponent } from './categories-page/categories-flat-page.component';
 import { CategoriesSetupPageComponent } from './categories-setup-page/categories-setup-page.component';
 import { ModalWindowComponent } from './modal-window/modal-window.component';
+import { FormatButtonsComponent } from './tickets-page/tickets-list/ticket-edit/format-buttons/format-buttons.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ModalWindowComponent } from './modal-window/modal-window.component';
     CategoriesFlatPageComponent,
     CategoriesSetupPageComponent,
     ModalWindowComponent,
+    FormatButtonsComponent,
   ],
   imports: [
     FormsModule,

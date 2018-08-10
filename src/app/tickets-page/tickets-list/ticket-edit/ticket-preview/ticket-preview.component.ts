@@ -1,11 +1,11 @@
-import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-ticket-preview',
   templateUrl: './ticket-preview.component.html'
 })
-export class TicketPreviewComponent implements OnInit, OnChanges {
+export class TicketPreviewComponent implements OnChanges {
 
   @Input() public ticket: any;
   @Input() public editTicket: boolean;
@@ -28,9 +28,6 @@ export class TicketPreviewComponent implements OnInit, OnChanges {
   });
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
   ngOnChanges(changes) {
     if (changes.hasOwnProperty('ticket') && changes.ticket.currentValue) {
