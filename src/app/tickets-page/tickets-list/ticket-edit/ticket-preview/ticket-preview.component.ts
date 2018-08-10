@@ -37,6 +37,7 @@ export class TicketPreviewComponent implements OnChanges {
         category: this.ticket.category,
       });
       this.ticketCategory = this.ticket.category;
+      this.ticket.tags = this.ticket.tags ? this.ticket.tags : [];
     }
   }
 

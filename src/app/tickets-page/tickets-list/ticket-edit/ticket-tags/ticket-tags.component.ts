@@ -21,7 +21,7 @@ export class TicketTagsComponent {
     }
   }
 
-  public deteteTag(tag: string) {
+  public deleteTag(tag: string) {
     this.tags = this.tags.filter(tg => tg !== tag);
     this.updateTags.emit(this.tags);
   }
