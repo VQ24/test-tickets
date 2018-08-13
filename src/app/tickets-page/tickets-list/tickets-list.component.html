@@ -1,43 +1,56 @@
 <div *ngIf="tickets">
-  <table *ngIf="tickets.length" class="highlight">
-    <thead>
-      <tr>
-        <th>Questions
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let ticket of tickets"
-        class="table-list-item">
-        <td (click)="showAnswer(ticket)" style="cursor: pointer">
-          <div class="row">
-            <div class="col question">
-              <span [innerHTML]="ticket.question | keepHtml"></span>
+  <div *ngIf="tickets.length else loading">
+    <table class="highlight">
+      <thead>
+        <tr>
+          <th>Questions
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ticket of tickets"
+          class="table-list-item">
+          <td (click)="showAnswer(ticket)" style="cursor: pointer">
+            <div class="row">
+              <div class="col question">
+                <span [innerHTML]="ticket.question | keepHtml"></span>
+              </div>
+              <div class="col">
+                  <div *ngIf="ticket.showAnswer"
+                  [innerHTML]="ticket.answer | keepHtml"></div>
+              </div>
+              <div class="col s2 offset-s10 show-on-hover">
+                <a class="btn-floating btn-flat waves-effect waves-purple white"
+                  (click)="editTicket(ticket)">
+                  <i class="material-icons purple-text">edit</i>
+                </a>
+                <a class="btn-floating btn-flat waves-effect waves-red white"
+                  (click)="onDeleteButtonClick(ticket)">
+                  <i class="material-icons red-text">close</i>
+                </a>
+              </div>
             </div>
-            <div class="col">
-                <div *ngIf="ticket.showAnswer"
-                [innerHTML]="ticket.answer | keepHtml"></div>
-            </div>
-            <div class="col s2 offset-s10 show-on-hover">
-              <a class="btn-floating btn-flat waves-effect waves-purple white"
-                (click)="editTicket(ticket)">
-                <i class="material-icons purple-text">edit</i>
-              </a>
-              <a class="btn-floating btn-flat waves-effect waves-red white"
-                (click)="onDeleteButtonClick(ticket)">
-                <i class="material-icons red-text">close</i>
-              </a>
-            </div>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-<app-pagination></app-pagination>
+    <div class="margin-top-xl margin-bottom-xl">
+      <app-pagination></app-pagination>
+    </div>
+
+  </div>
+</div>
 
 <app-modal-window #modalDeleteTicket
   [header]="'Delete ticket'"
   (okAction)="onDelete($event)">
 </app-modal-window>
+
+<ng-template #loading>
+  <div class="margin-top-xl margin-bottom-xl">
+    <div class="progress deep-purple lighten-5">
+      <div class="indeterminate deep-purple"></div>
+    </div>
+  </div>
+</ng-template>

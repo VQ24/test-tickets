@@ -15,6 +15,22 @@
   margin: 1rem !important;
 }
 
+.margin-top-xl {
+  margin-top: 3rem !important;
+}
+
+.margin-bottom-xl {
+  margin-bottom: 3rem !important;
+}
+
+.margin-top-lg {
+  margin-top: 2rem !important;
+}
+
+.margin-bottom-lg {
+  margin-bottom: 2rem !important;
+}
+
 .padding-left-lg {
   padding-left: 2rem;
 }

@@ -9,7 +9,7 @@
       <i class="material-icons left">add</i>Add root
     </button>
   </div>
-  <ul *ngIf="categories" class="col s12">
+  <ul *ngIf="categories; else loading" class="col s12">
     <li *ngFor="let cat of categories; index as i"
         class="category-list-template category-list-container">
         <app-categories-list-item 
@@ -30,6 +30,14 @@
     </li>
   </ul>
 </div>
+
+<ng-template #loading>
+  <div class="col s12 margin-top-xl margin-bottom-xl">
+    <div class="progress deep-purple lighten-5">
+      <div class="indeterminate deep-purple"></div>
+    </div>
+  </div>
+</ng-template>
 <!--                 modal windows                   -->
 <app-modal-window #modalEditCategory
   [header]="'Edit category name:'"
