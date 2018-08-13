@@ -27,6 +27,7 @@ import { CategoriesSetupPageComponent } from './categories-setup-page/categories
 import { ModalWindowComponent } from './modal-window/modal-window.component';
 import { FormatButtonsComponent } from './tickets-page/tickets-list/ticket-edit/format-buttons/format-buttons.component';
 import { TicketTagsComponent } from './tickets-page/tickets-list/ticket-edit/ticket-tags/ticket-tags.component';
+import { PaginationComponent } from './pagination/pagination-component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { TicketTagsComponent } from './tickets-page/tickets-list/ticket-edit/tic
     CategoriesFlatPageComponent,
     CategoriesSetupPageComponent,
     ModalWindowComponent,
+    PaginationComponent,
   ],
   imports: [
     FormsModule,

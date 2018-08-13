@@ -18,6 +18,7 @@ export class FormatButtonsComponent {
   @Output() public formatH3: EventEmitter<any> = new EventEmitter();
   @Output() public formatH4: EventEmitter<any> = new EventEmitter();
   @Output() public formatH5: EventEmitter<any> = new EventEmitter();
+  @Output() public formatA: EventEmitter<any> = new EventEmitter();
   @Output() public formatClear: EventEmitter<any> = new EventEmitter();
 
   public makeBold() {
@@ -54,6 +55,10 @@ export class FormatButtonsComponent {
 
   public makeH5() {
     this.formatH5.emit(this.area);
+  }
+
+  public makeA() {
+    this.formatA.emit(this.area);
   }
 
   public clearTag() {

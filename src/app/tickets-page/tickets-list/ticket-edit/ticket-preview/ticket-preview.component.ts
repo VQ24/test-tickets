@@ -177,6 +177,15 @@ export class TicketPreviewComponent implements OnChanges {
     }
   }
 
+  public makeA(element, value: string) {
+    if (window.getSelection) {
+      const selection = window.getSelection();
+      const replaceText = '<a href="' + selection.toString() + '" target="_blank">' + selection.toString() + '</a>';
+      const newText = element.value.slice(0, element.selectionStart) + replaceText + element.value.slice(element.selectionEnd);
+      this.ticketForm.patchValue({[value]: newText});
+    }
+  }
+
   public clearTag(element, value: string) {
     if (window.getSelection) {
       const selection = window.getSelection();
