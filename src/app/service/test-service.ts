@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/finally';
+import 'rxjs/add/operator/startWith';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class TestService {
@@ -12,10 +13,20 @@ export class TestService {
 
   public tickets$ = this.store.select('appStore').map(wholeStore => wholeStore.tickets);
 
+  private isLoading = new Subject<boolean>();
+  public isLoading$ = this.isLoading.asObservable();
+
+  private updateLoadingSubject(newBoolVar: boolean) {
+     this.isLoading.next(newBoolVar);
+  }
+
   // -------------- app functions ---------------------
 
   public loadAllTickets() {
-    this._getAllTickets().subscribe(data => {
+    this.updateLoadingSubject(true);
+    this._getAllTickets()
+      .finally(() => this.updateLoadingSubject(false))
+      .subscribe(data => {
       this.store.dispatch({type: 'GET_TICKETS', payload: data});
     });
   }

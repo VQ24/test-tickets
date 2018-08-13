@@ -15,12 +15,12 @@
   margin: 1rem !important;
 }
 
-.margin-top-xl {
-  margin-top: 3rem !important;
+.margin-top-md {
+  margin-top: 1rem !important;
 }
 
-.margin-bottom-xl {
-  margin-bottom: 3rem !important;
+.margin-bottom-md {
+  margin-bottom: 1rem !important;
 }
 
 .margin-top-lg {
@@ -29,6 +29,14 @@
 
 .margin-bottom-lg {
   margin-bottom: 2rem !important;
+}
+
+.margin-top-xl {
+  margin-top: 3rem !important;
+}
+
+.margin-bottom-xl {
+  margin-bottom: 3rem !important;
 }
 
 .padding-left-lg {
@@ -239,4 +247,8 @@ nav.nav-flat {
 
 .modal-wrapper.open .modal-overlay{
   display: block;
+}
+
+ul.pagination li.disabled {
+  user-select: none;
 }

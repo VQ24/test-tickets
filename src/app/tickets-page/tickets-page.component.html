@@ -15,5 +15,6 @@
 
 <app-tickets-list
   [tickets]="tickets$ | async"
+  [isLoading]="isLoading$ | async"
   (deleteTicket)="deleteTicket($event)">
 </app-tickets-list>
