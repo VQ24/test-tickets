@@ -165,6 +165,10 @@
   border-bottom: 1px solid #efe4ff;
 }
 
+.material-icons.disabled-color-text {
+  color: #efe4ff;
+}
+
 .category-list-container {
   position: relative;
 }
