@@ -90,7 +90,8 @@ app.get('/tickets', function(request, result) {
   MongoClient.connect(url, {useNewUrlParser: true}, function(err, db) {
     if (err) { throw err };
     var filter = request.query.filter ? JSON.parse(request.query.filter) : {};
-    db.db("my-test").collection('tickets').find(filter)
+    var filterNew1 = filter.length ? JSON.parse(JSON.stringify({"category": {"$in": JSON.parse(filter).map(item => ObjectID(item))}})) : {};
+    db.db("my-test").collection('tickets').find(filterNew1)
       .toArray(function (err, res) {
         if (err) { throw err };
         result.jsonp(res);

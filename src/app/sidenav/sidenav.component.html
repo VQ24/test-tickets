@@ -1,0 +1,36 @@
+<div [ngClass]="{'sidenav-wrapper': true, 'open': isOpened}">
+  <ul id="slide-out" class="sidenav">
+    <li>
+      <a class="waves-effect" (click)="close()"><i class="material-icons right">keyboard_arrow_left</i>Back</a>
+    </li>
+    <li><div class="divider"></div></li>
+    <li>
+      <a class="subheader">Categories</a>
+    </li>
+    <div class="margin-md">
+      <button class="waves-effect btn white grey-text text-darken-3 margin-sm"
+        (click)="categoriesList.unchooseAllCategories()">
+        <i class="material-icons left">filter_none</i>Select none
+      </button>
+      <button class="waves-effect btn white light-green-text text-darken-3 margin-sm"
+        (click)="categoriesList.chooseAllCategories()">
+        <i class="material-icons left">done_all</i>Select all
+      </button>
+    </div>
+    <app-categories-page 
+      #categoriesList
+      [checkedItems]="checkedItems"
+      [multiCheck]="true"
+      [checkItemMode]="true"
+      [hideChildren]="false"
+      (chooseCategory)="onChooseCategories($event)">
+    </app-categories-page>
+    <div class="margin-md">
+      <button class="waves-effect waves-light btn deep-purple margin-sm"
+        (click)="reloadData(categoriesList.checkedItems)"><i class="material-icons left">autorenew</i>Reload tickets
+      </button>
+    </div>
+    <li><div class="divider"></div></li>
+  </ul>
+  <div (click)="close()" class="sidenav-overlay"></div>
+</div>

@@ -1,0 +1,123 @@
+nav.nav-flat {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.breadcrumb-inversed {
+  cursor: pointer;
+  color: #455a64;
+}
+
+.breadcrumb-inversed::before {
+  color: #607d8b;
+}
+
+.breadcrumb-inversed:last-child {
+  color: #263238;
+}
+
+.category-list-item-hide {
+  display: none !important;
+}
+
+.category-list-template {
+  margin-left: 1rem;
+}
+
+.tree-icon-item {
+  display: block;
+  width: .9rem;
+  height: 2.75rem;
+  position: absolute;
+  bottom: 1.3rem;
+  left: .9rem;
+  user-select: none;
+  pointer-events: none;
+
+  border-top: 0px solid transparent;
+  border-left: 1px solid #efe4ff;
+  border-right: 0px solid transparent;
+  border-bottom: 1px solid #efe4ff;
+}
+
+.material-icons.disabled-color-text {
+  color: #efe4ff;
+}
+
+.category-list-container {
+  position: relative;
+}
+
+.tree-trunc-icon-item {
+  display: block;
+  width: .9rem;
+  position: absolute;
+  top: 0rem;
+  bottom: 0rem;
+  left: .9rem;
+  user-select: none;
+  pointer-events: none;
+
+  border-top: 0px solid transparent;
+  border-left: 1px solid #efe4ff;
+  border-right: 0px solid transparent;
+  border-bottom: 0px solid transparent;
+}
+
+.category-list-item {
+  position: relative;
+  display: block;
+  border-color: #311b92;
+  background-color: #fff;
+  line-height: 1.5rem;
+  height: 2.8rem;
+  padding: 10px 20px;
+  margin: 0;
+  border-radius: 3px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-transition: .25s;
+  transition: .25s;
+}
+
+p.category-list-item:hover {
+  background-color: #e5d4ff;
+  -webkit-transition: .25s;
+  transition: .25s;
+}
+
+[type="checkbox"]+.custom-checkbox::before {
+  border: 2px solid #90a4ae !important;
+  border-radius: 4px !important;
+}
+
+[type="checkbox"].subchecked+.custom-checkbox::before {
+  outline: 2px solid white;
+  outline-offset: -4px;
+  border: 2px solid #607d8b !important;
+  padding: 2px;
+  background: #c8e6c9;
+  border-radius: 2px !important;
+}
+
+[type="checkbox"]:checked+.custom-checkbox:before {
+  border-top: 4px solid transparent !important;
+  border-left: 4px solid transparent !important;
+  border-right: 2px solid #33691e !important;
+  border-bottom: 2px solid #33691e !important;
+}
+
+.category-list-item .show-on-hover{
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: .25s;
+  transition: .25s;
+}
+
+.category-list-item:hover .show-on-hover{
+  visibility: visible;
+  opacity: 1;
+  -webkit-transition: .25s;
+  transition: .25s;
+  transition-delay: .25s;
+}

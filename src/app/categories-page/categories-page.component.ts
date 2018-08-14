@@ -4,6 +4,7 @@ import { CategoryListItem } from '../models/category-list';
 
 @Component({
   selector: 'app-categories-page',
+  styleUrls: ['./categories-page.css'],
   templateUrl: './categories-page.component.html'
 })
 export class CategoriesPageComponent implements OnInit {
@@ -79,6 +80,23 @@ export class CategoriesPageComponent implements OnInit {
     this.service.deleteCategories(resultCategories);
   }
 
+  public chooseAllCategories() {
+    if (this.multiCheck) {
+      const result = this.unMapCategories({_id: null, name: null, subCategory: this.categories}, null)
+        .filter(item => item._id)
+        .map(item => item._id);
+        this.checkedItems = result;
+        this.chooseCategory.emit(this.checkedItems);
+    }
+  }
+
+  public unchooseAllCategories() {
+    if (this.multiCheck) {
+      this.checkedItems = [];
+      this.chooseCategory.emit(this.checkedItems);
+    }
+  }
+
   public onChooseCategory(item: CategoryListItem | string) {
     if (this.multiCheck) {
       const input = item as string;
@@ -116,7 +134,7 @@ export class CategoriesPageComponent implements OnInit {
     resultArr.push({_id: category._id, name: category.name, parentCategory: parentId});
     const goInsideArray = (arrCategories: CategoryListItem[], parentItem: CategoryListItem) => {
       arrCategories.forEach(subcat => {
-        resultArr.push({_id: subcat._id, name: subcat.name, parentCategory: parentItem});
+        resultArr.push({_id: subcat._id, name: subcat.name, parentCategory: parentItem._id});
         goInsideArray(subcat.subCategory, subcat);
       });
     };

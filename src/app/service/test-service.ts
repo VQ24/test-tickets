@@ -41,7 +41,12 @@ export class TestService {
   }
 
   public getFilteredTickets(filter: Object) {
-
+    this.updateLoadingSubject(true);
+    this._getFilteredTickets(JSON.stringify(filter))
+      .finally(() => this.updateLoadingSubject(false))
+      .subscribe(data => {
+      this.store.dispatch({type: 'GET_TICKETS', payload: data});
+    });
   }
 
   public deleteTicket(id: string) {

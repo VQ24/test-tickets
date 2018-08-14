@@ -3,6 +3,7 @@ import { CategoryListItem } from '../../models/category-list';
 
 @Component({
   selector: 'app-categories-list-item',
+  styleUrls: ['../categories-page.css'],
   templateUrl: './categories-list-item.component.html'
 })
 
@@ -32,15 +33,31 @@ export class CategoriesListItemComponent {
       this.listItem._id === this.checkedItemId;
   }
 
-  private itemChecked(item: CategoryListItem): boolean {
-    return item._id === this.checkedItemId;
+  private itemChecked(item: CategoryListItem, id: string): boolean {
+    return item._id === id;
   }
 
   public subItemIsChecked(item: CategoryListItem) {
-    const subChecked = subitem => subitem.subCategory.filter(sc =>
-      this.itemChecked(sc) ? true : subChecked(sc)
-    ).length > 0;
-    return item.subCategory.length ? subChecked(item) : false;
+    if (!this.multiCheck) {
+      const subChecked = subitem => subitem.subCategory.filter(sc =>
+        this.itemChecked(sc, this.checkedItemId) ? true : subChecked(sc)
+      ).length > 0;
+      return item.subCategory.length ? subChecked(item) : false;
+    } else {
+      let checkedResult = false;
+      this.checkedItems.forEach(checkedListItem => {
+        const subCheckedMulti = subitem => subitem.subCategory.forEach(sc => {
+          if (this.itemChecked(sc, checkedListItem)) {
+            checkedResult = true;
+          }
+          if (sc.subCategory.length) {
+            subCheckedMulti(sc);
+          }
+        });
+        subCheckedMulti(item);
+      });
+      return this.itemIsChecked() ? false : checkedResult;
+    }
   }
 
   public onCheckBoxInput(isChecked: boolean, item: CategoryListItem | string) {

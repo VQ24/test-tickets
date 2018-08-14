@@ -11,6 +11,10 @@
     routerLink="edit">
     <i class="material-icons left">add</i>Add new
   </button>
+  <button class="waves-effect btn white deep-purple-text margin-sm"
+    (click)="settingsOpen()">
+    <i class="material-icons left">settings</i>Settings
+  </button>
 </div>
 
 <app-tickets-list
@@ -19,13 +23,8 @@
   (deleteTicket)="deleteTicket($event)">
 </app-tickets-list>
 
-
-
-
-<ul id="slide-out" class="sidenav">
-  <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
-  <li><a href="#!">Second Link</a></li>
-  <li><div class="divider"></div></li>
-  <li><a class="subheader">Subheader</a></li>
-  <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
-</ul>
+<app-side-nav #settings
+  [checkedItems]="filterCategories"
+  (chooseCategoriesAndReload)="loadFilteredData($event)"
+  (chooseCategories)="onCategoriesChoose($event)">
+</app-side-nav>

@@ -3,6 +3,7 @@ import { CategoryService } from '../service/category-service';
 
 @Component({
   selector: 'app-categories-flat-page',
+  styleUrls: ['./categories-page.css'],
   templateUrl: './categories-flat-page.component.html'
 })
 export class CategoriesFlatPageComponent implements OnInit {

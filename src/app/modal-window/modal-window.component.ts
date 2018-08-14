@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-modal-window',
+  styleUrls: ['./modal-window.component.css'],
   templateUrl: './modal-window.component.html'
 })
 
