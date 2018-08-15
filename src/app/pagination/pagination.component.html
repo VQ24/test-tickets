@@ -1,14 +1,16 @@
-<ul *ngIf="paginationInfo && paginationInfo.total"
-  class="pagination">
-  <li [ngClass]="{'waves-effect': !isFirstPage, 'disabled': isFirstPage, 'noselect': isFirstPage}">
-    <a (click)="decreasePagination()"><i class="material-icons">chevron_left</i></a>
-  </li>
-  <li *ngFor="let page of pages"
-    [ngClass]="{'waves-effect': true, 'deep-purple': isCurrentPage(page), 'active': isCurrentPage(page)}"
-    class="waves-effect">
-    <a (click)="updatePagination(page)">{{page.pageNum + 1}}</a>
-  </li>
-  <li [ngClass]="{'waves-effect': !isLastPage, 'disabled': isLastPage, 'noselect': isLastPage}">
-    <a (click)="increasePagination()"><i class="material-icons">chevron_right</i></a>
-  </li>
-</ul>
+<div *ngIf="!isOnlyPage">
+  <ul *ngIf="paginationInfo && paginationInfo.total"
+    class="pagination">
+    <li [ngClass]="{'waves-effect': !isFirstPage, 'disabled': isFirstPage, 'noselect': isFirstPage}">
+      <a (click)="decreasePagination()"><i class="material-icons">chevron_left</i></a>
+    </li>
+    <li *ngFor="let page of pages"
+      [ngClass]="{'waves-effect': true, 'deep-purple': isCurrentPage(page), 'active': isCurrentPage(page)}"
+      class="waves-effect">
+      <a (click)="updatePagination(page)">{{page.pageNum + 1}}</a>
+    </li>
+    <li [ngClass]="{'waves-effect': !isLastPage, 'disabled': isLastPage, 'noselect': isLastPage}">
+      <a (click)="increasePagination()"><i class="material-icons">chevron_right</i></a>
+    </li>
+  </ul>
+</div>

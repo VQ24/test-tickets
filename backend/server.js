@@ -89,9 +89,15 @@ app.put('/category', function(request, result) {
 app.get('/tickets', function(request, result) {
   MongoClient.connect(url, {useNewUrlParser: true}, function(err, db) {
     if (err) { throw err };
-    var filter = request.query.filter ? JSON.parse(request.query.filter) : {};
-    var filterNew1 = filter.length ? JSON.parse(JSON.stringify({"category": {"$in": JSON.parse(filter).map(item => ObjectID(item))}})) : {};
-    db.db("my-test").collection('tickets').find(filterNew1)
+    var filter = request.query.filter ? JSON.parse(JSON.parse(request.query.filter)) : {};
+    var filterByCategory = filter.byCategory ? JSON.parse(JSON.stringify({$match: {category: {$in: filter.byCategory.map(item => ObjectID(item))}}})) : {$match: {}};
+    var randomFilter = filter.getRandom ? JSON.parse(JSON.stringify({$sample: {size: filter.getRandom}})) : null;
+    var resultfilter = [];
+    resultfilter.push(filterByCategory);
+    if (randomFilter) {
+      resultfilter.push(randomFilter);
+    }
+    db.db("my-test").collection('tickets').aggregate(resultfilter)
       .toArray(function (err, res) {
         if (err) { throw err };
         result.jsonp(res);

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TestService } from '../service/test-service';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
@@ -20,11 +20,6 @@ export class TicketsPageComponent implements OnInit {
   @ViewChild('settings') public settingsSideNav;
 
   public ngOnInit() {
-    this.service.tickets$.subscribe(data => {
-      if (!data || !data.length) {
-        this.loadData();
-      }
-    });
     this.tickets$ = this.service.tickets$;
     this.isLoading$ = this.service.isLoading$;
   }
@@ -33,12 +28,13 @@ export class TicketsPageComponent implements OnInit {
     this.service.loadAllTickets();
   }
 
-  public loadFilteredData (categories) {
-    this.filterCategories = categories;
-    const filterObject = {category: {$in: categories}};
-    console.log(filterObject);
-    this.service.getFilteredTickets(categories);
-    console.log(this.filterCategories);
+  public loadFilteredData (filter) {
+    this.filterCategories = filter.categories;
+    const filterCategoriesObject = {byCategory: filter.categories};
+    const getRandomFilter = filter.loadRandom && filter.loadRandom.on && +filter.loadRandom.numberOfTickets ?
+      { getRandom: +filter.loadRandom.numberOfTickets } : {};
+    const resultFiter = Object.assign(filterCategoriesObject, getRandomFilter);
+    this.service.getFilteredTickets(resultFiter);
   }
 
   public deleteTicket(ticket) {

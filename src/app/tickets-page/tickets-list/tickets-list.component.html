@@ -1,46 +1,48 @@
 <div *ngIf="tickets">
-  <div *ngIf="!isLoading && tickets.length else loading">
-    <table class="highlight">
-      <thead>
-        <tr>
-          <th>Questions
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let ticket of tickets; index as i"
-            class="table-list-item">
-          <ng-container *ngIf="showViaPagination(i)">
-            <td (click)="showAnswer(ticket)" style="cursor: pointer">
-              <div class="row">
-                <div class="col question">
-                  <span [innerHTML]="ticket.question | keepHtml"></span>
+  <div *ngIf="!isLoading else loading">
+    <div *ngIf="tickets.length else noTickets">
+      <table class="highlight">
+        <thead>
+          <tr>
+            <th>Questions
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ticket of tickets; index as i"
+              class="table-list-item">
+            <ng-container *ngIf="showViaPagination(i)">
+              <td (click)="showAnswer(ticket)" style="cursor: pointer">
+                <div class="row">
+                  <div class="col question">
+                    <span [innerHTML]="ticket.question | keepHtml"></span>
+                  </div>
+                  <div class="col">
+                      <div *ngIf="ticket.showAnswer"
+                      [innerHTML]="ticket.answer | keepHtml"></div>
+                  </div>
+                  <div class="col s2 offset-s10 show-on-hover">
+                    <a class="btn-floating btn-flat waves-effect waves-purple white"
+                      (click)="editTicket(ticket)">
+                      <i class="material-icons purple-text">edit</i>
+                    </a>
+                    <a class="btn-floating btn-flat waves-effect waves-red white"
+                      (click)="onDeleteButtonClick(ticket)">
+                      <i class="material-icons red-text">close</i>
+                    </a>
+                  </div>
                 </div>
-                <div class="col">
-                    <div *ngIf="ticket.showAnswer"
-                    [innerHTML]="ticket.answer | keepHtml"></div>
-                </div>
-                <div class="col s2 offset-s10 show-on-hover">
-                  <a class="btn-floating btn-flat waves-effect waves-purple white"
-                    (click)="editTicket(ticket)">
-                    <i class="material-icons purple-text">edit</i>
-                  </a>
-                  <a class="btn-floating btn-flat waves-effect waves-red white"
-                    (click)="onDeleteButtonClick(ticket)">
-                    <i class="material-icons red-text">close</i>
-                  </a>
-                </div>
-              </div>
-            </td>
-          </ng-container>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="margin-top-xl margin-bottom-xl">
-      <app-pagination
-        [paginationInfo]="paginationInfo">
-      </app-pagination>
+              </td>
+            </ng-container>
+          </tr>
+        </tbody>
+      </table>
+  
+      <div class="margin-top-xl margin-bottom-xl">
+        <app-pagination
+          [paginationInfo]="paginationInfo">
+        </app-pagination>
+      </div>
     </div>
 
   </div>
@@ -56,5 +58,11 @@
     <div class="progress deep-purple lighten-5">
       <div class="indeterminate deep-purple"></div>
     </div>
+  </div>
+</ng-template>
+
+<ng-template #noTickets>
+  <div class="margin-top-xl margin-bottom-xl">
+    <h4>No tickets found</h4>
   </div>
 </ng-template>

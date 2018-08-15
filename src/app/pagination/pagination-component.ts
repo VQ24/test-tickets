@@ -14,12 +14,6 @@ export class PaginationComponent {
     total: 52,
   };
 
-  constructor() {}
-
-  public test() {
-    console.log(this.isFirstPage, this.isLastPage);
-  }
-
   public updatePagination(page: PaginationPage) {
     this.paginationInfo.offset = page.pageOffset;
   }
@@ -45,7 +39,11 @@ export class PaginationComponent {
   }
 
   public get isLastPage(): boolean {
-    return this.paginationInfo.offset === Math.trunc(this.paginationInfo.total / this.paginationInfo.limit) * this.paginationInfo.limit;
+    return this.paginationInfo.limit >= Math.abs(this.paginationInfo.offset - this.paginationInfo.total);
+  }
+
+  public get isOnlyPage(): boolean {
+    return this.isFirstPage && this.isLastPage;
   }
 
   public get pages(): PaginationPage[] {

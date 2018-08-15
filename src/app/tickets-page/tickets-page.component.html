@@ -5,7 +5,7 @@
     routerLink="../"><i class="material-icons left">chevron_left</i>Go Back
   </button>
   <button class="waves-effect waves-light btn deep-purple margin-sm"
-    (click)="loadData()"><i class="material-icons left">autorenew</i>Refresh
+    (click)="loadData()"><i class="material-icons left">autorenew</i>Load All
   </button>
   <button class="waves-effect waves-light btn light-green darken-3 margin-sm"
     routerLink="edit">
@@ -24,6 +24,7 @@
 </app-tickets-list>
 
 <app-side-nav #settings
+  [chooseAllCategoriesOnOpen]="true"
   [checkedItems]="filterCategories"
   (chooseCategoriesAndReload)="loadFilteredData($event)"
   (chooseCategories)="onCategoriesChoose($event)">

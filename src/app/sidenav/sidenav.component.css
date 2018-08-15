@@ -25,6 +25,35 @@
   display: block;
 }
 
+.switch label input[type=checkbox]:checked+.lever:after {
+  background-color: #558b2f;
+}
+
+.switch label .lever:after {
+  background-color: #424242;
+}
+
+.accordion-item {
+  display: block;
+}
+
+.accordion-item.hidden {
+  display: none;
+}
+
+.switch label input[type=checkbox]+.lever {
+  background-color: #e6e6e6;
+  box-shadow: inset 0px 0px 2px #424242;
+}
+
+input[type=number]:disabled {
+  border-bottom: 1px dotted #424242;
+  border-bottom-width: 1px;
+  border-bottom-style: dotted;
+  border-bottom-color: #424242;
+  box-shadow: none;
+}
+
 @media only screen and (max-width: 450px) {
   .sidenav-wrapper .sidenav {
     width: 100%;

@@ -1,36 +1,76 @@
 <div [ngClass]="{'sidenav-wrapper': true, 'open': isOpened}">
   <ul id="slide-out" class="sidenav">
     <li>
-      <a class="waves-effect" (click)="close()"><i class="material-icons right">keyboard_arrow_left</i>Back</a>
+      <a class="clickable" 
+      (click)="close()"><i class="material-icons right">close</i>Close settings</a>
     </li>
-    <li><div class="divider"></div></li>
-    <li>
-      <a class="subheader">Categories</a>
+    <li><div class="divider margin-top-none"></div></li>
+    <li #categoriesSection>
+      <a class="clickable"
+        (click)="categoriesSection.hideContent = !categoriesSection.hideContent">
+          <i *ngIf="categoriesSection.hideContent" class="material-icons right">keyboard_arrow_right</i>
+          <i *ngIf="!categoriesSection.hideContent" class="material-icons right">keyboard_arrow_down</i>
+        Select ticket categories</a>
     </li>
-    <div class="margin-md">
-      <button class="waves-effect btn white grey-text text-darken-3 margin-sm"
-        (click)="categoriesList.unchooseAllCategories()">
-        <i class="material-icons left">filter_none</i>Select none
-      </button>
-      <button class="waves-effect btn white light-green-text text-darken-3 margin-sm"
-        (click)="categoriesList.chooseAllCategories()">
-        <i class="material-icons left">done_all</i>Select all
-      </button>
+    <div [ngClass]="{'accordion-item': true, 'hidden': categoriesSection.hideContent}">
+      <div class="margin-md margin-top-none">
+        <button class="waves-effect btn white grey-text text-darken-3 margin-sm"
+          (click)="categoriesList.unchooseAllCategories()">
+          <i class="material-icons left">filter_none</i>Select none
+        </button>
+        <button class="waves-effect btn white light-green-text text-darken-3 margin-sm"
+          (click)="categoriesList.chooseAllCategories()">
+          <i class="material-icons left">done_all</i>Select all
+        </button>
+      </div>
+      <app-categories-page 
+        #categoriesList
+        [checkedItems]="checkedItems"
+        [multiCheck]="true"
+        [checkItemMode]="true"
+        [hideChildren]="false"
+        (chooseCategory)="onChooseCategories($event)">
+      </app-categories-page>
     </div>
-    <app-categories-page 
-      #categoriesList
-      [checkedItems]="checkedItems"
-      [multiCheck]="true"
-      [checkItemMode]="true"
-      [hideChildren]="false"
-      (chooseCategory)="onChooseCategories($event)">
-    </app-categories-page>
+    <li><div class="divider margin-top-none"></div></li>
+    <li #randomSection>
+      <a class="clickable"
+        (click)="randomSection.hideContent = !randomSection.hideContent">
+          <i *ngIf="randomSection.hideContent" class="material-icons right">keyboard_arrow_right</i>
+          <i *ngIf="!randomSection.hideContent" class="material-icons right">keyboard_arrow_down</i>
+        Load random tickets</a>
+    </li>
+    <div [ngClass]="{'accordion-item': true, 'hidden': randomSection.hideContent}">
+      <div class="margin-md">
+        <div class="row margin-bottom-none">
+          <div class="switch deep-purple-text margin-bottom-md margin-top-md col m6 s12">
+            <label>
+              Off
+              <input #takeRandomNumberSwitch
+                type="checkbox"
+                [(ngModel)]="loadRandom.on">
+              <span class="lever"></span>
+              On
+            </label>
+          </div>
+          <div class="input-field col m6 s12 margin-bottom-none margin-top-none">
+            <input 
+              type="number"
+              class="validate"
+              [(ngModel)]="loadRandom.numberOfTickets"
+              [disabled]="!loadRandom.on">
+            <label class="active" for="first_name2">number of tickets</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <li><div class="divider margin-top-none"></div></li>
     <div class="margin-md">
       <button class="waves-effect waves-light btn deep-purple margin-sm"
-        (click)="reloadData(categoriesList.checkedItems)"><i class="material-icons left">autorenew</i>Reload tickets
+        [disabled]="!possibleToLoad"
+        (click)="reloadData(categoriesList.checkedItems)"><i class="material-icons left">autorenew</i>Load tickets
       </button>
     </div>
-    <li><div class="divider"></div></li>
   </ul>
   <div (click)="close()" class="sidenav-overlay"></div>
 </div>
