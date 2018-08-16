@@ -10,3 +10,7 @@
 .big-button:hover {
   background-color: #faf0fa ;
 }
+
+.center-text {
+  text-align: center;
+}

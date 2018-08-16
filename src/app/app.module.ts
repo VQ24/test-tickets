@@ -23,12 +23,13 @@ import { CategoryService } from './service/category-service';
 import { CategoriesPageComponent } from './categories-page/categories-page.component';
 import { CategoriesListItemComponent } from './categories-page/categories-list-item/categories-list-item.component';
 import { CategoriesFlatPageComponent } from './categories-page/categories-flat-page.component';
-import { CategoriesSetupPageComponent } from './categories-setup-page/categories-setup-page.component';
 import { ModalWindowComponent } from './modal-window/modal-window.component';
 import { FormatButtonsComponent } from './tickets-page/tickets-list/ticket-edit/format-buttons/format-buttons.component';
 import { TicketTagsComponent } from './ticket-tags/ticket-tags.component';
 import { PaginationComponent } from './pagination/pagination-component';
 import { SideNavComponent } from './sidenav/sidenav.component';
+import { SettingsPageComponent } from './settings-page/settings-page.component';
+import { CategoriesSetupPageComponent } from './settings-page/categories-setup-page/categories-setup-page.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { SideNavComponent } from './sidenav/sidenav.component';
     ModalWindowComponent,
     PaginationComponent,
     SideNavComponent,
+    SettingsPageComponent,
   ],
   imports: [
     FormsModule,

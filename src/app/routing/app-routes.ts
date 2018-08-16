@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { TicketEditComponent } from '../tickets-page/tickets-list/ticket-edit/ticket-edit.component';
 import { TicketsPageComponent } from '../tickets-page/tickets-page.component';
 import { MainPageComponent } from '../main-page/main-page.component';
-import { CategoriesSetupPageComponent } from '../categories-setup-page/categories-setup-page.component';
+import { SettingsPageComponent } from '../settings-page/settings-page.component';
 
 export const ROUTES: Routes = [
   {
@@ -34,9 +34,9 @@ export const ROUTES: Routes = [
         ]
       },
       {
-        path: 'categories',
+        path: 'settings',
         data: {
-          breadcrumb: 'Edit Categories'
+          breadcrumb: 'Settings'
         },
         children: [
           {
@@ -44,7 +44,7 @@ export const ROUTES: Routes = [
             data: {
               breadcrumb: ''
             },
-            component: CategoriesSetupPageComponent
+            component: SettingsPageComponent
           }
         ]
       },

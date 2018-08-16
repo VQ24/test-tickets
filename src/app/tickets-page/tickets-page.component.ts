@@ -21,6 +21,8 @@ export class TicketsPageComponent implements OnInit {
 
   public ngOnInit() {
     this.tickets$ = this.ticketService.tickets$;
+    // this.isLoading$ = this.ticketService.isLoading$.startWith(true);
+    // this.loadData();
     this.isLoading$ = this.ticketService.isLoading$;
   }
 
