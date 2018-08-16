@@ -1,6 +1,7 @@
 const initialState = {
   tickets: [],
   categories: [],
+  settings: {}
 };
 
 function remove(array: any[], elements: any[]) {

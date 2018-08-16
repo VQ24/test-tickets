@@ -10,14 +10,14 @@ import 'rxjs/add/observable/zip';
 })
 export class TicketsPageComponent implements OnInit {
 
+  @ViewChild('settings') public settingsSideNav;
+
   public tickets$: Observable<any>;
   public isLoading$: Observable<boolean>;
 
   public filterCategories: string[] = [];
 
   constructor(private service: TestService) { }
-
-  @ViewChild('settings') public settingsSideNav;
 
   public ngOnInit() {
     this.tickets$ = this.service.tickets$;
@@ -33,7 +33,8 @@ export class TicketsPageComponent implements OnInit {
     const filterCategoriesObject = {byCategory: filter.categories};
     const getRandomFilter = filter.loadRandom && filter.loadRandom.on && +filter.loadRandom.numberOfTickets ?
       { getRandom: +filter.loadRandom.numberOfTickets } : {};
-    const resultFiter = Object.assign(filterCategoriesObject, getRandomFilter);
+    const getTagsFilter = filter.tags && filter.tags.length ? { tags: filter.tags } : {};
+    const resultFiter = Object.assign(filterCategoriesObject, getRandomFilter, getTagsFilter);
     this.service.getFilteredTickets(resultFiter);
   }
 

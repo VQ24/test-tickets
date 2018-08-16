@@ -8,26 +8,33 @@ import { Component, Input, Output, EventEmitter, ViewChild } from '@angular/core
 
 export class SideNavComponent {
 
-  @Input() public checkedItems: string[];
-  @Input() public chooseAllCategoriesOnOpen = false;
-
   @Output() public chooseCategories: EventEmitter<any> = new EventEmitter();
   @Output() public chooseCategoriesAndReload: EventEmitter<any> = new EventEmitter();
+
+  @Input() public checkedItems: string[];
+  @Input() public settings = {
+    categoriesSection: {
+      loadAllOnOpenIfListIsEmpty: true,
+      hideContent: false,
+    },
+    tagSection: {
+      hideContent: true,
+    },
+    randomSection: {
+      hideContent: true,
+      loadRandom: {
+        on: false, numberOfTickets: 5
+      }
+    },
+  };
 
   @ViewChild('categoriesList') public categoriesList;
 
   public isOpened = false;
-  public loadRandom = {
-    on: false, numberOfTickets: 5
-  };
-
-  test() {
-    console.log(this.loadRandom);
-  }
 
   public open() {
     if (this.categoriesList.categories) {
-      if (this.chooseAllCategoriesOnOpen && !this.checkedItems.length) {
+      if (this.settings.categoriesSection.loadAllOnOpenIfListIsEmpty && !this.checkedItems.length) {
         this.categoriesList.chooseAllCategories();
       }
       this.isOpened = true;
@@ -42,12 +49,17 @@ export class SideNavComponent {
     this.chooseCategories.emit(categories);
   }
 
-  public reloadData(categories: string[]) {
-    this.chooseCategoriesAndReload.emit({categories: categories, loadRandom: this.loadRandom});
+  public reloadData(categories: string[], tags: string[]) {
+    this.chooseCategoriesAndReload.emit({
+      categories: categories,
+      loadRandom: this.settings.randomSection.loadRandom,
+      tags: tags,
+      settings: this.settings,
+    });
     this.isOpened = false;
   }
 
   public get possibleToLoad(): boolean {
-    return this.checkedItems.length > 0 && this.loadRandom.numberOfTickets > 0;
+    return this.checkedItems.length > 0 && this.settings.randomSection.loadRandom.numberOfTickets > 0;
   }
 }

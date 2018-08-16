@@ -1,18 +1,23 @@
 <div [ngClass]="{'sidenav-wrapper': true, 'open': isOpened}">
   <ul id="slide-out" class="sidenav">
     <li>
-      <a class="clickable" 
-      (click)="close()"><i class="material-icons right">close</i>Close settings</a>
+      <a class="waves-effect waves-light grey darken-3 white-text" 
+        (click)="close()">
+        <i class="material-icons right white-text">close</i>
+        Close filter settings
+      </a>
     </li>
     <li><div class="divider margin-top-none"></div></li>
-    <li #categoriesSection>
-      <a class="clickable"
-        (click)="categoriesSection.hideContent = !categoriesSection.hideContent">
-          <i *ngIf="categoriesSection.hideContent" class="material-icons right">keyboard_arrow_right</i>
-          <i *ngIf="!categoriesSection.hideContent" class="material-icons right">keyboard_arrow_down</i>
-        Select ticket categories</a>
+
+    <li>
+      <a class="clickable noselect"
+        (click)="settings.categoriesSection.hideContent = !settings.categoriesSection.hideContent">
+          <i *ngIf="settings.categoriesSection.hideContent" class="material-icons right">keyboard_arrow_right</i>
+          <i *ngIf="!settings.categoriesSection.hideContent" class="material-icons right">keyboard_arrow_down</i>
+        1. Get tickets of categories:
+      </a>
     </li>
-    <div [ngClass]="{'accordion-item': true, 'hidden': categoriesSection.hideContent}">
+    <div [ngClass]="{'accordion-item': true, 'hidden': settings.categoriesSection.hideContent}">
       <div class="margin-md margin-top-none">
         <button class="waves-effect btn white grey-text text-darken-3 margin-sm"
           (click)="categoriesList.unchooseAllCategories()">
@@ -33,14 +38,36 @@
       </app-categories-page>
     </div>
     <li><div class="divider margin-top-none"></div></li>
-    <li #randomSection>
-      <a class="clickable"
-        (click)="randomSection.hideContent = !randomSection.hideContent">
-          <i *ngIf="randomSection.hideContent" class="material-icons right">keyboard_arrow_right</i>
-          <i *ngIf="!randomSection.hideContent" class="material-icons right">keyboard_arrow_down</i>
-        Load random tickets</a>
+
+    <li>
+      <a class="clickable noselect"
+        (click)="settings.tagSection.hideContent = !settings.tagSection.hideContent">
+          <i *ngIf="settings.tagSection.hideContent" class="material-icons right">keyboard_arrow_right</i>
+          <i *ngIf="!settings.tagSection.hideContent" class="material-icons right">keyboard_arrow_down</i>
+        2. Get of them with following tags:
+      </a>
     </li>
-    <div [ngClass]="{'accordion-item': true, 'hidden': randomSection.hideContent}">
+    <div [ngClass]="{'accordion-item': true, 'hidden': settings.tagSection.hideContent}">
+      <div class="margin-md">
+        <div class="row margin-bottom-none">
+          <div class="col s12">
+            <app-ticket-tags #tagsList>
+            </app-ticket-tags>
+          </div>
+        </div>
+      </div>
+    </div>
+    <li><div class="divider margin-top-none"></div></li>
+
+    <li>
+      <a class="clickable noselect"
+        (click)="settings.randomSection.hideContent = !settings.randomSection.hideContent">
+          <i *ngIf="settings.randomSection.hideContent" class="material-icons right">keyboard_arrow_right</i>
+          <i *ngIf="!settings.randomSection.hideContent" class="material-icons right">keyboard_arrow_down</i>
+        3. Get random quantity of them:
+      </a>
+    </li>
+    <div [ngClass]="{'accordion-item': true, 'hidden': settings.randomSection.hideContent}">
       <div class="margin-md">
         <div class="row margin-bottom-none">
           <div class="switch deep-purple-text margin-bottom-md margin-top-md col m6 s12">
@@ -48,7 +75,7 @@
               Off
               <input #takeRandomNumberSwitch
                 type="checkbox"
-                [(ngModel)]="loadRandom.on">
+                [(ngModel)]="settings.randomSection.loadRandom.on">
               <span class="lever"></span>
               On
             </label>
@@ -57,18 +84,21 @@
             <input 
               type="number"
               class="validate"
-              [(ngModel)]="loadRandom.numberOfTickets"
-              [disabled]="!loadRandom.on">
+              [(ngModel)]="settings.randomSection.loadRandom.numberOfTickets"
+              [disabled]="!settings.randomSection.loadRandom.on">
             <label class="active" for="first_name2">number of tickets</label>
           </div>
         </div>
       </div>
     </div>
     <li><div class="divider margin-top-none"></div></li>
+
     <div class="margin-md">
       <button class="waves-effect waves-light btn deep-purple margin-sm"
         [disabled]="!possibleToLoad"
-        (click)="reloadData(categoriesList.checkedItems)"><i class="material-icons left">autorenew</i>Load tickets
+        (click)="reloadData(categoriesList.checkedItems, tagsList.tags)">
+        <i class="material-icons left">autorenew</i>
+          Load filtered tickets
       </button>
     </div>
   </ul>

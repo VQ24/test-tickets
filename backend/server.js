@@ -92,8 +92,12 @@ app.get('/tickets', function(request, result) {
     var filter = request.query.filter ? JSON.parse(JSON.parse(request.query.filter)) : {};
     var filterByCategory = filter.byCategory ? JSON.parse(JSON.stringify({$match: {category: {$in: filter.byCategory.map(item => ObjectID(item))}}})) : {$match: {}};
     var randomFilter = filter.getRandom ? JSON.parse(JSON.stringify({$sample: {size: filter.getRandom}})) : null;
+    var tagsFilter = filter.tags ? JSON.parse(JSON.stringify({$match: {tags: {$in: filter.tags}}})) : null;
     var resultfilter = [];
     resultfilter.push(filterByCategory);
+    if (tagsFilter) {
+      resultfilter.push(tagsFilter);
+    }
     if (randomFilter) {
       resultfilter.push(randomFilter);
     }

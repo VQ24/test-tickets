@@ -13,7 +13,7 @@
   </button>
   <button class="waves-effect btn white deep-purple-text margin-sm"
     (click)="settingsOpen()">
-    <i class="material-icons left">settings</i>Settings
+    <i class="material-icons left">filter_list</i>Filter
   </button>
 </div>
 
@@ -24,7 +24,6 @@
 </app-tickets-list>
 
 <app-side-nav #settings
-  [chooseAllCategoriesOnOpen]="true"
   [checkedItems]="filterCategories"
   (chooseCategoriesAndReload)="loadFilteredData($event)"
   (chooseCategories)="onCategoriesChoose($event)">

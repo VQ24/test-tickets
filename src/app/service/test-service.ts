@@ -32,11 +32,6 @@ export class TestService {
   }
 
   public getTicket(ticketNum: string) {
-    this.tickets$.subscribe(data => {
-      if (!data.length) {
-        this.loadAllTickets();
-      }
-    });
     return this.tickets$.map(tickets => tickets.filter(ticket => ticket._id === ticketNum)[0]);
   }
 

@@ -7,7 +7,7 @@ import { Component, Input, ViewChild, Output, EventEmitter } from '@angular/core
 
 export class TicketTagsComponent {
 
-  @Input() public tags: string[];
+  @Input() public tags: string[] = [];
 
   @Output() public updateTags: EventEmitter<any> = new EventEmitter();
 
@@ -15,7 +15,7 @@ export class TicketTagsComponent {
 
   public addTag(tag: string) {
     if (!this.tags.filter(tg => tg === tag.trim()).length && tag.trim() && this.validTag(tag)) {
-      this.tags.push(tag.trim());
+      this.tags.push(tag.trim().toLowerCase());
       this.inputTagField.nativeElement.value = '';
       this.updateTags.emit(this.tags);
     }
