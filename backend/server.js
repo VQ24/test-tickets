@@ -97,10 +97,10 @@ app.get('/tickets', function(request, result) {
     resultfilter.push(filterByCategory);
     if (tagsFilter) {
       resultfilter.push(tagsFilter);
-    }
+    };
     if (randomFilter) {
       resultfilter.push(randomFilter);
-    }
+    };
     db.db("my-test").collection('tickets').aggregate(resultfilter)
       .toArray(function (err, res) {
         if (err) { throw err };

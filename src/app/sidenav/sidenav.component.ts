@@ -14,7 +14,7 @@ export class SideNavComponent {
   @Input() public checkedItems: string[];
   @Input() public settings = {
     categoriesSection: {
-      loadAllOnOpenIfListIsEmpty: true,
+      loadAllOnOpenIfListIsEmpty: false,
       hideContent: false,
     },
     tagSection: {
@@ -60,6 +60,7 @@ export class SideNavComponent {
   }
 
   public get possibleToLoad(): boolean {
-    return this.checkedItems.length > 0 && this.settings.randomSection.loadRandom.numberOfTickets > 0;
+    return this.settings.randomSection.loadRandom.on ?
+      this.settings.randomSection.loadRandom.on && this.settings.randomSection.loadRandom.numberOfTickets > 0 : true;
   }
 }

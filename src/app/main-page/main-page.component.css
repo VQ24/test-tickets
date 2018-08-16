@@ -1,0 +1,12 @@
+.big-button {
+  display: block;
+  text-align: center;
+}
+
+.big-button .material-icons{
+  font-size: 10rem;
+}
+
+.big-button:hover {
+  background-color: #faf0fa ;
+}

@@ -15,6 +15,14 @@
   margin: 1rem !important;
 }
 
+.margin-lg {
+  margin: 2rem !important;
+}
+
+.margin-xl {
+  margin: 3rem !important;
+}
+
 .margin-top-md {
   margin-top: 1rem !important;
 }

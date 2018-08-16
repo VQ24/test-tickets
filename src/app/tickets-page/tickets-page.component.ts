@@ -15,31 +15,31 @@ export class TicketsPageComponent implements OnInit {
   public tickets$: Observable<any>;
   public isLoading$: Observable<boolean>;
 
-  public filterCategories: string[] = [];
+  public filter: any = {categories: []};
 
-  constructor(private service: TestService) { }
+  constructor(private ticketService: TestService) { }
 
   public ngOnInit() {
-    this.tickets$ = this.service.tickets$;
-    this.isLoading$ = this.service.isLoading$;
+    this.tickets$ = this.ticketService.tickets$;
+    this.isLoading$ = this.ticketService.isLoading$;
   }
 
   public loadData() {
-    this.service.loadAllTickets();
+    this.loadFilteredData(this.filter);
   }
 
   public loadFilteredData (filter) {
-    this.filterCategories = filter.categories;
-    const filterCategoriesObject = {byCategory: filter.categories};
+    this.filter = filter;
+    const filterCategoriesObject = filter.categories && filter.categories.length ? { byCategory: filter.categories } : {};
     const getRandomFilter = filter.loadRandom && filter.loadRandom.on && +filter.loadRandom.numberOfTickets ?
       { getRandom: +filter.loadRandom.numberOfTickets } : {};
     const getTagsFilter = filter.tags && filter.tags.length ? { tags: filter.tags } : {};
     const resultFiter = Object.assign(filterCategoriesObject, getRandomFilter, getTagsFilter);
-    this.service.getFilteredTickets(resultFiter);
+    this.ticketService.getFilteredTickets(resultFiter);
   }
 
   public deleteTicket(ticket) {
-    this.service.deleteTicket(ticket._id);
+    this.ticketService.deleteTicket(ticket._id);
   }
 
   public settingsOpen() {
@@ -47,7 +47,7 @@ export class TicketsPageComponent implements OnInit {
   }
 
   public onCategoriesChoose(categories) {
-    this.filterCategories = categories;
+    this.filter.categories = categories;
   }
 
 }

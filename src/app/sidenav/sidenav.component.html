@@ -98,7 +98,8 @@
         [disabled]="!possibleToLoad"
         (click)="reloadData(categoriesList.checkedItems, tagsList.tags)">
         <i class="material-icons left">autorenew</i>
-          Load filtered tickets
+          {{categoriesList.checkedItems.length || tagsList.tags.length || settings.randomSection.loadRandom.on ?
+            'Load filtered tickets' : 'Load all tickets'}}
       </button>
     </div>
   </ul>
