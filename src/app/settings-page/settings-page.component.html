@@ -1,1 +1,168 @@
-<h1>Settings page</h1>
+<div class="row">
+  <div class="col s12">
+    <h3>Settings</h3>
+    <ul *ngIf="settings && settings.length"
+      class="collapsible">
+      <li *ngFor="let setting of settings; index as i">
+        <div class="collapsible-header noselect table-list-item"
+          (click)="collapseAccordion(setting)">
+          <h6>
+            <span [ngClass]="{'radio-button': true, 'checked': setting.default}"
+              (click)="setDefault(setting)">
+              <span [ngClass]="{'radio-dot': true, 'checked': setting.default}"></span>
+            </span>
+            {{setting.name}}
+          </h6>
+          <div *ngIf="i === 0"
+            class="show-on-hover align-right">
+            <a class="btn-floating btn-flat waves-effect waves-green white"
+              (click)="onAddSettingButtonClick(setting)">
+              <i class="material-icons light-green-text text-darken-3">add</i>
+            </a>
+          </div>
+          <div *ngIf="i > 0"
+            class="show-on-hover align-right">
+            <a class="btn-floating btn-flat waves-effect waves-purple white"
+              (click)="onEditButtonClick(setting)">
+              <i class="material-icons purple-text">edit</i>
+            </a>
+            <a class="btn-floating btn-flat waves-effect waves-red white"
+              (click)="onDeleteButtonClick(setting)">
+              <i class="material-icons red-text">close</i>
+            </a>
+          </div>
+        </div>
+        <div [ngClass]="{'collapsible-header': true, 'body': true, 'open': setting.showContent}">
+          <div class="row margin-bottom-none">
+            <div class="col s12 underlined-block">
+              <p>
+                Categories:
+              </p>
+              <div class="row margin-left-md">
+                <p class="col s12">
+                  Hide categories section by deafult:
+                  <span class="switch">
+                    <label>
+                      Off
+                      <input type="checkbox" 
+                        [(ngModel)]="setting.filterSettings.categoriesSection.hideContent">
+                      <span class="lever"></span>
+                      On
+                    </label>
+                  </span>
+                </p>
+                <p class="col s12">
+                  Select all categories on open if nothing selected:
+                  <span class="switch">
+                    <label>
+                      Off
+                      <input type="checkbox"
+                        [(ngModel)]="setting.filterSettings.categoriesSection.loadAllOnOpenIfListIsEmpty">
+                      <span class="lever"></span>
+                      On
+                    </label>
+                  </span>
+                </p>
+              </div>
+            </div>
+            <div class="col s12 underlined-block">
+              <p>
+                Tags:
+              </p>
+              <div class="row margin-left-md">
+                <p class="col s12">
+                  Hide tags section by deafult:
+                  <span class="switch">
+                    <label>
+                      Off
+                      <input type="checkbox"
+                        [(ngModel)]="setting.filterSettings.tagSection.hideContent">
+                      <span class="lever"></span>
+                      On
+                    </label>
+                  </span>
+                </p>
+              </div>
+            </div>
+            <div class="col s12 underlined-block">
+              <p>
+                Random:
+              </p>
+              <div class="row margin-left-md">
+                <p class="col s12">
+                  Hide random section by deafult:
+                  <span class="switch">
+                    <label>
+                      Off
+                      <input type="checkbox"
+                        [(ngModel)]="setting.filterSettings.randomSection.hideContent">
+                      <span class="lever"></span>
+                      On
+                    </label>
+                  </span>
+                </p>
+                <p class="col s12">
+                  Load random tickets:
+                  <span class="switch">
+                    <label>
+                      Off
+                      <input type="checkbox"
+                        [(ngModel)]="setting.filterSettings.randomSection.loadRandom.on">
+                      <span class="lever"></span>
+                      On
+                    </label>
+                  </span>
+                </p>
+                <p class="col m6 s12">
+                  Random tickets default value:
+                  <span class="input-field">
+                    <input
+                      [(ngModel)]="setting.filterSettings.randomSection.loadRandom.numberOfTickets"
+                      type="number"
+                      class="validate">
+                  </span>
+                </p>
+              </div>
+            </div>
+            <div class="col s12">
+              <div class="margin-md">
+                <button class="waves-effect waves-light btn light-green darken-3 margin-sm"
+                  [disabled]="!possibleToSave(setting)"
+                  (click)="saveSetting(setting)">Save</button>
+                <button class="waves-effect waves-light btn grey darken-3 margin-sm"
+                  (click)="restoreSetting(setting)">Restore</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="col s12">
+    <div class="margin-md">
+      <button *ngIf="settings && settings.length"
+        class="waves-effect waves-light btn light-green darken-3 margin-sm"
+        (click)="saveAllSettings()">
+        <i class="material-icons left">check</i>Save all
+      </button>
+      <button class="waves-effect waves-light btn grey darken-3 margin-sm"
+        routerLink="../"><i class="material-icons left">chevron_left</i>Go Back
+      </button>
+    </div>
+  </div>
+</div>
+
+<app-modal-window #modalDeleteSetting
+  [header]="'Delete setting'"
+  (okAction)="onDelete($event)">
+</app-modal-window>
+
+<app-modal-window #modalEditSettingName
+  [header]="'Edit setting name:'"
+  (okAction)="onEditSettingName($event)">
+</app-modal-window>
+
+<app-modal-window #modalNewSettingName
+  [header]="'Enter setting name:'"
+  (okAction)="addNewSetting($event)">
+</app-modal-window>

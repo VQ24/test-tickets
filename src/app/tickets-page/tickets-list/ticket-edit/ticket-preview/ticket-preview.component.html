@@ -121,16 +121,16 @@
       </div>
     <!--                answer part end                 -->
     </form>
-  </div>
 
-  <div>
-    <button class="waves-effect waves-light btn light-green darken-3 margin-sm" [disabled]="!ticketForm.valid"
-      (click)="onSave()">
-      <i class="material-icons left">check</i>Done
-    </button>
-    <button class="waves-effect waves-light btn grey darken-3 margin-sm"
-      routerLink="../"><i class="material-icons left">chevron_left</i>Go Back
-    </button>
+    <div class="col s12">
+      <button class="waves-effect waves-light btn light-green darken-3 margin-sm" [disabled]="!ticketForm.valid"
+        (click)="onSave()">
+        <i class="material-icons left">check</i>Done
+      </button>
+      <button class="waves-effect waves-light btn grey darken-3 margin-sm"
+        routerLink="../"><i class="material-icons left">chevron_left</i>Go Back
+      </button>
+    </div>
   </div>
 
 </div>

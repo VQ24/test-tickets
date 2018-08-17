@@ -11,7 +11,7 @@ app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   next();
 });
-
+/*             post requests                */
 app.post('/ticket', function(request, result) {
   let body = '';
   request.on('data', chunk => {
@@ -48,6 +48,24 @@ app.post('/category', function(request, result) {
   });
 });
 
+app.post('/setting', function(request, result) {
+  let body = '';
+  request.on('data', chunk => {
+    body += chunk.toString();
+  });
+  request.on('end', () => {
+    let setting = JSON.parse(body)
+    MongoClient.connect(url, {useNewUrlParser: true}, function(err, db) {
+      if (err) { throw err };
+      db.db("my-test").collection('settings').insertOne(setting, function(err, res) {
+        if (err){ throw err; }
+        result.jsonp({setting: setting, status: 'created'});
+      });
+      db.close()
+    });
+  });
+});
+/*             put requests                */
 app.put('/ticket', function(request, result) {
   let body = '';
   request.on('data', chunk => {
@@ -61,6 +79,25 @@ app.put('/ticket', function(request, result) {
       db.db("my-test").collection('tickets').updateOne({"_id": ObjectID(ticket._id)}, {$set: newTick}, function(err, res) {
         if (err){ throw err; }
         result.jsonp({status: 'ticket updated'});
+      });
+      db.close()
+    });
+  });
+});
+
+app.put('/setting', function(request, result) {
+  let body = '';
+  request.on('data', chunk => {
+    body += chunk.toString();
+  });
+  request.on('end', () => {
+    let setting = JSON.parse(body)
+    MongoClient.connect(url, {useNewUrlParser: true}, function(err, db) {
+      if (err) { throw err };
+      let {_id, ...newSet} = setting;
+      db.db("my-test").collection('settings').updateOne({"_id": ObjectID(setting._id)}, {$set: newSet}, function(err, res) {
+        if (err){ throw err; }
+        result.jsonp({status: 'setting updated'});
       });
       db.close()
     });
@@ -85,7 +122,7 @@ app.put('/category', function(request, result) {
     });
   });
 });
-
+/*             get requests                */
 app.get('/tickets', function(request, result) {
   MongoClient.connect(url, {useNewUrlParser: true}, function(err, db) {
     if (err) { throw err };
@@ -123,6 +160,18 @@ app.get('/categories', function(request, result) {
   });
 });
 
+app.get('/settings', function(request, result) {
+  MongoClient.connect(url, {useNewUrlParser: true}, function(err, db) {
+    if (err) { throw err };
+    db.db("my-test").collection('settings').find({})
+      .toArray(function (err, res) {
+        if (err) { throw err };
+        result.jsonp(res);
+      });
+    db.close();
+  });
+});
+/*             delete requests                */
 app.delete('/ticket', function(request, result) {
   MongoClient.connect(url, {useNewUrlParser: true}, function(err, db) {
     if (err) { throw err };
@@ -130,6 +179,18 @@ app.delete('/ticket', function(request, result) {
     db.db("my-test").collection('tickets').deleteOne({"_id": ObjectID(ticket._id)}, function(err, res) {
       if (err){ throw err; }
       result.jsonp({status: 'ticket# ' + ticket._id + ' deleted'});
+    });
+    db.close();
+  });
+});
+
+app.delete('/setting', function(request, result) {
+  MongoClient.connect(url, {useNewUrlParser: true}, function(err, db) {
+    if (err) { throw err };
+    var setting = request.query ? request.query : {};
+    db.db("my-test").collection('settings').deleteOne({"_id": ObjectID(setting._id)}, function(err, res) {
+      if (err){ throw err; }
+      result.jsonp({status: 'setting# ' + setting._id + ' deleted'});
     });
     db.close();
   });

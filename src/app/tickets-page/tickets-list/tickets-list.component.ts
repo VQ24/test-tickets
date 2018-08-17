@@ -36,6 +36,7 @@ export class TicketsListComponent implements OnChanges {
 
   public onDeleteButtonClick(ticket) {
     this.deleteModalWindow.open(ticket, 'delete ticket');
+    event.stopPropagation();
   }
 
   public onDelete(event) {

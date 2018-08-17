@@ -30,6 +30,7 @@ import { PaginationComponent } from './pagination/pagination-component';
 import { SideNavComponent } from './sidenav/sidenav.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { CategoriesSetupPageComponent } from './settings-page/categories-setup-page/categories-setup-page.component';
+import { SettingsService } from './service/settings-service';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { CategoriesSetupPageComponent } from './settings-page/categories-setup-p
   providers: [
     TestService,
     CategoryService,
+    SettingsService,
   ],
   bootstrap: [AppComponent]
 })

@@ -1,7 +1,7 @@
 const initialState = {
   tickets: [],
   categories: [],
-  settings: {}
+  settings: []
 };
 
 function remove(array: any[], elements: any[]) {
@@ -63,6 +63,32 @@ export function ticketReducer(state = initialState, action ) {
             return action.payload;
           } else {
             return category;
+          }
+        }),
+      };
+    case 'GET_SETTINGS':
+      return {
+        ...state,
+        settings: action.payload,
+      };
+    case 'ADD_SETTING':
+      return {
+        ...state,
+        settings: [...state.settings, action.payload],
+      };
+    case 'DELETE_SETTING':
+      return {
+        ...state,
+        settings: state.settings.filter(stng => stng._id !== action.payload._id),
+      };
+    case 'UPDATE_SETTING':
+      return {
+        ...state,
+        settings: state.settings.map(stng => {
+          if (stng._id === action.payload._id) {
+            return action.payload;
+          } else {
+            return stng;
           }
         }),
       };
