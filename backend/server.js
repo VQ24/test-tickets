@@ -104,6 +104,27 @@ app.put('/setting', function(request, result) {
   });
 });
 
+app.put('/settings', function(request, result) {
+  let body = '';
+  request.on('data', chunk => {
+    body += chunk.toString();
+  });
+  request.on('end', () => {
+    let settings = JSON.parse(body)
+    MongoClient.connect(url, {useNewUrlParser: true}, function(err, db) {
+      if (err) { throw err };
+      settings.forEach(setting => {
+        let {_id, ...newSet} = setting;
+        db.db("my-test").collection('settings').updateOne({"_id": ObjectID(setting._id)}, {$set: newSet}, function(err, res) {
+          if (err){ throw err; }
+        });
+      });
+      result.jsonp({status: 'settings updated'});
+      db.close()
+    });
+  });
+});
+
 app.put('/category', function(request, result) {
   let body = '';
   request.on('data', chunk => {
@@ -167,6 +188,19 @@ app.get('/settings', function(request, result) {
       .toArray(function (err, res) {
         if (err) { throw err };
         result.jsonp(res);
+      });
+    db.close();
+  });
+});
+
+app.get('/setting', function(request, result) {
+  MongoClient.connect(url, {useNewUrlParser: true}, function(err, db) {
+    if (err) { throw err };
+    var setting = request.query ? request.query : {};
+    db.db("my-test").collection('settings').find({"_id": ObjectID(setting._id)})
+      .toArray(function (err, res) {
+        if (err) { throw err };
+        result.jsonp(res[0]);
       });
     db.close();
   });

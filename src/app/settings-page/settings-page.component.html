@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col s12">
     <h3>Settings</h3>
-    <ul *ngIf="settings && settings.length"
+    <ul *ngIf="settings && settings.length; else loading"
       class="collapsible">
       <li *ngFor="let setting of settings; index as i">
         <div class="collapsible-header noselect table-list-item"
@@ -128,9 +128,9 @@
               <div class="margin-md">
                 <button class="waves-effect waves-light btn light-green darken-3 margin-sm"
                   [disabled]="!possibleToSave(setting)"
-                  (click)="saveSetting(setting)">Save</button>
+                  (click)="saveMultipleSettings()">Save</button>
                 <button class="waves-effect waves-light btn grey darken-3 margin-sm"
-                  (click)="restoreSetting(setting)">Restore</button>
+                  (click)="restoreSettings()">Restore</button>
               </div>
             </div>
           </div>
@@ -142,7 +142,7 @@
     <div class="margin-md">
       <button *ngIf="settings && settings.length"
         class="waves-effect waves-light btn light-green darken-3 margin-sm"
-        (click)="saveAllSettings()">
+        (click)="saveMultipleSettings()">
         <i class="material-icons left">check</i>Save all
       </button>
       <button class="waves-effect waves-light btn grey darken-3 margin-sm"
@@ -166,3 +166,11 @@
   [header]="'Enter setting name:'"
   (okAction)="addNewSetting($event)">
 </app-modal-window>
+
+<ng-template #loading>
+    <div class="col s12 margin-top-xl margin-bottom-xl">
+      <div class="progress deep-purple lighten-5">
+        <div class="indeterminate deep-purple"></div>
+      </div>
+    </div>
+  </ng-template>

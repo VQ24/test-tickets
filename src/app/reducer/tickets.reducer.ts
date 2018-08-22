@@ -12,6 +12,12 @@ function remove(array: any[], elements: any[]) {
   return resultArray;
 }
 
+function replace(array: any[], elements: any[]) {
+  array.forEach(arrEl => {
+    arrEl = elements.filter(el => el._id === arrEl._id).length ? elements.filter(el => el._id === arrEl._id)[0] : arrEl;
+  });
+}
+
 export function ticketReducer(state = initialState, action ) {
   switch (action.type) {
     case 'ADD_TICKET':
@@ -91,6 +97,11 @@ export function ticketReducer(state = initialState, action ) {
             return stng;
           }
         }),
+      };
+    case 'UPDATE_SETTINGS':
+      return {
+        ...state,
+        settings: replace(state.settings, action.payload)
       };
     default:
       return state;

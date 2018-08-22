@@ -63,39 +63,37 @@ export class SettingsPageComponent implements OnInit {
       this.setDefault(this.settings[0]);
     }
     this.service.deleteSetting(setting);
-    console.log(setting.name + ' deleted');
   }
 
   public onEditSettingName(setting) {
-    if (setting.showContent) {
-      delete setting.showContent;
-    }
-    this.service.updateSetting(setting);
-    console.log(setting.name + ' edited');
+    const {showContent, ...newSet} = setting;
+    this.service.updateSetting(newSet);
   }
 
-  public saveAllSettings() {
-    console.log('all settings saved');
+  public saveMultipleSettings(settings = this.settings) {
+    const mappedSettings = settings.map(stng => {
+      const {showContent, ...newSet} = stng;
+      return newSet;
+    });
+    this.service.updateSettings(mappedSettings);
   }
 
   public saveSetting(setting) {
-    if (setting.showContent) {
-      delete setting.showContent;
+    const {showContent, ...newSet} = setting;
+    if (setting.default) {
+      this.saveMultipleSettings();
+    } else {
+      this.service.updateSetting(newSet);
     }
-    this.service.updateSetting(setting);
-    console.log(setting.name + ' saved');
   }
 
-  public restoreSetting(setting) {
-    console.log(setting.name + ' restored');
+  public restoreSettings() {
+    this.service.restoreSettings();
   }
 
   public addNewSetting(setting) {
-    if (setting.showContent) {
-      delete setting.showContent;
-    }
-    this.service.createSetting(setting);
-    console.log('new setting added');
+    const {showContent, ...newSet} = setting;
+    this.service.createSetting(newSet);
   }
 
 }

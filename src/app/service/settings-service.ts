@@ -20,18 +20,27 @@ export class SettingsService {
     });
   }
 
-  public getSetting(setNum: string) {
-    this.settings$.subscribe(data => {
-      if (!data.length) {
-        this.loadAllSettings();
-      }
+  public restoreSetting(setting) {
+    this._getSetting(setting).subscribe(oldSetting => {
+      this.store.dispatch({type: 'UPDATE_SETTING', payload: oldSetting});
     });
-    return this.settings$.map(stngs => stngs.filter(s => s._id === setNum)[0]);
+  }
+
+  public restoreSettings() {
+    this._getAllSettings().subscribe(oldSettings => {
+      this.store.dispatch({type: 'UPDATE_SETTINGS', payload: oldSettings});
+    });
   }
 
   public updateSetting(setting) {
     this._updateSetting(setting).subscribe(() => {
       this.store.dispatch({type: 'UPDATE_SETTING', payload: setting});
+    });
+  }
+
+  public updateSettings(settings: any[]) {
+    this._updateSettings(settings).subscribe(() => {
+      this.store.dispatch({type: 'UPDATE_SETTINGS', payload: settings});
     });
   }
 
@@ -46,8 +55,11 @@ export class SettingsService {
       this.store.dispatch({type: 'DELETE_SETTING', payload: setting});
     });
   }
-
   // ----------- back end functions --------------------
+  private _getSetting(setting) {
+    const apiUrl = 'http://localhost:1980/setting';
+    return this.http.get(apiUrl, {params: {_id: setting._id}});
+  }
 
   private _getAllSettings() {
     const apiUrl = 'http://localhost:1980/settings';
@@ -57,6 +69,11 @@ export class SettingsService {
   private _updateSetting(setting) {
     const apiUrl = 'http://localhost:1980/setting';
     return this.http.put(apiUrl, setting);
+  }
+
+  private _updateSettings(settings) {
+    const apiUrl = 'http://localhost:1980/settings';
+    return this.http.put(apiUrl, settings);
   }
 
   private _createSetting(setting) {
