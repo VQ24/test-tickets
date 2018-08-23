@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { FilterSettings } from '../models/settings';
 
 @Component({
   selector: 'app-side-nav',
@@ -12,32 +13,20 @@ export class SideNavComponent {
   @Output() public chooseCategoriesAndReload: EventEmitter<any> = new EventEmitter();
 
   @Input() public checkedItems: string[];
-  @Input() public settings = {
-    categoriesSection: {
-      loadAllOnOpenIfListIsEmpty: false,
-      hideContent: false,
-    },
-    tagSection: {
-      hideContent: true,
-    },
-    randomSection: {
-      hideContent: true,
-      loadRandom: {
-        on: false, numberOfTickets: 5
-      }
-    },
-  };
+  @Input() public settings: FilterSettings;
 
   @ViewChild('categoriesList') public categoriesList;
 
   public isOpened = false;
 
   public open() {
-    if (this.categoriesList.categories) {
-      if (this.settings.categoriesSection.loadAllOnOpenIfListIsEmpty && !this.checkedItems.length) {
-        this.categoriesList.chooseAllCategories();
+    if (this.settings) {
+      if (this.categoriesList.categories) {
+        if (this.settings.categoriesSection.loadAllOnOpenIfListIsEmpty && !this.checkedItems.length) {
+          this.categoriesList.chooseAllCategories();
+        }
+        this.isOpened = true;
       }
-      this.isOpened = true;
     }
   }
 

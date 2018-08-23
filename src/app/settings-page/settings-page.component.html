@@ -1,6 +1,25 @@
 <div class="row">
   <div class="col s12">
-    <h3>Settings</h3>
+    <h3>User settings</h3>
+  </div>
+  <div class="col s12">
+    <div class="margin-md">
+      <button class="waves-effect waves-light btn grey darken-3 margin-sm"
+        routerLink="../"><i class="material-icons left">chevron_left</i>Go Back
+      </button>
+      <button *ngIf="settings && settings.length"
+        class="waves-effect waves-light btn light-green darken-3 margin-sm"
+        (click)="saveMultipleSettings()">
+        <i class="material-icons left">check</i>Save
+      </button>
+      <button *ngIf="settings && settings.length"
+        class="waves-effect waves-light btn white grey-text text-darken-3 margin-sm"
+        (click)="restoreSettings()">
+        <i class="material-icons left">undo</i>Restore
+      </button>
+    </div>
+  </div>
+  <div class="col s12">
     <ul *ngIf="settings && settings.length; else loading"
       class="collapsible">
       <li *ngFor="let setting of settings; index as i">
@@ -137,18 +156,6 @@
         </div>
       </li>
     </ul>
-  </div>
-  <div class="col s12">
-    <div class="margin-md">
-      <button *ngIf="settings && settings.length"
-        class="waves-effect waves-light btn light-green darken-3 margin-sm"
-        (click)="saveMultipleSettings()">
-        <i class="material-icons left">check</i>Save all
-      </button>
-      <button class="waves-effect waves-light btn grey darken-3 margin-sm"
-        routerLink="../"><i class="material-icons left">chevron_left</i>Go Back
-      </button>
-    </div>
   </div>
 </div>
 

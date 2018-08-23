@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Ticket } from '../../../../models/ticket';
 
 @Component({
   selector: 'app-ticket-preview',
@@ -7,7 +8,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class TicketPreviewComponent implements OnChanges {
 
-  @Input() public ticket: any;
+  @Input() public ticket: Ticket;
   @Input() public editTicket: boolean;
 
   @Output() public updateTicket: EventEmitter<any> = new EventEmitter();

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { CategoryService } from '../service/category-service';
 import { CategoryListItem } from '../models/category-list';
+import { Category } from '../models/category';
 
 @Component({
   selector: 'app-categories-page',
@@ -30,7 +31,7 @@ export class CategoriesPageComponent implements OnInit {
   constructor(private service: CategoryService) { }
 
   ngOnInit() {
-    this.service.categories$.subscribe(data => {
+    this.service.categories$.subscribe((data: Category[]) => {
       if (!data || !data.length) {
         this.loadData();
       } else {
@@ -72,7 +73,7 @@ export class CategoriesPageComponent implements OnInit {
       if (!data || !data.length) {
         this.loadData();
       } else {
-        const filteredData = data.filter(origCat => origCat.subCategory === item._id);
+        const filteredData = data.filter((origCat: any) => origCat.subCategory === item._id);
         parentCategory = filteredData.length ? filteredData[0] : null;
       }
     });
@@ -116,7 +117,7 @@ export class CategoriesPageComponent implements OnInit {
     }
   }
 
-  private mapCategories (categories: any[]): CategoryListItem[] {
+  private mapCategories (categories: Category[]): CategoryListItem[] {
     const rearrange = (arrCategories: any[]) => {
       return arrCategories.map(arrCategory => {
         return {
@@ -129,7 +130,7 @@ export class CategoriesPageComponent implements OnInit {
     return rearrange(categories.filter(item => !item.parentCategory));
   }
 
-  private unMapCategories (category: CategoryListItem, parentId: string): any[] {
+  private unMapCategories (category: CategoryListItem, parentId: string): Category[] {
     const resultArr = [];
     resultArr.push({_id: category._id, name: category.name, parentCategory: parentId});
     const goInsideArray = (arrCategories: CategoryListItem[], parentItem: CategoryListItem) => {

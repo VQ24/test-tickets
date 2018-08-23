@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TestService } from '../../../service/test-service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import { Ticket } from '../../../models/ticket';
 
 @Component({
   selector: 'app-ticket-edit',
@@ -10,7 +11,7 @@ import 'rxjs/add/observable/of';
 })
 export class TicketEditComponent implements OnInit {
 
-  public ticket$: any;
+  public ticket$: Observable<Ticket>;
   public edit: boolean;
 
   constructor(private router: Router,
@@ -24,7 +25,7 @@ export class TicketEditComponent implements OnInit {
         this.ticket$ = this.service.getTicket(data.ticketId);
       } else {
         this.edit = false;
-        this.ticket$ = Observable.of({answer: '', question: ''});
+        this.ticket$ = Observable.of({answer: '', question: ''} as Ticket);
       }
     });
   }

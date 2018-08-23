@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, ViewChild, OnChanges } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Pagination } from '../../models/pagination';
+import { Ticket } from '../../models/ticket';
 
 @Component({
   selector: 'app-tickets-list',
@@ -9,7 +10,7 @@ import { Pagination } from '../../models/pagination';
 
 export class TicketsListComponent implements OnChanges {
 
-  @Input() public tickets: any[];
+  @Input() public tickets: Ticket[];
   @Input() public ticketsToShowOnPage: number;
   @Input() public isLoading: boolean;
 
@@ -34,7 +35,7 @@ export class TicketsListComponent implements OnChanges {
     return itemNumber >= this.paginationInfo.offset && itemNumber < this.paginationInfo.offset + this.paginationInfo.limit;
   }
 
-  public onDeleteButtonClick(ticket) {
+  public onDeleteButtonClick(ticket: Ticket) {
     this.deleteModalWindow.open(ticket, 'delete ticket');
     event.stopPropagation();
   }
@@ -47,7 +48,7 @@ export class TicketsListComponent implements OnChanges {
     ticket.showAnswer = ticket.showAnswer ? false : true;
   }
 
-  public editTicket(ticket) {
+  public editTicket(ticket: Ticket) {
     this.router.navigate(['./edit', { ticketId: ticket._id }], { relativeTo: this.route });
   }
 

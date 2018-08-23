@@ -24,6 +24,7 @@
 </app-tickets-list>
 
 <app-side-nav #settings
+  [settings]="settings$ | async"
   [checkedItems]="filter.categories"
   (chooseCategoriesAndReload)="loadFilteredData($event)"
   (chooseCategories)="onCategoriesChoose($event)">

@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import 'rxjs/add/operator/finally';
 import 'rxjs/add/operator/startWith';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
+import { Ticket } from '../models/ticket';
 
 @Injectable()
 export class TestService {
@@ -11,7 +12,7 @@ export class TestService {
   constructor(private http: HttpClient,
               private store: Store<any>) { }
 
-  public tickets$ = this.store.select('appStore').map(wholeStore => wholeStore.tickets);
+  public tickets$: Observable<Ticket[]> = this.store.select('appStore').map(wholeStore => wholeStore.tickets);
 
   private isLoading = new Subject<boolean>();
   public isLoading$ = this.isLoading.asObservable();
@@ -50,14 +51,14 @@ export class TestService {
     });
   }
 
-  public updateTicket(ticket) {
+  public updateTicket(ticket: Ticket) {
     this._updateTicket(ticket).subscribe(() => {
       this.store.dispatch({type: 'UPDATE_TICKET', payload: ticket});
     });
     return this.getTicket(ticket._id);
   }
 
-  public createTicket(ticket) {
+  public createTicket(ticket: Ticket) {
     this._createTicket(ticket).subscribe((data: any) => {
       this.store.dispatch({type: 'ADD_TICKET', payload: data.ticket});
     });
@@ -80,12 +81,12 @@ export class TestService {
     return this.http.delete(apiUrl, {params: {_id: id}});
   }
 
-  private _updateTicket(ticket) {
+  private _updateTicket(ticket: Ticket) {
     const apiUrl = 'http://localhost:1980/ticket';
     return this.http.put(apiUrl, ticket);
   }
 
-  private _createTicket(ticket) {
+  private _createTicket(ticket: Ticket) {
     const apiUrl = 'http://localhost:1980/ticket';
     return this.http.post(apiUrl, ticket);
   }

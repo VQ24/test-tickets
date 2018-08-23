@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TestService } from '../service/test-service';
+import { SettingsService } from '../service/settings-service';
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/observable/zip';
+import { Ticket } from '../models/ticket';
+import { FilterSettings } from '../models/settings';
 
 @Component({
   selector: 'app-tickets-page',
@@ -12,18 +13,28 @@ export class TicketsPageComponent implements OnInit {
 
   @ViewChild('settings') public settingsSideNav;
 
-  public tickets$: Observable<any>;
+  public tickets$: Observable<Ticket[]>;
+  public settings$: Observable<FilterSettings>;
   public isLoading$: Observable<boolean>;
 
   public filter: any = {categories: []};
 
-  constructor(private ticketService: TestService) { }
+  constructor(private ticketService: TestService,
+              private settingsService: SettingsService) { }
 
   public ngOnInit() {
+    this.settingsService.settings$.subscribe(data => {
+      if (!data || !data.length) {
+        this.settingsService.loadAllSettings();
+      }
+    });
+    this.settings$ = this.settingsService.settings$
+      .map(settings => settings.filter(stng => stng.default)[0])
+      .map(setting => setting && setting.filterSettings ? setting.filterSettings : null);
     this.tickets$ = this.ticketService.tickets$;
+    this.isLoading$ = this.ticketService.isLoading$;
     // this.isLoading$ = this.ticketService.isLoading$.startWith(true);
     // this.loadData();
-    this.isLoading$ = this.ticketService.isLoading$;
   }
 
   public loadData() {
